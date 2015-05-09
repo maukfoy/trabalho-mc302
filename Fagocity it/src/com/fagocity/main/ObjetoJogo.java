@@ -3,10 +3,12 @@ package com.fagocity.main;
 import java.awt.Graphics;
 
 public abstract class ObjetoJogo {
-	protected int x, y;
 	protected ID id;
 	protected int velX, velY;
 	
+	/**************/
+	/* CONSTRUTOR */
+	/**************/
 	public ObjetoJogo(int x, int y, ID id) {
 		this.x = x;
 		this.y = y;

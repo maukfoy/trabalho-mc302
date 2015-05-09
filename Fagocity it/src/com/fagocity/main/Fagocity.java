@@ -16,12 +16,11 @@ public class Fagocity extends Canvas implements Runnable {
 	private  boolean rodando = false;
 	private Handler handler;
 	
-	/**************/
-	/* Construtor */
-	/**************/
+	
 	public Fagocity() {
 		/* Cria o handler */
 		handler = new Handler();
+		
 		/* Cria o objeto que recebe as informações do teclado */
 		this.addKeyListener(new Input(handler));
 		

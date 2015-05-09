@@ -6,6 +6,7 @@ import java.util.LinkedList;
 
 public class Handler {
 	
+	/*cria lista contendo todos os objetos*/
 	LinkedList<ObjetoJogo> obj = new LinkedList<ObjetoJogo>();
 	
 	/* Método que percorre todos objetos e atualiza suas informações */
