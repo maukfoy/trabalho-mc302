@@ -17,8 +17,8 @@ public class Jogador extends ObjetoJogo {
 		y += velY;
 		
 		/*limita a liberdade do jogador para dentro dos limites da tela*/
-		x = Fagocity.clamp (x, 0, Fagocity.LARGURA - 37);
-		y = Fagocity.clamp (y, 0, Fagocity.ALTURA - 60);
+		x = Fagocity.limita (x, 0, Fagocity.LARGURA - 37);
+		y = Fagocity.limita (y, 0, Fagocity.ALTURA - 60);
 
 	}
 	

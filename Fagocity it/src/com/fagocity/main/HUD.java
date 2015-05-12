@@ -9,9 +9,10 @@ public class HUD {
 
 	
 	public void tick(){
-		vida--;
-		
-		vida = Fagocity.clamp (vida, 0, 100);
+		/*TEMPORARIO.*/
+		vida--;	
+		/*define os limites da barra de vida*/ 
+		vida = Fagocity.limita (vida, 0, 100);
 		
 	}
 	

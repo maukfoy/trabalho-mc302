@@ -17,12 +17,14 @@ public class Fagocity extends Canvas implements Runnable {
 	private Random r;
 	private  boolean rodando = false;
 	private Handler handler;
+	private HUD hud;
 	
 	
 	public Fagocity() {
 		/* Cria o handler */
 		handler = new Handler();
 		r = new Random();
+		hud = new HUD();
 		
 		/* Cria o objeto que recebe as informações do teclado */
 		this.addKeyListener(new Input(handler));
@@ -95,6 +97,7 @@ public class Fagocity extends Canvas implements Runnable {
 	/* Chama método para atualizar informações de objetos */
 	private void tick() {
 		handler.tick();
+		hud.tick();
 	}
 	
 	/* Método que renderiza */
@@ -111,13 +114,14 @@ public class Fagocity extends Canvas implements Runnable {
 		g.fillRect(0, 0, LARGURA, ALTURA);
 		
 		handler.render(g);
+		hud.render(g);
 		
 		g.dispose();
 		bs.show();
 	}
 	
-	/*limita a liberdade do jogador*/
-	public static int clamp (int var, int min, int max){
+	/*limita a liberdade do objeto*/
+	public static int limita (int var, int min, int max){
 		if (var >= max)
 			return var = max;
 		else if (var <= min)
