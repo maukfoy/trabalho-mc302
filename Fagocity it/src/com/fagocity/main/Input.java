@@ -23,13 +23,13 @@ public class Input extends KeyAdapter {
 			
 			/* Verifica se o objeto é o jogador. Se for, move o jogador */
 			if(tempObj.getID() == ID.Jogador) {
-				if( key == KeyEvent.VK_W)
+				if(key == KeyEvent.VK_W || key == KeyEvent.VK_UP)
 					tempObj.setVelY(-7);
-				if( key == KeyEvent.VK_S)
+				if(key == KeyEvent.VK_S || key == KeyEvent.VK_DOWN)
 					tempObj.setVelY(7);
-				if( key == KeyEvent.VK_A)
+				if(key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT)
 					tempObj.setVelX(-7);
-				if( key == KeyEvent.VK_D)
+				if(key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT)
 					tempObj.setVelX(7);
 			}
 		}

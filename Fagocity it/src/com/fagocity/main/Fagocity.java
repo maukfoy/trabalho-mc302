@@ -15,7 +15,7 @@ public class Fagocity extends Canvas implements Runnable {
 	
 	private Thread thread;
 	private Random r;
-	private  boolean rodando = false;
+	private boolean rodando = false;
 	private Handler handler;
 	private HUD hud;
 	
@@ -73,6 +73,8 @@ public class Fagocity extends Canvas implements Runnable {
 		double delta = 0;
 		long timer = System.currentTimeMillis();
 		int frames = 0;
+		this.setFocusable(true);
+		this.requestFocus();
 		while(rodando){
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
