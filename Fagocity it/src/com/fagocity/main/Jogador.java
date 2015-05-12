@@ -15,6 +15,11 @@ public class Jogador extends ObjetoJogo {
 	public void tick() {
 		x += velX;
 		y += velY;
+		
+		/*limita a liberdade do jogador para dentro dos limites da tela*/
+		x = Fagocity.clamp (x, 0, Fagocity.LARGURA - 37);
+		y = Fagocity.clamp (y, 0, Fagocity.ALTURA - 60);
+
 	}
 	
 	/* Renderiza o objeto */

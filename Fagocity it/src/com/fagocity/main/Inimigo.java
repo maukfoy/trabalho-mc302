@@ -8,6 +8,7 @@ public class Inimigo extends ObjetoJogo {
 	public Inimigo(int x, int y, ID id) {
 		super(x, y, id);
 		
+		/*velocidade do inimigo*/
 		velX = 5;
 		velY = 5;
 	}
@@ -15,6 +16,12 @@ public class Inimigo extends ObjetoJogo {
 	public void tick() {
 		x += velX;
 		y += velY;
+		
+		/*define limite de mobilidade do inimigo (limites da tela)*/
+		if (y <= 0 || y >= Fagocity.ALTURA - 32) velY *= -1;
+		if (x <= 0 || x >= Fagocity.LARGURA - 16) velX *= -1;
+
+		
 	}
 
 	public void render(Graphics g) {

@@ -4,6 +4,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.util.Random;
 
 
 public class Fagocity extends Canvas implements Runnable {
@@ -13,6 +14,7 @@ public class Fagocity extends Canvas implements Runnable {
 	public static final int LARGURA = 800, ALTURA = 600;
 	
 	private Thread thread;
+	private Random r;
 	private  boolean rodando = false;
 	private Handler handler;
 	
@@ -20,6 +22,7 @@ public class Fagocity extends Canvas implements Runnable {
 	public Fagocity() {
 		/* Cria o handler */
 		handler = new Handler();
+		r = new Random();
 		
 		/* Cria o objeto que recebe as informações do teclado */
 		this.addKeyListener(new Input(handler));
@@ -29,7 +32,12 @@ public class Fagocity extends Canvas implements Runnable {
 		
 		/* Cria o jogador e o coloca na tela */
 		handler.addObjeto(new Jogador(LARGURA/2 -32/2, ALTURA/2 -32/2, ID.Jogador ));
-		handler.addObjeto(new Inimigo(LARGURA/2 -32/2, ALTURA/2 -32/2, ID.Inimigo ));
+		
+		/*cria os inimigos em locais aleatórios*/
+		for (int i = 0; i < 10; i++){
+			handler.addObjeto(new Inimigo(r.nextInt(LARGURA), r.nextInt(ALTURA), ID.Inimigo ));
+		}
+		
 
 		
 	}
@@ -106,6 +114,16 @@ public class Fagocity extends Canvas implements Runnable {
 		
 		g.dispose();
 		bs.show();
+	}
+	
+	/*limita a liberdade do jogador*/
+	public static int clamp (int var, int min, int max){
+		if (var >= max)
+			return var = max;
+		else if (var <= min)
+			return var = min;
+		else
+			return var;
 	}
 
 	public static void main(String[] args) {
