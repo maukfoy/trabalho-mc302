@@ -29,6 +29,8 @@ public class Fagocity extends Canvas implements Runnable {
 		
 		/* Cria o jogador e o coloca na tela */
 		handler.addObjeto(new Jogador(LARGURA/2 -32/2, ALTURA/2 -32/2, ID.Jogador ));
+		handler.addObjeto(new Inimigo(LARGURA/2 -32/2, ALTURA/2 -32/2, ID.Inimigo ));
+
 		
 	}
 	
