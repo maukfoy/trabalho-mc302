@@ -1,6 +1,7 @@
 package com.fagocity.main;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public abstract class ObjetoJogo {
 	protected int x, y;
@@ -18,6 +19,7 @@ public abstract class ObjetoJogo {
 	
 	public abstract void tick();
 	public abstract void render(Graphics g);
+	public abstract Rectangle getBounds();
 	
 	/*********************/
 	/* GETTERS E SETTERS */

@@ -19,33 +19,28 @@ public class Fagocity extends Canvas implements Runnable {
 	private Handler handler;
 	private HUD hud;
 	Janela janela;
-	
+
+	Janela janela2;
 	
 	public Fagocity() {
-		/* Cria o handler */
+		/* Cria o handler, random, HUD*/
 		handler = new Handler();
 		r = new Random();
 		hud = new HUD();
 		
-		/* Cria o objeto que recebe as informações do teclado */
+		/* Cria um objeto que lê as informações do teclado e registra ele no componente Janela */
 		this.addKeyListener(new Input(handler));
 		
-		/* Cria a janela */
+		/* Cria o componente Janela janela e registra o jogo nele */
 		janela = new Janela(ALTURA, LARGURA, "Fagocity It!", this);
 		
-		/* Cria o jogador e o coloca na tela */
-		handler.addObjeto(new Jogador(LARGURA/2 -32/2, ALTURA/2 -32/2, ID.Jogador ));
+		/* Cria o jogador e o coloca no componente */
+		handler.addObjeto(new Player(LARGURA/2 -32/2, ALTURA/2 -32/2, ID.Player, handler));
 		
-		/*cria os inimigos em locais aleatórios*/
+		/* Cria os inimigos em locais aleatórios */
 		for (int i = 0; i < 10; i++){
-			handler.addObjeto(new Inimigo(r.nextInt(LARGURA), r.nextInt(ALTURA), ID.Inimigo ));
+			handler.addObjeto(new BasicEnemy(r.nextInt(LARGURA), r.nextInt(ALTURA), ID.BasicEnemy, handler));
 		}
-		
-		this.setFocusable(true);
-		this.requestFocus();
-		
-
-		
 	}
 	
 	/**********/
@@ -68,9 +63,14 @@ public class Fagocity extends Canvas implements Runnable {
 		}
 	}
 	
-	/* Método com as ações de atualizar, renderizar
-	 * e mostrar FPS realizadas pelo thread */
+	/* Inicia a thread responsável por gerenciar o component Janela e o jogo dentro dele */
+	/* Atualiza e renderiza os graficos na tela a cada frame */
 	public void run() {
+		
+		/* Foca o jogo */
+		this.setFocusable(true);
+		this.requestFocus();
+		
 		long lastTime = System.nanoTime();
 		double amountOfTicks = 60.0;
 		double ns = 1000000000 / amountOfTicks;
