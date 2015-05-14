@@ -18,6 +18,7 @@ public class Fagocity extends Canvas implements Runnable {
 	private boolean rodando = false;
 	private Handler handler;
 	private HUD hud;
+	Janela janela;
 	
 	
 	public Fagocity() {
@@ -30,7 +31,7 @@ public class Fagocity extends Canvas implements Runnable {
 		this.addKeyListener(new Input(handler));
 		
 		/* Cria a janela */
-		new Janela(ALTURA, LARGURA, "Fagocity It!", this);
+		janela = new Janela(ALTURA, LARGURA, "Fagocity It!", this);
 		
 		/* Cria o jogador e o coloca na tela */
 		handler.addObjeto(new Jogador(LARGURA/2 -32/2, ALTURA/2 -32/2, ID.Jogador ));
@@ -39,6 +40,9 @@ public class Fagocity extends Canvas implements Runnable {
 		for (int i = 0; i < 10; i++){
 			handler.addObjeto(new Inimigo(r.nextInt(LARGURA), r.nextInt(ALTURA), ID.Inimigo ));
 		}
+		
+		this.setFocusable(true);
+		this.requestFocus();
 		
 
 		
@@ -73,8 +77,6 @@ public class Fagocity extends Canvas implements Runnable {
 		double delta = 0;
 		long timer = System.currentTimeMillis();
 		int frames = 0;
-		this.setFocusable(true);
-		this.requestFocus();
 		while(rodando){
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
