@@ -4,8 +4,6 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.util.Random;
-
 
 public class Fagocity extends Canvas implements Runnable {
 	private static final long serialVersionUID = 2929390961970147223L;
@@ -14,47 +12,50 @@ public class Fagocity extends Canvas implements Runnable {
 	public static final int LARGURA = 800, ALTURA = 600;
 	
 	private Thread thread;
-	private Random r;
-	private boolean rodando = false;
+	private  boolean rodando = false;
 	private Handler handler;
 	private HUD hud;
-	Janela janela;
-
-	Janela janela2;
+	private Spawn spawnner;
 	
-	public Fagocity() {
-		/* Cria o handler, random, HUD*/
+	/*******************/
+	/*INICO DO VIDEO 9*/
+	/******************/
+	/*public enum ESTADO
+	{
+		Menu, Game;
+	}
+	public ESTADO estadoJogo = ESTADO.Menu;*/ //2:30 video 9
+	
+	
+	public Fagocity() 
+	{
 		handler = new Handler();
-		r = new Random();
 		hud = new HUD();
+		spawnner = new Spawn (handler);
 		
-		/* Cria um objeto que lê as informações do teclado e registra ele no componente Janela */
+		/* Cria o objeto que recebe as informaÃ§Ãµes do teclado */
 		this.addKeyListener(new Input(handler));
 		
-		/* Cria o componente Janela janela e registra o jogo nele */
-		janela = new Janela(ALTURA, LARGURA, "Fagocity It!", this);
-		
-		/* Cria o jogador e o coloca no componente */
-		handler.addObjeto(new Player(LARGURA/2 -32/2, ALTURA/2 -32/2, ID.Player, handler));
-		
-		/* Cria os inimigos em locais aleatórios */
-		for (int i = 0; i < 10; i++){
-			handler.addObjeto(new BasicEnemy(r.nextInt(LARGURA), r.nextInt(ALTURA), ID.BasicEnemy, handler));
-		}
+		/* Cria a janela */
+		new Janela(ALTURA, LARGURA, "Fagocity It!", this);
+				
+		spawnner.CriaJogador();
 	}
 	
 	/**********/
 	/* Thread */
 	/**********/
-	/* Método que inicia o thread */
-	public synchronized void start() {
+	/* MÃ©todo que inicia o thread */
+	public synchronized void start() 
+	{
 		thread = new Thread(this);
 		thread.start();
 		rodando = true;
 	}
 	
-	/* Método que interrompe o thread */
-	public synchronized void stop() {
+	/* MÃ©todo que interrompe o thread */
+	public synchronized void stop()
+	{
 		try {
 			thread.join();
 			rodando = false;
@@ -63,14 +64,11 @@ public class Fagocity extends Canvas implements Runnable {
 		}
 	}
 	
-	/* Inicia a thread responsável por gerenciar o component Janela e o jogo dentro dele */
-	/* Atualiza e renderiza os graficos na tela a cada frame */
-	public void run() {
-		
-		/* Foca o jogo */
-		this.setFocusable(true);
-		this.requestFocus();
-		
+	/* MÃ©todo com as aÃ§Ãµes de atualizar, renderizar
+	 * e mostrar FPS realizadas pelo thread */
+	public void run() 
+	{
+		this.requestFocus(); //nao necessita clicar na tela para input funcionar
 		long lastTime = System.nanoTime();
 		double amountOfTicks = 60.0;
 		double ns = 1000000000 / amountOfTicks;
@@ -98,16 +96,20 @@ public class Fagocity extends Canvas implements Runnable {
 		stop();
 	}
 	
-	/* Chama método para atualizar informações de objetos */
-	private void tick() {
+	/* Chama mÃ©todo para atualizar informaÃ§Ãµes de objetos */
+	private void tick() 
+	{
 		handler.tick();
 		hud.tick();
+		spawnner.tick();
 	}
 	
-	/* Método que renderiza */
-	private void render() {
+	/* MÃ©todo que renderiza */
+	private void render() 
+	{
 		BufferStrategy bs = this.getBufferStrategy();
-		if( bs == null ) {
+		if( bs == null ) 
+		{
 			this.createBufferStrategy(3);
 			return;
 		}
@@ -120,24 +122,26 @@ public class Fagocity extends Canvas implements Runnable {
 		handler.render(g);
 		hud.render(g);
 		
+		
 		g.dispose();
 		bs.show();
 	}
 	
+	/*PENSAR EM LOCAL MAIS ADEQUADO PARA ESSA FUNÃ‡ÃƒO*/
 	/*limita a liberdade do objeto*/
-	public static int limita (int var, int min, int max){
+	public static float limita (float var, float min, float max)
+	{
 		if (var >= max)
-			return var = max;
+			return max;
 		else if (var <= min)
-			return var = min;
+			return min;
 		else
 			return var;
 	}
 
-	public static void main(String[] args) {
-		
+	public static void main(String[] args)
+	{		
 		new Fagocity();
-
 	}
 
 }
