@@ -1,41 +1,147 @@
 package com.fagocity.main;
 
+import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Rectangle;
+import java.awt.image.BufferStrategy;
 
-public class BasicEnemy extends ObjetoJogo {
+public class Fagocity extends Canvas implements Runnable {
+	private static final long serialVersionUID = 2929390961970147223L;
 	
+	/* Tamanho da janela do jogo */
+	public static final int LARGURA = 800, ALTURA = 600;
+	
+	private Thread thread;
+	private  boolean rodando = false;
 	private Handler handler;
+	private HUD hud;
+	private Spawn spawnner;
 	
-	public BasicEnemy(int x, int y, ID id, Handler handler) {
-		super(x, y, id);
+	/*******************/
+	/*INICO DO VIDEO 9*/
+	/******************/
+	/*public enum ESTADO
+	{
+		Menu, Game;
+	}
+	public ESTADO estadoJogo = ESTADO.Menu;*/ //2:30 video 9
+	
+	
+	public Fagocity() 
+	{
+		handler = new Handler();
+		hud = new HUD();
+		spawnner = new Spawn (handler);
 		
-		this.handler = handler;
+		/* Cria o objeto que recebe as informações do teclado */
+		this.addKeyListener(new Input(handler));
 		
-		/*velocidade do inimigo*/
-		velX = 4;
-		velY = 4;
+		/* Cria a janela */
+		new Janela(ALTURA, LARGURA, "Fagocity It!", this);
+				
+		spawnner.CriaJogador();
 	}
 	
-	public Rectangle getBounds() {
-		return new Rectangle(x, y, 16, 16);
+	/**********/
+	/* Thread */
+	/**********/
+	/* Método que inicia o thread */
+	public synchronized void start() 
+	{
+		thread = new Thread(this);
+		thread.start();
+		rodando = true;
 	}
 	
-	public void tick() {
-		x += velX;
-		y += velY;
+	/* Método que interrompe o thread */
+	public synchronized void stop()
+	{
+		try {
+			thread.join();
+			rodando = false;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/* Método com as ações de atualizar, renderizar
+	 * e mostrar FPS realizadas pelo thread */
+	public void run() 
+	{
+		this.requestFocus(); //nao necessita clicar na tela para input funcionar
+		long lastTime = System.nanoTime();
+		double amountOfTicks = 60.0;
+		double ns = 1000000000 / amountOfTicks;
+		double delta = 0;
+		long timer = System.currentTimeMillis();
+		int frames = 0;
+		while(rodando){
+			long now = System.nanoTime();
+			delta += (now - lastTime) / ns;
+			lastTime = now;
+			while(delta >= 1){
+				tick();
+				delta--;
+			}
+			if(rodando)
+				render();
+			frames++;
+			
+			if(System.currentTimeMillis() - timer > 1000){
+				timer += 1000;
+				System.out.println("FPS: " + frames);
+				frames = 0;
+			}
+		}
+		stop();
+	}
+	
+	/* Chama método para atualizar informações de objetos */
+	private void tick() 
+	{
+		handler.tick();
+		hud.tick();
+		spawnner.tick();
+	}
+	
+	/* Método que renderiza */
+	private void render() 
+	{
+		BufferStrategy bs = this.getBufferStrategy();
+		if( bs == null ) 
+		{
+			this.createBufferStrategy(3);
+			return;
+		}
 		
-		/*faz inimigo voltar quando bater na parede (limites da tela)*/
-		if (y <= 0 || y >= Fagocity.ALTURA - 32) velY *= -1;
-		if (x <= 0 || x >= Fagocity.LARGURA - 16) velX *= -1;
+		Graphics g = bs.getDrawGraphics();
 		
-		handler.addObjeto(new Trail(x, y, ID.Trail, Color.red, 16, 16, 0.08f, handler));
+		g.setColor(Color.black);
+		g.fillRect(0, 0, LARGURA, ALTURA);
+		
+		handler.render(g);
+		hud.render(g);
+		
+		
+		g.dispose();
+		bs.show();
+	}
+	
+	/*PENSAR EM LOCAL MAIS ADEQUADO PARA ESSA FUNÇÃO*/
+	/*limita a liberdade do objeto*/
+	public static float limita (float var, float min, float max)
+	{
+		if (var >= max)
+			return max;
+		else if (var <= min)
+			return min;
+		else
+			return var;
 	}
 
-	public void render(Graphics g) {
-		g.setColor(Color.red);
-		g.fillRect (x, y, 16, 16);
+	public static void main(String[] args)
+	{		
+		new Fagocity();
 	}
 
 }
