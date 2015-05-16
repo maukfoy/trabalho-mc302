@@ -1,4 +1,4 @@
-package com.fagocity.main;
+package tutorial.realtutsgml.wave;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
