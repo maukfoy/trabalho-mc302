@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_IbyaAP2KEeSE6P2M64Bg8w" name="Model">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_IbyaAf2KEeSE6P2M64Bg8w">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_oulWgP2LEeSE6P2M64Bg8w" name="GameMain"/>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_1CX-MP2dEeSN89_Ju-JAMw" name="ID">
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_y8F8QP2fEeSN89_Ju-JAMw" name="Player"/>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_z5k4MP2fEeSN89_Ju-JAMw" name="Enemy"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_xa-K8P2jEeSN89_Ju-JAMw" name="View">
+    <packagedElement xmi:type="uml:Class" xmi:id="_iwZboP2dEeSN89_Ju-JAMw" name="HUD"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_aHdeoP2XEeSN89_Ju-JAMw" name="Render"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_WCgIgP2kEeSN89_Ju-JAMw" name="Model"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_u9xWcP2oEeSN89_Ju-JAMw" name="Controller">
+    <packagedElement xmi:type="uml:Component" xmi:id="_SjvGIP2lEeSN89_Ju-JAMw" name="Controller">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_hkdBYP2nEeSN89_Ju-JAMw" name="IPlayerController" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_4L3y0P2qEeSN89_Ju-JAMw" name="IEnemy" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_H93r8P2rEeSN89_Ju-JAMw" name="IInput" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_eZQFIP2xEeSN89_Ju-JAMw" name="IWindow" aggregation="composite"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_26M9UP2vEeSN89_Ju-JAMw" name="Usage0" client="_hkdBYP2nEeSN89_Ju-JAMw" supplier="_FqSxsP2pEeSN89_Ju-JAMw"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_ZEdnMP2wEeSN89_Ju-JAMw" name="Usage1" client="_4L3y0P2qEeSN89_Ju-JAMw" supplier="_0XmP8P2qEeSN89_Ju-JAMw"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_-2i24P2xEeSN89_Ju-JAMw" name="Usage3" client="_eZQFIP2xEeSN89_Ju-JAMw" supplier="_jVtYEP2xEeSN89_Ju-JAMw"/>
+    <packagedElement xmi:type="uml:Component" xmi:id="_0vOeEP2wEeSN89_Ju-JAMw" name="Input">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_GWfPsP2xEeSN89_Ju-JAMw" name="IInput" aggregation="composite"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_lriVEP2zEeSN89_Ju-JAMw" name="Package"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_xMzZ0P2oEeSN89_Ju-JAMw" name="View">
+    <packagedElement xmi:type="uml:Component" xmi:id="_7SJjEP2xEeSN89_Ju-JAMw" name="Window">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_A6xYcP2yEeSN89_Ju-JAMw" name="Port0" aggregation="composite"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_y2eGUP2oEeSN89_Ju-JAMw" name="Model"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_FqSxsP2pEeSN89_Ju-JAMw" name="IPlayerController"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_0XmP8P2qEeSN89_Ju-JAMw" name="IEnemyController">
+    <nestedClassifier xmi:type="uml:Interface" xmi:id="_IKnVMP2wEeSN89_Ju-JAMw" name="IEnemyController"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_8breUP2uEeSN89_Ju-JAMw" name="Player">
+    <ownedAttribute xmi:type="uml:Port" xmi:id="_FJCQAP2vEeSN89_Ju-JAMw" name="IPlayerController" aggregation="composite"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_j5TfQP2vEeSN89_Ju-JAMw" name="Realization0" client="_8breUP2uEeSN89_Ju-JAMw" supplier="_FqSxsP2pEeSN89_Ju-JAMw" contract="_FqSxsP2pEeSN89_Ju-JAMw"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_2xw9kP2wEeSN89_Ju-JAMw" name="Enemy">
+    <ownedAttribute xmi:type="uml:Port" xmi:id="_JiyzoP2xEeSN89_Ju-JAMw" name="IEnemy" aggregation="composite"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_9WcLgP2wEeSN89_Ju-JAMw" name="Realization1" client="_2xw9kP2wEeSN89_Ju-JAMw" supplier="_0XmP8P2qEeSN89_Ju-JAMw" contract="_0XmP8P2qEeSN89_Ju-JAMw"/>
+  <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_Fla_IP2xEeSN89_Ju-JAMw" name="Realization2" client="_0vOeEP2wEeSN89_Ju-JAMw"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_jVtYEP2xEeSN89_Ju-JAMw" name="IWindow"/>
+  <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_Fdt_MP2yEeSN89_Ju-JAMw" name="Realization3" client="_7SJjEP2xEeSN89_Ju-JAMw" supplier="_jVtYEP2xEeSN89_Ju-JAMw" contract="_jVtYEP2xEeSN89_Ju-JAMw"/>
+</uml:Model>
