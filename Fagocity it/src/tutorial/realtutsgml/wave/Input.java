@@ -1,4 +1,4 @@
-package com.fagocity.main;
+package tutorial.realtutsgml.wave;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
