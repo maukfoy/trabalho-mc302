@@ -20,7 +20,7 @@ public class GameFrame extends JFrame {
 	public GameFrame(GameModel model) {
 		this.model = model;
 		
-		/* Cria a janela principal */
+		// Cria a janela principal
 		screen = new JPanel();
 		screen.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		screen.setBackground(Color.BLUE);
