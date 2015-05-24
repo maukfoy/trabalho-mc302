@@ -1,0 +1,5 @@
+/* ESCREVAM AQUI TODOS OS BUGS, AS MODIFICAÇÕES A FAZER, 
+AS IDEIAS A SEREM IMPLEMENTADAS E COISAS DO TIPO */
+
+- a thread está no construtor da GameMain, mas ele deve ser posteriormente
+tirado do construtor. Dizem que dá bugs. Pesquisar.
