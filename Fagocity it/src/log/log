@@ -3,8 +3,17 @@ AS IDEIAS A SEREM IMPLEMENTADAS E COISAS DO TIPO */
 Vamos só fazer append aqui pra manter um log mesmo do trabalho */
 
 - a thread está no construtor da GameMain, mas ele deve ser posteriormente
-tirado do construtor. Dizem que dá bugs. Pesquisar. -vitaozera
+<<<<<<< HEAD
+=======
+tirado do construtor. Dizem que dá bugs. Pesquisar.
 
+- é necessario trocar WIDTH e HEIGHT para private no GameView e fazer seus getters.
+por um problema estranho não conseguir usar getter pra passar pra classe PlayerController 
+esses dados. entao coloquei como public.
+
+- a AbstractFactory está criando os Players e Enemys de um jeito burro. O certo seria usar polimorfismo
+e nao referencia por ID
+>>>>>>> origin/master
 - o bug que dá é que o javax.swing não é thread-safe, então ele usa um
 gerenciador de eventos próprio, o EventQueue, a versão anterior previa isso
 sugiro retornar ao que era -mauk
