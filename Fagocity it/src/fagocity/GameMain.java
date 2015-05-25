@@ -1,12 +1,14 @@
 package fagocity;
 
 
+import fagocity.controller.GameController;
 import fagocity.model.GameModel;
 import fagocity.view.GameView;
 
 public class GameMain implements Runnable {
 	private GameView view;
 	private GameModel model;
+	private GameController controller;
 	private boolean running;
 	private Thread thread;
 	
@@ -17,10 +19,11 @@ public class GameMain implements Runnable {
 	GameMain() {
 		/* Cria o Model e o View */
 		this.model = new GameModel();
-		this.view = new GameView(model);
+		this.view = new GameView();
+		this.controller = new GameController();
 		
 		/* Abre a janela principal */
-		this.view.CriaJanelaPrincipal();
+		this.view.createMainWindow();
 		
 		/* Cria a Thread */
 		this.thread = new Thread(this);

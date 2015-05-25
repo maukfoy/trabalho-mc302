@@ -6,26 +6,22 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import fagocity.model.GameModel;
-
 @SuppressWarnings("serial")
 public class GameView extends JFrame {
 	
-	private static final int WIDTH = 800;
-	private static final int HEIGHT = 600;
+	public static final int WIDTH = 800;
+	public static final int HEIGHT = 600;
 	
-	private GameModel model;
 	private JPanel screen;
 	private boolean visible;
 
-	public GameView(GameModel model) {
-		this.model = model;
+	public GameView() {
 		this.visible = false;
 	}
 	
 	/* Cria a janela principal */
-	public void CriaJanelaPrincipal() {
-		if(visible == false) {
+	public void createMainWindow() {
+		if(this.visible == false) {
 			screen = new JPanel();
 			screen.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 			screen.setBackground(Color.BLUE);
