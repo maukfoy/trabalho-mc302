@@ -1,5 +1,13 @@
 /* ESCREVAM AQUI TODOS OS BUGS, AS MODIFICAÇÕES A FAZER, 
 AS IDEIAS A SEREM IMPLEMENTADAS E COISAS DO TIPO */
+Vamos só fazer append aqui pra manter um log mesmo do trabalho */
 
 - a thread está no construtor da GameMain, mas ele deve ser posteriormente
-tirado do construtor. Dizem que dá bugs. Pesquisar.
+tirado do construtor. Dizem que dá bugs. Pesquisar. -vitaozera
+
+- o bug que dá é que o javax.swing não é thread-safe, então ele usa um
+gerenciador de eventos próprio, o EventQueue, a versão anterior previa isso
+sugiro retornar ao que era -mauk
+
+- mudei o momento que a view torna-se visível, apenas pelas boas práticas
+quem abre a janela que diz quando ela deve aparecer -mauk
