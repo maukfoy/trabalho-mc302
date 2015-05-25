@@ -1,11 +1,16 @@
 package fagocity;
 
 
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
+
 import fagocity.controller.GameController;
 import fagocity.model.GameModel;
 import fagocity.view.GameView;
 
-public class GameMain implements Runnable {
+public class GameMain extends Canvas implements Runnable {
 	
 	private static final int MilisToSecs = 1000;
 	private GameView view;
@@ -62,7 +67,7 @@ public class GameMain implements Runnable {
 			/*	CHAMAR AQUI O VIEW PARA EXIBIR A TELA		*/
 			/*												*/
 			/* ******************************************** */
-			//render();
+			view.render();
 			frames++;
 			
 			if(System.currentTimeMillis() - timer > 1000) {
@@ -73,5 +78,8 @@ public class GameMain implements Runnable {
 			}
 		}
 	}
-	
 }
+	
+
+
+

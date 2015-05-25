@@ -9,5 +9,4 @@ public class PlayerController {
 		Player player = (Player) ActorFactory.createActor(x, y, id);
 		return player;
 	}
-
 }
