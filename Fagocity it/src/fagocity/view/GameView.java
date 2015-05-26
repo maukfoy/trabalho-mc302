@@ -7,6 +7,7 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import fagocity.model.GameModel;
 
 @SuppressWarnings("serial")
