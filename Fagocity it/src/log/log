@@ -2,15 +2,20 @@
 AS IDEIAS A SEREM IMPLEMENTADAS E COISAS DO TIPO */
 Vamos só fazer append aqui pra manter um log mesmo do trabalho */
 
+- PRÓXIMA COISA A SER IMPLEMENTADA: arrumar o renderizador da imagem do player de modo
+que se encaixe no padrão MVC. No momento só está assim pra testes. - vitao
+
+- O jogo ta rodando a apenas 80 fps exibindo somente uma imagem. É normal? -vitao
+
 - a thread está no construtor da GameMain, mas ele deve ser posteriormente
-tirado do construtor. Dizem que dá bugs. Pesquisar.
+tirado do construtor. Dizem que dá bugs. Pesquisar. - vitao
 
 - é necessario trocar WIDTH e HEIGHT para private no GameView e fazer seus getters.
 por um problema estranho não conseguir usar getter pra passar pra classe PlayerController 
-esses dados. entao coloquei como public.
+esses dados. entao coloquei como public. -vitao
 
 - a AbstractFactory está criando os Players e Enemys de um jeito burro. O certo seria usar polimorfismo
-e nao referencia por ID
+e nao referencia por ID -vitao
 
 - o bug que dá é que o javax.swing não é thread-safe, então ele usa um
 gerenciador de eventos próprio, a EventDispatcherThread, a versão anterior previa isso
@@ -18,3 +23,8 @@ sugiro retornar ao que era -mauk
 
 - mudei o momento que a view torna-se visível, apenas pelas boas práticas
 quem abre a janela que diz quando ela deve aparecer -mauk
+
+- No final, antes de entregar o jogo pro Santanche, todos e.printStackTrace(); nos try/catch 
+devem ser trocador for getMessage(); por ser uma boa prática de programação. e.printStackTrace();
+deve ser usado apenas para debugação. - vitao
+

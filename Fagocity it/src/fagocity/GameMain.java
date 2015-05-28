@@ -1,17 +1,12 @@
 package fagocity;
 
-
 import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.image.BufferStrategy;
-
 import fagocity.controller.GameController;
 import fagocity.model.GameModel;
 import fagocity.view.GameView;
 
 public class GameMain extends Canvas implements Runnable {
-	
+	private static final long serialVersionUID = -7704331975933693523L;
 	private static final int MilisToSecs = 1000;
 	private GameView view;
 	private GameModel model;
@@ -27,7 +22,6 @@ public class GameMain extends Canvas implements Runnable {
 		/* Cria o Model e o View */
 		this.model = new GameModel();
 		this.view = new GameView(model);
-		view.setVisible(true);
 		
 		/* Cria a Thread */
 		this.thread = new Thread(this);
@@ -62,14 +56,8 @@ public class GameMain extends Canvas implements Runnable {
 				updates++;
 				delta--;
 			}
-			/* ******************************************** */
-			/*												*/
-			/*	CHAMAR AQUI O VIEW PARA EXIBIR A TELA		*/
-			/*												*/
-			/* ******************************************** */
 			view.render();
 			frames++;
-			
 			if(System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
 				System.out.println(updates + " Ticks, Fps " + frames);
