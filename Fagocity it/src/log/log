@@ -10,7 +10,6 @@ Vamos só fazer append aqui pra manter um log mesmo do trabalho */
  ou fazer um update automático nas variaveis X e Y a partir do MouseMoved ?
  atualmente está com o MouseMoved, mas não tenho certeza se é uma boa ideia. -vitao
 
-
 - a thread está no construtor da GameMain, mas ele deve ser posteriormente
 tirado do construtor. Dizem que dá bugs. Pesquisar. - vitao
 - o bug que dá é que o javax.swing não é thread-safe, então ele usa um

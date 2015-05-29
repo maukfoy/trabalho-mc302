@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import fagocity.model.interfaces.IActor;
 
-public class Actor implements IActor {
+public abstract class Actor implements IActor {
 	public int x, y;
 	private double velX, velY;
 	private BufferedImage image;
