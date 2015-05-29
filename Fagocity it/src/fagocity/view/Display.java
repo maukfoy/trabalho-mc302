@@ -2,7 +2,10 @@ package fagocity.view;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.GraphicsDevice;
+
 import javax.swing.JFrame;
+
 import fagocity.controller.MouseController;
 
 public class Display {
@@ -21,10 +24,10 @@ public class Display {
 	private void createDisplay() {
 		/* Cria o JFrame */
 		frame = new JFrame(title);
-		frame.setSize(width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		frame.setUndecorated(true);
 		frame.setVisible(true);
 		
 		/* Cria o Canvas */
@@ -41,4 +44,6 @@ public class Display {
 	public Canvas getCanvas() {
 		return canvas;
 	}
+	
+	
 }

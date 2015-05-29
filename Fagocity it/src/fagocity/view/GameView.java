@@ -2,17 +2,20 @@ package fagocity.view;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+
 import javax.swing.JPanel;
+
 import fagocity.model.GameModel;
 import fagocity.model.interfaces.IActor;
 
 public class GameView extends JPanel {
 	private static final long serialVersionUID = 3856930242116209479L;
-	private static final int WIDTH = 800;
-	private static final int HEIGHT = WIDTH / 4 * 3;
+	private static final int WIDTH = getScreenWorkingWidth();
+	private static final int HEIGHT = getScreenWorkingHeight();
 	private Display display;
 	private BufferStrategy bs;
 	private Graphics g;
@@ -35,7 +38,7 @@ public class GameView extends JPanel {
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 		
 		/* Desenha o fundo da tela */
-		g.setColor(Color.BLACK);
+		g.setColor(Color.DARK_GRAY);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
 		/* Desenha todos actors */
@@ -58,6 +61,14 @@ public class GameView extends JPanel {
 
 	public int getHeight() {
 		return HEIGHT;
+	}
+	
+	public static int getScreenWorkingWidth() {
+	    return Toolkit.getDefaultToolkit().getScreenSize().width;
+	}
+
+	public static int getScreenWorkingHeight() {
+	    return Toolkit.getDefaultToolkit().getScreenSize().height;
 	}
 }
 
