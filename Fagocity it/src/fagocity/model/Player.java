@@ -2,7 +2,7 @@ package fagocity.model;
 
 public class Player extends Actor {
 	
-	public Player(double x, double y) {
+	public Player(int x, int y) {
 		super(x, y);
 	}
 }

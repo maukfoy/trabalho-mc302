@@ -1,20 +1,27 @@
 package fagocity.model;
 
 public class Actor {
-	protected double x, y;
+	protected int x, y;
 	protected double velX, velY;
 	
-	public Actor(double x, double y) {
+	public Actor(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 
 	/* Getters and setters */
-	public void setX(double x) {
+	public void setX(int x) {
 		this.x = x;
 	}
 	
-	public void setY(double y) {
+	public void setY(int y) {
 		this.y = y;
+	}
+	
+	public int getX() {
+		return this.x;
+	}
+	public int getY() {
+		return this.y;
 	}
 }

@@ -52,8 +52,8 @@ public class GameView extends JPanel {
 		 */
 		BufferedImage image;
 		try {
-			image = ImageIO.read(getClass().getResourceAsStream("avatar.png"));
-			g.drawImage(image, (WIDTH/2 - image.getWidth()/2), (HEIGHT/2 - image.getHeight()/2), image.getWidth(), image.getHeight(), null);
+			image = ImageIO.read(getClass().getResourceAsStream("player.png"));
+			g.drawImage(image, (WIDTH - image.getWidth())/2, (HEIGHT - image.getHeight())/2, (int)(image.getWidth()*1), (int)(image.getHeight()*1), null);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

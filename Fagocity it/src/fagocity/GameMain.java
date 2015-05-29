@@ -19,9 +19,10 @@ public class GameMain extends Canvas implements Runnable {
 	}
 	
 	public GameMain() {
-		/* Cria o Model e o View */
+		/* Cria o Model, View e o Controller */
 		this.model = new GameModel();
 		this.view = new GameView(model);
+		this.controller = new GameController();
 		
 		/* Cria a Thread */
 		this.thread = new Thread(this);
