@@ -1,24 +1,42 @@
 package fagocity.controller;
 
-import java.util.ArrayList;
-
-import fagocity.model.Actor;
-import fagocity.model.Player;
+import fagocity.model.GameModel;
+import fagocity.model.interfaces.IActor;
 import fagocity.view.GameView;
 
 public class GameController {
-	/* Lista de Actors */
-	static ArrayList<Actor> ActorsList;
 	
-	Player player;
-	public GameController() {
-		/* Cria o player */
-		ActorsList = new ArrayList<Actor>();
-		System.out.println("antes: " +ActorsList.isEmpty());
-		player = PlayerController.createPlayer(GameView.WIDTH/2, GameView.HEIGHT/2, ActorID.Player);
-		System.out.println("depois: " +ActorsList.get(0).getX());
+	private static GameModel model;
+	private GameView view;
+	
+	public GameController(GameModel model, GameView view) {
+		GameController.setModel(model);
+		this.setView(view);
+		initialConditions();
 	}
 	
+	/* Cria as condições iniciais do jogo */
+	private void initialConditions() {
+		/* Cria o player */
+		PlayerController.createPlayer(view.getWidth()/2, view.getHeight()/2);
+	}
 	
-	
+	/* Adiciona actors à lista de actors que fica em GameModel */
+	public static void addToActorsList(IActor actor) {
+		getModel().addToActorsList(actor);
+	}
+
+	/* Getters e setters */
+	public static GameModel getModel() {
+		return model;
+	}
+	public static void setModel(GameModel model) {
+		GameController.model = model;
+	}
+	public GameView getView() {
+		return view;
+	}
+	public void setView(GameView view) {
+		this.view = view;
+	}
 }

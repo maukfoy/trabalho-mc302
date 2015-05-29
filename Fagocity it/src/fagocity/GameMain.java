@@ -1,6 +1,7 @@
 package fagocity;
 
 import java.awt.Canvas;
+
 import fagocity.controller.GameController;
 import fagocity.model.GameModel;
 import fagocity.view.GameView;
@@ -21,14 +22,13 @@ public class GameMain extends Canvas implements Runnable {
 	public GameMain() {
 		/* Cria o Model, View e o Controller */
 		this.model = new GameModel();
-		this.view = new GameView(model);
-		this.controller = new GameController();
+		this.view = new GameView("Fagocity It!");
+		this.controller = new GameController(model, view);
 		
 		/* Cria a Thread */
 		this.thread = new Thread(this);
 	    this.thread.start();
 	}
-
 	
 	public void run() {
 		long lastTime = System.currentTimeMillis();
@@ -68,7 +68,3 @@ public class GameMain extends Canvas implements Runnable {
 		}
 	}
 }
-	
-
-
-

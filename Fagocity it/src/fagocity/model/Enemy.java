@@ -1,9 +1,11 @@
 package fagocity.model;
 
-public class Enemy extends Actor{
+import fagocity.model.interfaces.IActor;
+
+public class Enemy extends Actor implements IActor {
 	
 	public Enemy(int x, int y) {
-		super(x, y);
+		super(x, y, "enemy");
 	}
 
 }

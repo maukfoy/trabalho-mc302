@@ -1,28 +1,31 @@
 package fagocity.controller;
 
-import fagocity.controller.inter.IActorFactory;
-import fagocity.model.Actor;
 import fagocity.model.Enemy;
 import fagocity.model.Player;
+import fagocity.model.interfaces.IActor;
 
-public class ActorFactory implements IActorFactory {
+public class ActorFactory {
 	
 	/* Cria um Actor */
-	public static Actor createActor(int x, int y, ActorID id) {
+	public static IActor createActor(int x, int y, String type) {
 		
-		if( id == ActorID.Player) {
+		/* Cria um Player */
+		if( type.equals("player")) {
 			Player player = new Player(x, y);
 			/* Adiciona o player à lista de actors */
-			GameController.ActorsList.add(player);
+			GameController.addToActorsList(player);
 			return player;
 		}
-		else if( id == ActorID.Enemy) {
+		
+		/* Cria um Enemy */
+		else if( type.equals("enemy")) {
 			Enemy enemy = new Enemy(x, y);
 			/* Adiciona o enemy à lista de actors */
-			GameController.ActorsList.add(enemy);
+			GameController.addToActorsList(enemy);
 			return enemy;
 		}
 		
-		return null; /* Não retorna nada pois o ID não é conhecido */
+		/* O objeto pedido para ser criado não é conhecido */
+		return null;
 	}
 }
