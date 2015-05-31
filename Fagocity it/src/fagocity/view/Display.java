@@ -36,7 +36,7 @@ public class Display {
 		canvas.setMaximumSize(new Dimension(width, height));
 		
 		frame.add(canvas);
-		canvas.addMouseMotionListener(new MouseController());
+		canvas.addMouseListener(new MouseController());
 		frame.pack();
 	}
 	

@@ -4,8 +4,8 @@ import fagocity.model.interfaces.IActor;
 
 public class Enemy extends Actor implements IActor {
 	
-	public Enemy(int x, int y) {
-		super(x, y, "enemy");
+	public Enemy(int x, int y, int radius, double mass) {
+		super(x, y, radius, mass);
 	}
 
 }

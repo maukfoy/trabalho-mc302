@@ -1,26 +1,16 @@
 package fagocity.model;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import fagocity.model.interfaces.IActor;
 
 public abstract class Actor implements IActor {
-	public int x, y;
-	private double velX, velY;
-	private BufferedImage image;
+	public int x, y, radius;
+	private double velX, velY, mass;
 	
-	public Actor(int x, int y, String type) {
+	public Actor(int x, int y, int radius, double mass) {
 		this.x = x;
 		this.y = y;
-		
-		/* Guarda a imagem do actor na memoria */
-		String path = "assets/sprites/" + type + ".png";
-		try {
-			image = ImageIO.read(getClass().getResourceAsStream(path));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		this.radius = radius;
+		this.mass = mass;
 	}
 
 	/* Getters and setters */
@@ -36,7 +26,7 @@ public abstract class Actor implements IActor {
 	public int getY() {
 		return this.y;
 	}
-	public BufferedImage getImage() {
-		return this.image;
+	public int getRadius() {
+		return this.radius;
 	}
 }

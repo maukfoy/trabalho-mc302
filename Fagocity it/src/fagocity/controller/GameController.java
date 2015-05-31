@@ -18,7 +18,8 @@ public class GameController {
 	/* Cria as condições iniciais do jogo */
 	private void initialConditions() {
 		/* Cria o player */
-		PlayerController.createPlayer(view.getWidth()/2, view.getHeight()/2);
+		int radius = 50;
+		PlayerController.createPlayer((view.getWidth() - radius)/2, (view.getHeight() - radius)/2, radius, 0);
 	}
 	
 	/* Adiciona actors à lista de actors que fica em GameModel */

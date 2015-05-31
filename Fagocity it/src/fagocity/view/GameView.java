@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -14,8 +13,8 @@ import fagocity.model.interfaces.IActor;
 
 public class GameView extends JPanel {
 	private static final long serialVersionUID = 3856930242116209479L;
-	private static final int WIDTH = getScreenWorkingWidth();
-	private static final int HEIGHT = getScreenWorkingHeight();
+	private static final int WIDTH = getScreenWidth();
+	private static final int HEIGHT = getScreenHeight();
 	private Display display;
 	private BufferStrategy bs;
 	private Graphics g;
@@ -42,11 +41,11 @@ public class GameView extends JPanel {
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
 		/* Desenha todos actors */
+		g.setColor(Color.RED);
 		ArrayList <IActor> ActorsList = GameModel.getActorsList();
 		for(int i = 0; i < GameModel.getActorsList().size(); i++ ) {
 			IActor actor = ActorsList.get(i);
-			BufferedImage image = (BufferedImage) actor.getImage();
-			g.drawImage(image, actor.getX(), actor.getY(), (int)(image.getWidth()*1), (int)(image.getHeight()*1), null);
+			g.fillOval(actor.getX(), actor.getY(), actor.getRadius(), actor.getRadius());
 		}
 		
 		/* Finaliza os desenhos */
@@ -63,11 +62,11 @@ public class GameView extends JPanel {
 		return HEIGHT;
 	}
 	
-	public static int getScreenWorkingWidth() {
+	public static int getScreenWidth() {
 	    return Toolkit.getDefaultToolkit().getScreenSize().width;
 	}
 
-	public static int getScreenWorkingHeight() {
+	public static int getScreenHeight() {
 	    return Toolkit.getDefaultToolkit().getScreenSize().height;
 	}
 }
