@@ -3,8 +3,8 @@ package fagocity.controller;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import fagocity.model.Actor;
 import fagocity.model.GameModel;
-import fagocity.model.interfaces.IActor;
 import fagocity.view.GameView;
 
 public class GameController {
@@ -18,26 +18,30 @@ public class GameController {
 		initialConditions();
 	}
 	
-	/* Cria as condições iniciais do jogo */
+	/* Cria as condiÃ§Ãµes iniciais do jogo */
 	private void initialConditions() {
 		/* Cria o player */
-		int radius = 50;
-		PlayerController.createPlayer((view.getWidth() - radius)/2, (view.getHeight() - radius)/2, 0, 0, radius, Color.red);
+		double radius = 50;
+		ActorFactory.createActor((view.getWidth() - radius)/2, (view.getHeight() - radius)/2, 0, 0, radius, Color.red, "player");
 	}
 	
 	/* Atualiza todos fatores do jogo */
 	public void update() {
-		/* Percorre a lista de actors e manda eles atualizarem suas informações */
-		ArrayList<IActor> lista = GameModel.getActorsList();
+		/* Percorre a lista de actors e manda eles atualizarem suas informaÃ§Ãµes */
+		ArrayList<Actor> lista = GameModel.getActorsList();
+		Actor obj;
+		
 		for(int i = 0; i < lista.size(); i++) {
-			lista.get(i).update();
+			obj = lista.get(i);
+			obj.update();
 		}
-		/* Chama o Spawn Controller */
-		SpawnController.autoEnemyCreator();
+		
+		SpawnController.update();
+		CollisionController.update();
 	}
 	
-	/* Adiciona actors à lista de actors que fica em GameModel */
-	public static void addToActorsList(IActor actor) {
+	/* Adiciona actors Ã  lista de actors que fica em GameModel */
+	public static void addToActorsList(Actor actor) {
 		getModel().addToActorsList(actor);
 	}
 
