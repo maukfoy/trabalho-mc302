@@ -51,11 +51,9 @@ public class GameView extends JPanel {
 				g.setColor(actor.getColor());
 				g.fillOval((int)actor.getX(),(int) actor.getY(),(int) actor.getRadius(),(int) actor.getRadius());
 			}
-		}
-		
+		}		
 		else
 			MenuView.render(g);
-
 		
 		/* Finaliza os desenhos */
 		bs.show();

@@ -9,19 +9,19 @@ import fagocity.model.Actor;
 
  public class MouseController extends MouseAdapter implements MouseMotionListener {
 	ArrayList<Actor> ActorsList;
-	private static double mousePosX = 0;
-	private static double mousePosY = 0;
+	private static int mousePosX = 0;
+	private static int mousePosY = 0;
 	
 	public void mouseMoved(MouseEvent e) {
 		mousePosX = e.getX();
 		mousePosY = e.getY();
 	}
 	
-	public static double getMouseX() {
+	public static int getMouseX() {
 		return mousePosX;
 	}
 	
-	public static double getMouseY() {
+	public static int getMouseY() {
 		return mousePosY;
 	}
 }

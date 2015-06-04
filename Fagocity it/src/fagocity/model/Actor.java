@@ -5,7 +5,7 @@ import java.awt.Color;
 import fagocity.controller.Interfaces.ActorController;
 
 public abstract class Actor {
-	protected double x, y, radius;
+	protected int x, y, radius;
 	protected double velX;
 	protected double velY;
 	protected Color color;
@@ -25,10 +25,10 @@ public abstract class Actor {
 	}
 	
 	/* Getters and setters */
-	public void setX(double x) {
+	public void setX(int x) {
 		this.x = x;
 	}
-	public void setY(double y) {
+	public void setY(int y) {
 		this.y = y;
 	}
 	public void setVelX(double x) {
@@ -37,13 +37,13 @@ public abstract class Actor {
 	public void setVelY(double y) {
 		this.velY = y;
 	}
-	public void setRadius(double radius){
+	public void setRadius(int radius){
 		this.radius = radius;
 	}
-	public double getX() {
+	public int getX() {
 		return this.x;
 	}
-	public double getY() {
+	public int getY() {
 		return this.y;
 	}
 	public double getVelX() {
@@ -52,7 +52,7 @@ public abstract class Actor {
 	public double getVelY() {
 		return this.velY;
 	}
-	public double getRadius() {
+	public int getRadius() {
 		return this.radius;
 	}
 	public Color getColor() {

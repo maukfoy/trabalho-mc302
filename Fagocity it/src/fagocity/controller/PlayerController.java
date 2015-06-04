@@ -17,30 +17,27 @@ public class PlayerController implements ActorController {
 	}
 	
 	private void atualizarPosicao() {
-		p.setX(p.getX() + p.getVelX());
-		p.setY(p.getY() + p.getVelY());
+		p.setX(p.getX() + (int)p.getVelX());
+		p.setY(p.getY() + (int)p.getVelY());
 	}
 	
 	private void atualizaVelocidade() {
 		double velTotal = 8;
-		double mouseX = MouseController.getMouseX();
-		double mouseY = MouseController.getMouseY();
+		int mouseX = MouseController.getMouseX();
+		int mouseY = MouseController.getMouseY();
 		
-		/* Se houver distÃ¢ncia entre x do mouse e x da bola, mover a bola no eixo x */
-		if( (mouseX - p.getX()) != 0.0 ) {
-			double oldVelX = p.getVelX();
-			p.setVelX (velTotal * ( (mouseX - p.getX()) / Math.sqrt( (mouseY - p.getY())*(mouseY - p.getY()) +  (mouseX - p.getX())*(mouseX - p.getX()) )) );
-			if( oldVelX > 0 && p.getVelX() < 0 ||  oldVelX < 0 && p.getVelX() > 0)
-				p.setVelX(0);
-			//System.out.println(velX);
+		/* Distance between mouse and player */
+		double distance = Math.sqrt( (mouseY - p.getY())*(mouseY - p.getY()) +  (mouseX - p.getX())*(mouseX - p.getX()) );
+		
+		/* 5 é a tolerância de erro. Ele é necessário pois evita uma divisão por 0 e evita o flickering do player */
+		if(distance > 5) {
+			p.setVelX ( (velTotal/distance) * (mouseX - p.getX()) );
+			p.setVelY ( (velTotal/distance) * (mouseY - p.getY()) );
 		}
-		/* Se houver distÃ¢ncia entre y do mouse e y da bola, mover a bola no eixo y */
-		if( (mouseY - p.getY()) != 0.0 ) {
-			double oldVelY = p.getVelY();
-			p.setVelY(velTotal * ( (mouseY - p.getY()) / Math.sqrt( (mouseY - p.getY())*(mouseY - p.getY()) +  (mouseX - p.getX())*(mouseX - p.getX()) )));
-			if( oldVelY > 0 && p.getVelY() < 0 ||  oldVelY < 0 && p.getVelY() > 0)
-				p.setVelY(0);
-			//System.out.println(velY);
+		else {
+			p.setVelX (0);
+			p.setVelY (0);
 		}
+		System.out.println("distance:" +distance);
 	}
 }
