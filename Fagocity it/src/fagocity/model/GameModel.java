@@ -1,22 +1,25 @@
 package fagocity.model;
 
 import java.util.ArrayList;
-import fagocity.model.interfaces.IActor;
 
 public class GameModel {
 	/* Lista de Actors */
-	private static ArrayList<IActor> ActorsList;
+	private static ArrayList<Actor> ActorsList;
 	
 	public GameModel() {
-		ActorsList = new ArrayList<IActor>();
+		ActorsList = new ArrayList<Actor>();
 	}
 	
-	public void addToActorsList(IActor actor) {
+	public void addToActorsList(Actor actor) {
 		ActorsList.add(actor);
 	}
 	
-	/* Getters e setters */
-	public static ArrayList<IActor> getActorsList() {
+	public static void removeFromActorsList(Actor actor) {
+		ActorsList.remove(actor);
+	}
+	
+	/* Getter*/
+	public static ArrayList<Actor> getActorsList() {
 		return ActorsList;
 	}	
 }
