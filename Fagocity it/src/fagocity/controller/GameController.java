@@ -2,7 +2,10 @@ package fagocity.controller;
 
 import java.awt.Color;
 import java.util.ArrayList;
+
 import fagocity.model.Actor;
+import fagocity.model.GameMode;
+import fagocity.model.GameMode.STATUS;
 import fagocity.model.GameModel;
 import fagocity.view.GameView;
 
@@ -26,17 +29,21 @@ public class GameController {
 	
 	/* Atualiza todos fatores do jogo */
 	public void update() {
-		/* Percorre a lista de actors e manda eles atualizarem suas informações */
-		ArrayList<Actor> lista = GameModel.getActorsList();
-		Actor obj;
 		
-		for(int i = 0; i < lista.size(); i++) {
-			obj = lista.get(i);
-			obj.update();
+		/*so vai dar os updates caso esteja no modo jogavel*/
+		if (GameMode.status == STATUS.Fagocity){
+			/* Percorre a lista de actors e manda eles atualizarem suas informações */
+			ArrayList<Actor> lista = GameModel.getActorsList();
+			Actor obj;
+		
+			for(int i = 0; i < lista.size(); i++) {
+				obj = lista.get(i);
+				obj.update();
+			}
+		
+			SpawnController.update();
+			CollisionController.update();
 		}
-		
-		SpawnController.update();
-		CollisionController.update();
 	}
 	
 	/* Adiciona actors à lista de actors que fica em GameModel */

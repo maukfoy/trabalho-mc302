@@ -5,9 +5,13 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
+
 import javax.swing.JPanel;
+
 import fagocity.model.Actor;
+import fagocity.model.GameMode;
 import fagocity.model.GameModel;
+import fagocity.model.GameMode.STATUS;
 
 public class GameView extends JPanel {
 	private static final long serialVersionUID = 3856930242116209479L;
@@ -38,14 +42,20 @@ public class GameView extends JPanel {
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
-		/* Desenha todos actors */
-		
-		ArrayList <Actor> ActorsList = GameModel.getActorsList();
-		for(int i = 0; i < GameModel.getActorsList().size(); i++ ) {
-			Actor actor = ActorsList.get(i);
-			g.setColor(actor.getColor());
-			g.fillOval((int)actor.getX(),(int) actor.getY(),(int) actor.getRadius(),(int) actor.getRadius());
+		/*no modo de jogo*/
+		if (GameMode.status == STATUS.Fagocity){
+			/* Desenha todos actors */	
+			ArrayList <Actor> ActorsList = GameModel.getActorsList();
+			for(int i = 0; i < GameModel.getActorsList().size(); i++ ) {
+				Actor actor = ActorsList.get(i);
+				g.setColor(actor.getColor());
+				g.fillOval((int)actor.getX(),(int) actor.getY(),(int) actor.getRadius(),(int) actor.getRadius());
+			}
 		}
+		
+		else
+			MenuView.render(g);
+
 		
 		/* Finaliza os desenhos */
 		bs.show();
