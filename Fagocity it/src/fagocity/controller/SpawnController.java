@@ -68,8 +68,6 @@ public class SpawnController {
 
 	private static double[] generateSpawnVelocities() {
 		double velTotal, velX, velY;
-		int width = GameView.getScreenWidth();
-		int height = GameView.getScreenHeight();
 		double[] velocities = new double[2];
 		Random random = new Random();
 		
@@ -78,9 +76,11 @@ public class SpawnController {
 		velTotal = random.nextInt( (int)maxDefaultEnemyVelocity - (int)minDefaultEnemyVelocity + 1)
 				+ (int)minDefaultEnemyVelocity;
 		
+		double angle = random.nextDouble() * Math.PI/2;
+		
 		/* Decompõe a velocidade */
-		velX = velTotal * (width / Math.sqrt( (width*width) + (height*height) ));
-		velY = velTotal * (height / Math.sqrt( (width*width) + (height*height) ));
+		velX = velTotal * Math.cos(angle);
+		velY = velTotal * Math.sin(angle);
 		
 		/* Faz com que a velocidade da bolinha esteja sempre direcionada para dentro da tela */
 		switch(side) {

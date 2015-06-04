@@ -31,11 +31,11 @@ public class CollisionController {
 	}
 	
 	/*calcula a dinstancia entre dois pontos das coordenadas cartesianas*/
-	public static int distanceBetweenPoints (double x1, double x2, double y1, double y2)
+	public static int distanceBetweenPoints (int x1, int x2, int y1, int y2)
 	{
 		int d;
 		
-		d = (int) (Math.sqrt ((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)));
+		d = (int)(Math.sqrt ((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)));
 		
 		return d;
 	}
@@ -61,7 +61,7 @@ public class CollisionController {
 	/*retorna true se a intersecao entre dois objetos for suficiente para ocorrer a fagocitacao*/
 	public static boolean intersection (Actor obj1, Actor obj2){
 		/*se a distancia entre os objetos for menor ou igual ao raio do maior objeto*/
-		if (distanceBetweenPoints (obj1.getX(), obj2.getX(), obj1.getY(), obj2.getY()) <= greatestObject(obj1, obj2).getRadius()/2)
+		if (distanceBetweenPoints (obj1.getX() - obj1.getRadius()/2, obj2.getX()- obj2.getRadius()/2, obj1.getY()- obj1.getRadius()/2, obj2.getY()- obj2.getRadius()/2) <= greatestObject(obj1, obj2).getRadius()/2)
 			return true;
 		else
 			return false;

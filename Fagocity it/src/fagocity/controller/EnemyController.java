@@ -16,8 +16,8 @@ public class EnemyController implements ActorController {
 	}
 	
 	private void atualizarPosicao() {
-		e.setX(e.getX() + e.getVelX());
-		e.setY(e.getY() + e.getVelY());
+		e.setX(e.getX() + (int)e.getVelX());
+		e.setY(e.getY() + (int)e.getVelY());
 	}
 
 }
