@@ -2,8 +2,6 @@ package fagocity.controller;
 
 import java.awt.Color;
 import java.util.Random;
-import java.util.Vector;
-
 import fagocity.view.GameView;
 
 public class SpawnController {
