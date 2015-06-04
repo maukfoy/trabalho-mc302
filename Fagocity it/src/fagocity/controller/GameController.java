@@ -20,7 +20,7 @@ public class GameController {
 	/* Cria as condições iniciais do jogo */
 	private void initialConditions() {
 		/* Cria o player */
-		int radius = 30;
+		int radius = 20;
 		ActorFactory.createActor((view.getWidth() - radius)/2, (view.getHeight() - radius)/2, 0, 0, radius, Color.red, "player");
 	}
 	
