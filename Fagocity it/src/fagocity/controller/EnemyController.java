@@ -1,16 +1,24 @@
 package fagocity.controller;
 
-
-import java.awt.Color;
-
+import fagocity.controller.Interfaces.ActorController;
 import fagocity.model.Enemy;
+import fagocity.model.Player;
 
-public class EnemyController {
+public class EnemyController implements ActorController {
 	
-	/* Cria um Enemy */
-	public static Enemy createEnemy(int x, int y, double velX, double velY, int radius, Color color) {
-		Enemy enemy = (Enemy) ActorFactory.createActor(x, y, velX, velY, radius, color, "enemy");
-		return enemy;
+	private Enemy e;
+	
+	public EnemyController (Enemy enemy){
+		this.e = enemy;
+	}
+	
+	public void update() {
+		atualizarPosicao();
+	}
+	
+	private void atualizarPosicao() {
+		e.setX(e.getX() + e.getVelX());
+		e.setY(e.getY() + e.getVelY());
 	}
 
 }
