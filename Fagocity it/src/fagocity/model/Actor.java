@@ -1,16 +1,22 @@
 package fagocity.model;
 
+import java.awt.Color;
+
 import fagocity.model.interfaces.IActor;
 
 public abstract class Actor implements IActor {
 	public int x, y, radius;
-	private double velX, velY, mass;
+	protected double velX;
+	protected double velY;
+	protected Color color;
 	
-	public Actor(int x, int y, int radius, double mass) {
+	public Actor(int x, int y, double velX, double velY, int radius, Color color) {
 		this.x = x;
 		this.y = y;
+		this.velX = velX;
+		this.velY = velY;
 		this.radius = radius;
-		this.mass = mass;
+		this.color = color;
 	}
 
 	/* Getters and setters */
@@ -28,5 +34,8 @@ public abstract class Actor implements IActor {
 	}
 	public int getRadius() {
 		return this.radius;
+	}
+	public Color getColor() {
+		return this.color;
 	}
 }

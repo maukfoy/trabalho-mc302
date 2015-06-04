@@ -1,5 +1,7 @@
 package fagocity.controller;
 
+import java.awt.Color;
+
 import fagocity.model.Enemy;
 import fagocity.model.Player;
 import fagocity.model.interfaces.IActor;
@@ -7,11 +9,11 @@ import fagocity.model.interfaces.IActor;
 public class ActorFactory {
 	
 	/* Cria um Actor */
-	public static IActor createActor(int x, int y, int radius, double mass, String type) {
+	public static IActor createActor(int x, int y, double velX, double velY, int radius, Color color, String type) {
 		
 		/* Cria um Player */
 		if( type.equals("player")) {
-			Player player = new Player(x, y, radius, mass);
+			Player player = new Player(x, y, velX, velY, radius, color);
 			/* Adiciona o player à lista de actors */
 			GameController.addToActorsList(player);
 			return player;
@@ -19,7 +21,7 @@ public class ActorFactory {
 		
 		/* Cria um Enemy */
 		else if( type.equals("enemy")) {
-			Enemy enemy = new Enemy(x, y, radius, mass);
+			Enemy enemy = new Enemy(x, y, velX, velY, radius, color);
 			/* Adiciona o enemy à lista de actors */
 			GameController.addToActorsList(enemy);
 			return enemy;

@@ -2,7 +2,6 @@ package fagocity.view;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
-
 import javax.swing.JFrame;
 
 import fagocity.controller.MouseController;
@@ -36,7 +35,8 @@ public class Display {
 		canvas.setMaximumSize(new Dimension(width, height));
 		
 		frame.add(canvas);
-		canvas.addMouseListener(new MouseController());
+		canvas.addMouseMotionListener(new MouseController());
+			
 		frame.pack();
 	}
 	

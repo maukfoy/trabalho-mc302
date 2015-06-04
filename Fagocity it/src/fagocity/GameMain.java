@@ -46,14 +46,7 @@ public class GameMain extends Canvas implements Runnable {
 			delta += (now - lastTime) / ms;
 			lastTime = now;
 			if(delta >= 1) {
-				
-				/* ******************************************** */
-				/*												*/
-				/* CHAMAR AQUI O CONTROLLER PARA FAZER OS TICKS */
-				/*												*/
-				/* ******************************************** */
-				
-				//tick();
+				controller.update();
 				updates++;
 				delta--;
 			}

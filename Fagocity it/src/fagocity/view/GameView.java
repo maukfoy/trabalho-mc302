@@ -41,10 +41,11 @@ public class GameView extends JPanel {
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
 		/* Desenha todos actors */
-		g.setColor(Color.RED);
+		
 		ArrayList <IActor> ActorsList = GameModel.getActorsList();
 		for(int i = 0; i < GameModel.getActorsList().size(); i++ ) {
 			IActor actor = ActorsList.get(i);
+			g.setColor(actor.getColor());
 			g.fillOval(actor.getX(), actor.getY(), actor.getRadius(), actor.getRadius());
 		}
 		

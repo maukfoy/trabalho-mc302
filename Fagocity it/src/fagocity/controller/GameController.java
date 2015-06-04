@@ -1,5 +1,8 @@
 package fagocity.controller;
 
+import java.awt.Color;
+import java.util.ArrayList;
+
 import fagocity.model.GameModel;
 import fagocity.model.interfaces.IActor;
 import fagocity.view.GameView;
@@ -19,7 +22,18 @@ public class GameController {
 	private void initialConditions() {
 		/* Cria o player */
 		int radius = 50;
-		PlayerController.createPlayer((view.getWidth() - radius)/2, (view.getHeight() - radius)/2, radius, 0);
+		PlayerController.createPlayer((view.getWidth() - radius)/2, (view.getHeight() - radius)/2, 0, 0, radius, Color.red);
+	}
+	
+	/* Atualiza todos fatores do jogo */
+	public void update() {
+		/* Percorre a lista de actors e manda eles atualizarem suas informações */
+		ArrayList<IActor> lista = GameModel.getActorsList();
+		for(int i = 0; i < lista.size(); i++) {
+			lista.get(i).update();
+		}
+		/* Chama o Spawn Controller */
+		SpawnController.autoEnemyCreator();
 	}
 	
 	/* Adiciona actors à lista de actors que fica em GameModel */
