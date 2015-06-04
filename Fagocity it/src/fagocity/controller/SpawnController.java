@@ -2,6 +2,8 @@ package fagocity.controller;
 
 import java.awt.Color;
 import java.util.Random;
+import java.util.Vector;
+
 import fagocity.view.GameView;
 
 public class SpawnController {
@@ -17,13 +19,17 @@ public class SpawnController {
 	static int maxDefaultRadius = 200;
 	static SIDE side;
 	
+	public static void update (){
+		autoEnemyCreator();
+	}
+	
 	public static void autoEnemyCreator() {
 		
 		if(System.currentTimeMillis() > oldTime + spawnTime) {
 			int[] coordinates = generateSpawnCoordinates();
 			double[] velocities = generateSpawnVelocities();
-			EnemyController.createEnemy(coordinates[0], coordinates[1],
-					velocities[0], velocities[1], generateRandomRadius(), generateRandomColor());
+			ActorFactory.createActor(coordinates[0], coordinates[1],
+					velocities[0], velocities[1], generateRandomRadius(), generateRandomColor(), "enemy");
 			
 			oldTime = System.currentTimeMillis();
 		}
@@ -74,7 +80,7 @@ public class SpawnController {
 		velTotal = random.nextInt( (int)maxDefaultEnemyVelocity - (int)minDefaultEnemyVelocity + 1)
 				+ (int)minDefaultEnemyVelocity;
 		
-		/* Decompıe a velocidade */
+		/* Decomp√µe a velocidade */
 		velX = velTotal * (width / Math.sqrt( (width*width) + (height*height) ));
 		velY = velTotal * (height / Math.sqrt( (width*width) + (height*height) ));
 		
@@ -118,12 +124,12 @@ public class SpawnController {
 		}
 	}
 
-	private static int generateRandomRadius() {
+	private static double generateRandomRadius() {
 		Random random = new Random();
-		int radius;
+		double radius;
 		
 		/* Numero random entre o radio maximo e o minimo */
-		radius = (int) (random.nextInt(maxDefaultRadius - minDefaultRadius) + minDefaultRadius);
+		radius = (random.nextInt(maxDefaultRadius - minDefaultRadius) + minDefaultRadius);
 		
 		return radius;
 	}
@@ -131,7 +137,7 @@ public class SpawnController {
 	private static Color generateRandomColor() {
 		Random r = new Random();
 		
-		/* Vetor com todas cores de bolinha possÌveis no jogo */
+		/* Vetor com todas cores de bolinha poss√≠veis no jogo */
 		Color[] colors = {Color.blue, Color.cyan, Color.green, 
 				Color.yellow, Color.magenta, Color.orange, Color.pink, 
 				Color.white, Color.yellow};
