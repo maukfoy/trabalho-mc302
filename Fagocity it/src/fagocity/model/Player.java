@@ -30,16 +30,20 @@ public class Player extends Actor implements IActor {
 		if( (mouseX - x) != 0.0 ) {
 			double oldVelX = velX;
 			velX = velTotal * ( (mouseX - x) / Math.sqrt( (mouseY - y)*(mouseY - y) +  (mouseX - x)*(mouseX - x) ) );
-			if( oldVelX > 0 && velX < 0 ||  oldVelX < 0 && velX > 0)
+			if( oldVelX > 0 && velX < 0 ||  oldVelX < 0 && velX > 0) {
 				velX = 0;
-			//System.out.println(velX);
+				// x = mouseX; talvez seja util - atualmente da bug, nao usar
+			}
+			System.out.println(velX);
 		}
 		/* Se houver distância entre y do mouse e y da bola, mover a bola no eixo y */
 		if( (mouseY - y) != 0.0 ) {
 			double oldVelY = velY;
 			velY = velTotal * ( (mouseY - y) / Math.sqrt( (mouseY - y)*(mouseY - y) +  (mouseX - x)*(mouseX - x) ) );
-			if( oldVelY > 0 && velY < 0 ||  oldVelY < 0 && velY > 0)
+			if( oldVelY > 0 && velY < 0 ||  oldVelY < 0 && velY > 0) {
 				velY = 0;
+				// y = mouseY; talvez seja util - atualmente da bug, nao usar
+			}
 			//System.out.println(velY);
 		}
 	}

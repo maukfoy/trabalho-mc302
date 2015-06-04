@@ -123,7 +123,7 @@ public class SpawnController {
 		int radius;
 		
 		/* Numero random entre o radio maximo e o minimo */
-		radius = (int) (random.nextInt(maxDefaultRadius - minDefaultRadius) + minDefaultEnemyVelocity);
+		radius = (int) (random.nextInt(maxDefaultRadius - minDefaultRadius) + minDefaultRadius);
 		
 		return radius;
 	}
