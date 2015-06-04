@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import fagocity.model.Actor;
 import fagocity.model.GameModel;
-import fagocity.model.interfaces.IActor;
 
 public class GameView extends JPanel {
 	private static final long serialVersionUID = 3856930242116209479L;
@@ -25,7 +25,7 @@ public class GameView extends JPanel {
 	
 	/* Metodo que renderiza */
 	public void render() {
-		/* Cria o Buffer Strategy, caso n„o exista - Triple Buffering */
+		/* Cria o Buffer Strategy, caso n√£o exista - Triple Buffering */
 		bs = display.getCanvas().getBufferStrategy();
 		if(bs == null) {
 			display.getCanvas().createBufferStrategy(3);
@@ -42,11 +42,11 @@ public class GameView extends JPanel {
 		
 		/* Desenha todos actors */
 		
-		ArrayList <IActor> ActorsList = GameModel.getActorsList();
+		ArrayList <Actor> ActorsList = GameModel.getActorsList();
 		for(int i = 0; i < GameModel.getActorsList().size(); i++ ) {
-			IActor actor = ActorsList.get(i);
+			Actor actor = ActorsList.get(i);
 			g.setColor(actor.getColor());
-			g.fillOval(actor.getX(), actor.getY(), actor.getRadius(), actor.getRadius());
+			g.fillOval((int)actor.getX(),(int) actor.getY(),(int) actor.getRadius(),(int) actor.getRadius());
 		}
 		
 		/* Finaliza os desenhos */
