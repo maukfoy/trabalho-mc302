@@ -11,7 +11,7 @@ public abstract class Actor {
 	protected Color color;
 	protected ActorController actorController;
 	
-	public Actor(double x, double y, double velX, double velY, double radius, Color color) {
+	public Actor(int x, int y, double velX, double velY, int radius, Color color) {
 		this.x = x;
 		this.y = y;
 		this.velX = velX;

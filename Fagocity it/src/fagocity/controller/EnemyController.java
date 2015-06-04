@@ -2,7 +2,6 @@ package fagocity.controller;
 
 import fagocity.controller.Interfaces.ActorController;
 import fagocity.model.Enemy;
-import fagocity.model.Player;
 
 public class EnemyController implements ActorController {
 	

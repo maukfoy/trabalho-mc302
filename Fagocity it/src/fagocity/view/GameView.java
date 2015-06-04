@@ -5,9 +5,7 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
-
 import javax.swing.JPanel;
-
 import fagocity.model.Actor;
 import fagocity.model.GameModel;
 

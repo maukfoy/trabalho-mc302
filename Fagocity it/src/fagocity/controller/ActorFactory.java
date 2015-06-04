@@ -9,7 +9,7 @@ import fagocity.model.Player;
 public class ActorFactory {
 	
 	/* Cria um Actor */
-	public static void createActor(double x, double y, double velX, double velY, double radius, Color color, String type) {
+	public static void createActor(int x, int y, double velX, double velY, int radius, Color color, String type) {
 		
 		/* Cria um Player */
 		if( type.equals("player")) {

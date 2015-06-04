@@ -2,8 +2,6 @@ package fagocity.controller;
 
 import java.awt.Color;
 import java.util.Random;
-import java.util.Vector;
-
 import fagocity.view.GameView;
 
 public class SpawnController {
@@ -15,8 +13,8 @@ public class SpawnController {
 	static int defaultEnemyRadius = 50;
 	static double minDefaultEnemyVelocity = 3;
 	static double maxDefaultEnemyVelocity = 6;
-	static int minDefaultRadius = 20;
-	static int maxDefaultRadius = 200;
+	static int minDefaultRadius = 10;
+	static int maxDefaultRadius = 100;
 	static SIDE side;
 	
 	public static void update (){
@@ -124,9 +122,9 @@ public class SpawnController {
 		}
 	}
 
-	private static double generateRandomRadius() {
+	private static int generateRandomRadius() {
 		Random random = new Random();
-		double radius;
+		int radius;
 		
 		/* Numero random entre o radio maximo e o minimo */
 		radius = (random.nextInt(maxDefaultRadius - minDefaultRadius) + minDefaultRadius);

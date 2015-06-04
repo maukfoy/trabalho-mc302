@@ -1,8 +1,6 @@
 package fagocity.controller;
 
-import java.awt.Color;
 import java.util.ArrayList;
-
 import fagocity.model.Actor;
 import fagocity.model.GameModel;
 
@@ -13,20 +11,20 @@ public class CollisionController {
 	}
 	
 	public static void collision(){
-		ArrayList<Actor> lista = GameModel.getActorsList();
+		ArrayList<Actor> list = GameModel.getActorsList();
 		Actor obj1, obj2;
 		
 		/*compara todos os Actors do jogo*/
-		for(int i = 0; i < lista.size(); i++) {
-			for(int j = 0; j < lista.size(); j++) {
-				obj1 = lista.get(i);
-				obj2 = lista.get(j);
+		for(int i = 0; i < list.size(); i++) {
+			for(int j = 0; j < list.size(); j++) {
+				obj1 = list.get(i);
+				obj2 = list.get(j);
 				
 				/*se distintos objetos, com distintos tamanhos, tiverem condicao de intersecao
 				 *propícia a fagocitacao, remove-se o menor e aumenta-se o maior*/
 				if ( (j != i) && (obj1.getRadius() != obj2.getRadius()) && (intersection(obj1, obj2))){
 					greatestObject(obj1, obj2).setRadius(newRadius(obj1, obj2));			
-					lista.remove(smallestObject (obj1, obj2));
+					list.remove(smallestObject (obj1, obj2));
 				}
 			}
 		}
@@ -70,11 +68,12 @@ public class CollisionController {
 	}
 	
 	/*retorna o novo raio do objeto maior após a fagocitacao*/
-	public static double newRadius (Actor obj1, Actor obj2){
+	public static int newRadius (Actor obj1, Actor obj2){
 		double r;
 		
-		r = Math.sqrt(obj1.getRadius() * obj1.getRadius() + obj1.getRadius() * obj1.getRadius());
-		return r;
+		r = Math.sqrt(obj1.getRadius() * obj1.getRadius() + obj2.getRadius() * obj2.getRadius());
+	
+		return (int)r;
 	}
 	
 }

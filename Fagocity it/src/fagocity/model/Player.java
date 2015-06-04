@@ -6,7 +6,7 @@ import fagocity.controller.PlayerController;
 
 public class Player extends Actor {
 		
-	public Player(double x, double y, double velX, double velY, double radius, Color color) {
+	public Player(int x, int y, double velX, double velY, int radius, Color color) {
 		super(x, y, velX, velY, radius, color);
 		actorController = new PlayerController(this);
 	}	

@@ -2,6 +2,11 @@
 AS IDEIAS A SEREM IMPLEMENTADAS E COISAS DO TIPO */
 Vamos só fazer append aqui pra manter um log mesmo do trabalho */
 
+- é possivel criar uma interface updatable onde quem implementa deve implementar update - vitao
+
+- a formula de pitágoras é usada varias vezes, é possivel fazer um controller que contem 
+operacoes matematicas como essa - vitao
+
 - O código precisa MUITO ser otimizado. Tipo MUITO. A estrutura de MVC não está muito bem
  implementada, é preciso aumentar a independência dos componentes!! -vitao
  

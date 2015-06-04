@@ -2,7 +2,6 @@ package fagocity.controller;
 
 import java.awt.Color;
 import java.util.ArrayList;
-
 import fagocity.model.Actor;
 import fagocity.model.GameModel;
 import fagocity.view.GameView;
@@ -21,7 +20,7 @@ public class GameController {
 	/* Cria as condições iniciais do jogo */
 	private void initialConditions() {
 		/* Cria o player */
-		double radius = 50;
+		int radius = 30;
 		ActorFactory.createActor((view.getWidth() - radius)/2, (view.getHeight() - radius)/2, 0, 0, radius, Color.red, "player");
 	}
 	
