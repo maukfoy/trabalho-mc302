@@ -7,7 +7,9 @@ import fagocity.model.Actor;
 import fagocity.model.GameMode;
 import fagocity.model.GameMode.STATUS;
 import fagocity.model.GameModel;
+import fagocity.model.Player;
 import fagocity.view.GameView;
+import fagocity.view.HUD;
 
 public class GameController {
 	
@@ -23,7 +25,7 @@ public class GameController {
 	/* Cria as condições iniciais do jogo */
 	private void initialConditions() {
 		/* Cria o player */
-		int radius = 35;
+		int radius = Player.defaultRadius;
 		ActorFactory.createActor((view.getWidth() - radius)/2, (view.getHeight() - radius)/2, 0, 0, radius, Color.red, "player");
 	}
 	
@@ -40,9 +42,10 @@ public class GameController {
 				obj = lista.get(i);
 				obj.update();
 			}
-		
+			
 			SpawnController.update();
 			CollisionController.update();
+			HUD.update();
 		}
 	}
 	

@@ -1,6 +1,10 @@
 package fagocity.controller;
 
+import java.util.ArrayList;
+
 import fagocity.controller.Interfaces.ActorController;
+import fagocity.model.Actor;
+import fagocity.model.GameModel;
 import fagocity.model.Player;
 
 public class PlayerController implements ActorController {
@@ -22,7 +26,7 @@ public class PlayerController implements ActorController {
 	}
 	
 	private void atualizaVelocidade() {
-		double velTotal = 8;
+		double velTotal = Player.defaultSpeed;
 		int mouseX = MouseController.getMouseX();
 		int mouseY = MouseController.getMouseY();
 		
@@ -38,6 +42,17 @@ public class PlayerController implements ActorController {
 			p.setVelX (0);
 			p.setVelY (0);
 		}
-		System.out.println("distance:" +distance);
+	}
+	
+	public static Player getPlayer() {
+		ArrayList<Actor> list = GameModel.getActorsList();
+		Player player = null;
+		
+		for(int i = 0; i < list.size(); i++) {
+			Actor actor = list.get(i);
+			if( actor instanceof Player )
+				player = (Player) actor;
+		}
+		return player;
 	}
 }

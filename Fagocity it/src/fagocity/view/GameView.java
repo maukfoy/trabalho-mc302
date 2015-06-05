@@ -20,9 +20,17 @@ public class GameView extends JPanel {
 	private Display display;
 	private BufferStrategy bs;
 	private Graphics g;
+	private static HUD hud;
 	
 	public GameView(String title) {
 		this.display = new Display(title, WIDTH, HEIGHT);
+		
+		/* Cria o HUD */
+		try {
+			hud = new HUD(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/* Metodo que renderiza */
@@ -51,6 +59,12 @@ public class GameView extends JPanel {
 				g.setColor(actor.getColor());
 				g.fillOval((int)actor.getX(),(int) actor.getY(),(int) actor.getRadius(),(int) actor.getRadius());
 			}
+			
+			/* Desenha o Score */
+			g.setColor(Color.white);
+			String score = "Score: " + String.valueOf(HUD.getScore());
+			g.drawString(score, WIDTH/100, HEIGHT/50);
+			
 		}		
 		else
 			MenuView.render(g);
@@ -75,6 +89,10 @@ public class GameView extends JPanel {
 
 	public static int getScreenHeight() {
 	    return Toolkit.getDefaultToolkit().getScreenSize().height;
+	}
+	
+	public static HUD getHUD() {
+		return hud;
 	}
 }
 
