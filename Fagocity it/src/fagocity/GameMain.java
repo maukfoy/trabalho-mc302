@@ -3,6 +3,7 @@ package fagocity;
 import java.awt.Canvas;
 
 import fagocity.controller.GameController;
+import fagocity.controller.MenuController;
 import fagocity.model.GameModel;
 import fagocity.view.GameView;
 
@@ -24,6 +25,7 @@ public class GameMain extends Canvas implements Runnable {
 		this.model = new GameModel();
 		this.view = new GameView("Fagocity It!");
 		this.controller = new GameController(model, view);
+
 		
 		/* Cria a Thread */
 		this.thread = new Thread(this);

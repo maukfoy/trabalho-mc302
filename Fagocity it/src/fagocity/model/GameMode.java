@@ -6,5 +6,5 @@ public class GameMode {
 		Fagocity(), Menu(), Help();
 	}
 	
-	public static STATUS status = STATUS.Fagocity;
+	public static STATUS status = STATUS.Menu;
 }

@@ -6,28 +6,38 @@ import fagocity.model.GameModel;
 
 public class CollisionController {
 	
-	public static void update(){
+	public static void update()
+	{
 		collision ();
 	}
 	
-	public static void collision(){
+	public static void collision()
+	{
 		ArrayList<Actor> list = GameModel.getActorsList();
+		ArrayList<Actor> toBeDeleted = new ArrayList<Actor>();
 		Actor obj1, obj2;
 		
 		/*compara todos os Actors do jogo*/
-		for(int i = 0; i < list.size(); i++) {
-			for(int j = 0; j < list.size(); j++) {
+		for(int i = 0; i < list.size(); i++)
+		{
+			for(int j = 0; j < list.size(); j++)
+			{
 				obj1 = list.get(i);
 				obj2 = list.get(j);
 				
 				/*se distintos objetos, com distintos tamanhos, tiverem condicao de intersecao
-				 *propícia a fagocitacao, remove-se o menor e aumenta-se o maior*/
-				if ( (j != i) && (obj1.getRadius() != obj2.getRadius()) && (intersection(obj1, obj2))){
+				 *propicia a fagocitacao, guarda-se o menor (p/ remove-lo posteriormente) e 
+				 *aumenta-se o maior*/
+				if ( (j != i) && (obj1.getRadius() != obj2.getRadius()) && (intersection(obj1, obj2)))
+				{
 					greatestObject(obj1, obj2).setRadius(newRadius(obj1, obj2));			
-					list.remove(smallestObject (obj1, obj2));
+					toBeDeleted.add(smallestObject(obj1,obj2));
 				}
 			}
 		}
+		/*remove todos os objetos que foram fagocitados*/
+		for (int i = 0; i < toBeDeleted.size(); i++)
+			list.remove(toBeDeleted.get(i));
 	}
 	
 	/*calcula a dinstancia entre dois pontos das coordenadas cartesianas*/
@@ -59,7 +69,8 @@ public class CollisionController {
 	}
 	
 	/*retorna true se a intersecao entre dois objetos for suficiente para ocorrer a fagocitacao*/
-	public static boolean intersection (Actor obj1, Actor obj2){
+	public static boolean intersection (Actor obj1, Actor obj2)
+	{
 		
 		double x1center = obj1.getX() + obj1.getRadius()/2;
 		double x2center = obj2.getX()+ obj2.getRadius()/2;
@@ -74,7 +85,8 @@ public class CollisionController {
 	}
 	
 	/*retorna o novo raio do objeto maior após a fagocitacao*/
-	public static int newRadius (Actor obj1, Actor obj2){
+	public static int newRadius (Actor obj1, Actor obj2)
+	{
 		double r;
 		
 		r = Math.sqrt(obj1.getRadius() * obj1.getRadius() + obj2.getRadius() * obj2.getRadius());

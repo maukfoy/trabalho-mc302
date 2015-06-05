@@ -42,17 +42,17 @@ public class GameView extends JPanel {
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
-		/*no modo de jogo*/
-		if (GameMode.status == STATUS.Fagocity){
-			/* Desenha todos actors */	
-			ArrayList <Actor> ActorsList = GameModel.getActorsList();
-			for(int i = 0; i < GameModel.getActorsList().size(); i++ ) {
-				Actor actor = ActorsList.get(i);
-				g.setColor(actor.getColor());
-				g.fillOval((int)actor.getX(),(int) actor.getY(),(int) actor.getRadius(),(int) actor.getRadius());
-			}
-		}		
-		else
+	
+		/* Desenha todos actors */	
+		ArrayList <Actor> ActorsList = GameModel.getActorsList();
+		for(int i = 0; i < GameModel.getActorsList().size(); i++ ) {
+			Actor actor = ActorsList.get(i);
+			g.setColor(actor.getColor());
+			g.fillOval((int)actor.getX(),(int) actor.getY(),(int) actor.getRadius(),(int) actor.getRadius());
+		}
+		
+		/*se nao estiver no modo jogavel, da render no menu ou help*/
+		if (GameMode.status != STATUS.Fagocity)
 			MenuView.render(g);
 		
 		/* Finaliza os desenhos */

@@ -21,34 +21,23 @@ public class MenuView {
 	{
 		if (GameMode.status == STATUS.Menu)
 		{
-		Font f = null;
-		try {
-			f = Font.createFont (Font.TRUETYPE_FONT, new FileInputStream(new File ("Sansation-Regular.ttf"))).deriveFont(Font.PLAIN, 500);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (FontFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+		Font fnt = new Font ("arial", 1, 50);
 		
-		g.setFont (f);
+		g.setFont (fnt);
 		g.setColor (Color.white);
-		g.drawString ("Menu", width/2 - (width/25), height/10);
+		g.drawString ("Menu", 23*width/50, height/10);
 		
 		/*botoes do menu*/
-		g.drawRect (width/23, 190, 200, 64);
-		g.drawString ("Play", width/15, 240);
+		g.drawRect (width/23, 5*height/20, width/10, height/17);
+		g.drawString ("Play", width/15, 59*height/200);
 		
-		g.drawRect (width/23, 320, 200, 64);
-		g.drawString ("Help", width/15, 370);
+		g.drawRect (width/23, 9*height/20 , width/10, height/17);
+		g.drawString ("Help", width/15, 189*height/380);
 	
-		g.drawRect (width/23, 450, 200, 64);
-		g.drawString ("Quit", width/15, 500);
+		g.drawRect (width/23, 13*height/20, width/10, height/17);
+		g.drawString ("Quit", width/15, 153*height/220);
 		}
+		
 		/*janela help*/
 		else if (GameMode.status == STATUS.Help)
 		{
@@ -57,13 +46,13 @@ public class MenuView {
 			
 			g.setFont (fnt);
 			g.setColor (Color.white);
-			g.drawString ("Menu", 335, 70);
+			g.drawString ("Help", 23*width/50, height/10);
 			
-			g.drawRect (300, 450, 200, 64);
-			g.drawString ("Back", 340, 500);
+			g.drawRect (22*width/50, 40*height/50, width/10, height/17);
+			g.drawString ("Back", 23*width/50, 169*height/200);
 			
 			g.setFont (fnt2);
-			g.drawString ("Mouse move o personagem", 200, 250);
+			g.drawString ("Mouse move o personagem", 25*width/64, 4*height/9);
 		}
 
 	}
