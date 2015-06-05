@@ -7,7 +7,9 @@ import fagocity.model.Actor;
 import fagocity.model.GameMode;
 import fagocity.model.GameMode.STATUS;
 import fagocity.model.GameModel;
+import fagocity.model.Player;
 import fagocity.view.GameView;
+import fagocity.view.HUD;
 
 public class GameController {
 	
@@ -39,6 +41,7 @@ public class GameController {
 		}
 		SpawnController.update();
 		CollisionController.update();
+		HUD.update();
 		
 		/*se nao estiver no modo jogavel, menu ou help fica ativo*/
 		if (GameMode.status != STATUS.Fagocity)
