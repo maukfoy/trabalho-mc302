@@ -9,7 +9,7 @@ public class SpawnController {
 	enum SIDE {DOWN, UP, LEFT, RIGHT};
 	
 	static long oldTime = 0;
-	static long spawnTime = 500;
+	static long spawnTime = 100;
 	static int defaultEnemyRadius = 50;
 	static double minDefaultEnemyVelocity = 3;
 	static double maxDefaultEnemyVelocity = 6;
