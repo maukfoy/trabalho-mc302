@@ -2,8 +2,11 @@ package fagocity.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
 import fagocity.model.Actor;
 import fagocity.model.GameModel;
+import fagocity.model.Player;
+import fagocity.view.GameView;
 
 public class CollisionController {
 	
@@ -32,7 +35,6 @@ public class CollisionController {
 				if ( (j != i) && (obj1.getRadius() != obj2.getRadius()) && (intersection(obj1, obj2)))
 				{			
 					toBeDeleted.add(smallestObject(obj1,obj2));
-					greatestObject(obj1, obj2).setRadius(newRadius(obj1, obj2));
 					Actor dead = smallestObject (obj1, obj2);
 					/* Se o Actor morto for o player, salvar o highscore */
 					if(dead instanceof Player) {

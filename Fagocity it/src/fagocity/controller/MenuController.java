@@ -17,6 +17,7 @@ public class MenuController {
 	
 	public static void click ()
 	{	
+		/*O MX E MY TAO SEMPRE ZERO, POR MAIS QUE ESTEJA DANDO UPDATE AQUI PORRA*/
 		mx = MouseController.getClickX ();
 		my = MouseController.getClickY ();
 		
