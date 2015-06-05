@@ -2,6 +2,8 @@
 AS IDEIAS A SEREM IMPLEMENTADAS E COISAS DO TIPO */
 Vamos só fazer append aqui pra manter um log mesmo do trabalho */
 
+- quando o player ficar parado o score deve diminuir!! - vitao
+
 - é possivel criar uma interface updatable onde quem implementa deve implementar update.
 o mesmo vale para o render, uma interface renderizable onde quem implementa chama um render própio - vitao
 

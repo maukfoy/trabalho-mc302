@@ -63,7 +63,9 @@ public class GameView extends JPanel {
 			/* Desenha o Score */
 			g.setColor(Color.white);
 			String score = "Score: " + String.valueOf(HUD.getScore());
+			String highscore = "Highscore: " + String.valueOf(HUD.getHighScore());
 			g.drawString(score, WIDTH/100, HEIGHT/50);
+			g.drawString(highscore, WIDTH/100 + 75, HEIGHT/50);
 			
 		}		
 		else
