@@ -2,30 +2,23 @@ package fagocity.view;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Graphics;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import fagocity.model.GameMode;
-import fagocity.model.GameMode.STATUS;
+import fagocity.model.GameStatus;
+import fagocity.model.GameStatus.STATUS;
 
 public class MenuView {
-	
 	private static int width = GameView.getScreenWidth();
 	private static int height = GameView.getScreenHeight();
 	
 	public static void render (Graphics g)
 	{
-		if (GameMode.status == STATUS.Menu)
+		if (GameStatus.status == STATUS.Menu)
 		{
 		Font fnt = new Font ("arial", 1, 50);
 		
 		g.setFont (fnt);
 		g.setColor (Color.white);
-		g.drawString ("Menu", 23*width/50, height/10);
+		g.drawString ("Fagocity It!", 20*width/50, height/10);
 		
 		/*botoes do menu*/
 		g.drawRect (width/23, 5*height/20, width/10, height/17);
@@ -39,7 +32,7 @@ public class MenuView {
 		}
 		
 		/*janela help*/
-		else if (GameMode.status == STATUS.Help)
+		else if (GameStatus.status == STATUS.Help)
 		{
 			Font fnt = new Font ("arial", 1, 50);
 			Font fnt2 = new Font ("arial", 1, 30);

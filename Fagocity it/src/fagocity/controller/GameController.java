@@ -4,12 +4,11 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import fagocity.model.Actor;
-import fagocity.model.GameMode;
-import fagocity.model.GameMode.STATUS;
+import fagocity.model.GameStatus;
+import fagocity.model.GameStatus.STATUS;
 import fagocity.model.GameModel;
 import fagocity.model.Player;
 import fagocity.view.GameView;
-import fagocity.view.HUD;
 
 public class GameController {
 	
@@ -22,9 +21,9 @@ public class GameController {
 	}
 	
 	/* Cria as condições iniciais do jogo */
-	private static void initialConditions() {
+	public static void initialConditions() {
 		/* Cria o player */
-		int radius = 35;
+		int radius = Player.defaultRadius;
 		ActorFactory.createActor((GameView.getScreenWidth() - radius)/2, (GameView.getScreenHeight() - radius)/2, 0, 0, radius, Color.red, "player");
 	}
 	
@@ -41,10 +40,10 @@ public class GameController {
 		}
 		SpawnController.update();
 		CollisionController.update();
-		HUD.update();
+		HUDController.update();
 		
 		/*se nao estiver no modo jogavel, menu ou help fica ativo*/
-		if (GameMode.status != STATUS.Fagocity)
+		if (GameStatus.status != STATUS.Fagocity)
 			MenuController.update();
 		
 	}

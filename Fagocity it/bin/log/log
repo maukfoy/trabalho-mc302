@@ -2,30 +2,15 @@
 AS IDEIAS A SEREM IMPLEMENTADAS E COISAS DO TIPO */
 Vamos só fazer append aqui pra manter um log mesmo do trabalho */
 
-- quando o player ficar parado o score deve diminuir!! - vitao
+- sempre que alguem se come a cor muda. No caso do player ele tem que comer somente os de mesma cor que ele? - vitao
 
-- é possivel criar uma interface updatable onde quem implementa deve implementar update.
-o mesmo vale para o render, uma interface renderizable onde quem implementa chama um render própio - vitao
-
-- a formula de pitágoras é usada varias vezes, é possivel fazer um controller que contem 
-operacoes matematicas como essa - vitao
-
-- O código precisa MUITO ser otimizado. Tipo MUITO. A estrutura de MVC não está muito bem
- implementada, é preciso aumentar a independência dos componentes!! -vitao
- 
- - QUal o método ideal de atualizar a informação da posição do mouse ? 
- fazer getters das posições X e Y do mouse e atualizar a posicao no Game Loop
- ou fazer um update automático nas variaveis X e Y a partir do MouseMoved ?
- atualmente está com o MouseMoved, mas não tenho certeza se é uma boa ideia. -vitao
+- os inimigos nunca são deletados! - vitao
 
 - a thread está no construtor da GameMain, mas ele deve ser posteriormente
 tirado do construtor. Dizem que dá bugs. Pesquisar. - vitao
 - o bug que dá é que o javax.swing não é thread-safe, então ele usa um
 gerenciador de eventos próprio, a EventDispatcherThread, a versão anterior previa isso
 sugiro retornar ao que era -mauk
-
-- mudei o momento que a view torna-se visível, apenas pelas boas práticas
-quem abre a janela que diz quando ela deve aparecer -mauk
 
 - No final, antes de entregar o jogo pro Santanche, todos e.printStackTrace(); nos try/catch 
 devem ser trocador for getMessage(); por ser uma boa prática de programação. e.printStackTrace();

@@ -9,8 +9,7 @@ public class SpawnController {
 	enum SIDE {DOWN, UP, LEFT, RIGHT};
 	
 	static long oldTime = 0;
-	static long spawnTime = 100;
-	static int defaultEnemyRadius = 50;
+	static long spawnTime = 300;
 	static double minDefaultEnemyVelocity = 3;
 	static double maxDefaultEnemyVelocity = 6;
 	static int minDefaultRadius = 10;
@@ -40,7 +39,7 @@ public class SpawnController {
 		switch(random.nextInt(4)) {
 			/* Nascer do lado esquerdo da tela */
 			case 0:
-				coordinates[0] = -defaultEnemyRadius;
+				coordinates[0] = -maxDefaultRadius;
 				coordinates[1] = random.nextInt(GameView.getScreenHeight());
 				side = SIDE.LEFT;
 				break;
@@ -53,7 +52,7 @@ public class SpawnController {
 			/* Nascer em cima da tela */
 			case 2:
 				coordinates[0] = random.nextInt(GameView.getScreenWidth());
-				coordinates[1] = -defaultEnemyRadius;
+				coordinates[1] = -maxDefaultRadius;
 				side = SIDE.UP;
 				break;
 			/* Nascer em baixo da tela */
@@ -71,7 +70,7 @@ public class SpawnController {
 		double[] velocities = new double[2];
 		Random random = new Random();
 		
-		/* Escolhe aleatoriamente qualquer numetro entre minDefaultEnemyVelocity
+		/* Escolhe aleatoriamente qualquer numero entre minDefaultEnemyVelocity
 		 *  e maxDefaultEnemyVelocity, incluindo eles mesmos */
 		velTotal = random.nextInt( (int)maxDefaultEnemyVelocity - (int)minDefaultEnemyVelocity + 1)
 				+ (int)minDefaultEnemyVelocity;

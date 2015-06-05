@@ -5,13 +5,13 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
-
 import javax.swing.JPanel;
 
 import fagocity.model.Actor;
-import fagocity.model.GameMode;
+import fagocity.model.GameStatus;
 import fagocity.model.GameModel;
-import fagocity.model.GameMode.STATUS;
+import fagocity.model.GameStatus.STATUS;
+import fagocity.model.HUDModel;
 
 public class GameView extends JPanel {
 	private static final long serialVersionUID = 3856930242116209479L;
@@ -20,17 +20,18 @@ public class GameView extends JPanel {
 	private Display display;
 	private BufferStrategy bs;
 	private Graphics g;
-	private static HUD hud;
+	private static HUDView hud;
 	
 	public GameView(String title) {
 		this.display = new Display(title, WIDTH, HEIGHT);
 		
-		/* Cria o HUD */
+		/* Da load no Highscore do disco */
 		try {
-			hud = new HUD(0);
+			HUDModel.loadHighscore();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
 	/* Metodo que renderiza */
@@ -50,7 +51,22 @@ public class GameView extends JPanel {
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
+		/* Desenha todos actors */
+		renderActors();
+		
+		/* Desenha o HUD */
+		HUDView.render(g);
+		
+		/*se nao estiver no modo jogavel, da render no menu ou help*/
+		if (GameStatus.status != STATUS.Fagocity)
+			MenuView.render(g);
+		
+		/* Finaliza os desenhos */
+		bs.show();
+		g.dispose();
+	}
 	
+	private void renderActors() {
 		/* Desenha todos actors */	
 		ArrayList <Actor> ActorsList = GameModel.getActorsList();
 		for(int i = 0; i < GameModel.getActorsList().size(); i++ ) {
@@ -58,20 +74,6 @@ public class GameView extends JPanel {
 			g.setColor(actor.getColor());
 			g.fillOval((int)actor.getX(),(int) actor.getY(),(int) actor.getRadius(),(int) actor.getRadius());
 		}
-		/* Desenha o Score */
-			g.setColor(Color.white);
-			String score = "Score: " + String.valueOf(HUD.getScore());
-			String highscore = "Highscore: " + String.valueOf(HUD.getHighScore());
-			g.drawString(score, WIDTH/100, HEIGHT/50);
-			g.drawString(highscore, WIDTH/100 + 75, HEIGHT/50);
-		
-		/*se nao estiver no modo jogavel, da render no menu ou help*/
-		if (GameMode.status != STATUS.Fagocity)
-			MenuView.render(g);
-		
-		/* Finaliza os desenhos */
-		bs.show();
-		g.dispose();
 	}
 	
 	/* Getters e setters */
@@ -91,7 +93,7 @@ public class GameView extends JPanel {
 	    return Toolkit.getDefaultToolkit().getScreenSize().height;
 	}
 	
-	public static HUD getHUD() {
+	public static HUDView getHUD() {
 		return hud;
 	}
 }

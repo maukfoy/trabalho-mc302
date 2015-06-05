@@ -1,6 +1,6 @@
 package fagocity.model;
 
-public class GameMode {
+public class GameStatus {
 	
 	public static enum STATUS {
 		Fagocity(), Menu(), Help();

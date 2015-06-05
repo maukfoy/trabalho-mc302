@@ -2,14 +2,14 @@ package fagocity.model;
 
 import java.awt.Color;
 
-import fagocity.controller.Interfaces.ActorController;
+import fagocity.controller.Interfaces.IActorController;
 
 public abstract class Actor {
 	protected int x, y, radius;
 	protected double velX;
 	protected double velY;
 	protected Color color;
-	protected ActorController actorController;
+	protected IActorController actorController;
 	
 	public Actor(int x, int y, double velX, double velY, int radius, Color color) {
 		this.x = x;

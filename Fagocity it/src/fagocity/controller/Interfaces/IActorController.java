@@ -1,6 +1,6 @@
 package fagocity.controller.Interfaces;
 
-public interface ActorController {
+public interface IActorController {
 	
 	public void update();
 

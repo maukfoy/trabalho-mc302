@@ -3,7 +3,6 @@ package fagocity;
 import java.awt.Canvas;
 
 import fagocity.controller.GameController;
-import fagocity.controller.MenuController;
 import fagocity.model.GameModel;
 import fagocity.view.GameView;
 

@@ -2,12 +2,13 @@ package fagocity.controller;
 
 import java.util.ArrayList;
 
-import fagocity.controller.Interfaces.ActorController;
+import fagocity.controller.Interfaces.IActorController;
 import fagocity.model.Actor;
 import fagocity.model.GameModel;
 import fagocity.model.Player;
+import fagocity.view.Display;
 
-public class PlayerController implements ActorController {
+public class PlayerController implements IActorController {
 	
 	private Player p;
 	
@@ -37,8 +38,10 @@ public class PlayerController implements ActorController {
 		if(distance > 5) {
 			p.setVelX ( (velTotal/distance) * (mouseX - p.getX()) );
 			p.setVelY ( (velTotal/distance) * (mouseY - p.getY()) );
+			Display.showCursor();
 		}
 		else {
+			Display.hideCursor();
 			p.setVelX (0);
 			p.setVelY (0);
 		}

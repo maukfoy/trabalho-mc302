@@ -1,9 +1,9 @@
 package fagocity.controller;
 
-import fagocity.controller.Interfaces.ActorController;
+import fagocity.controller.Interfaces.IActorController;
 import fagocity.model.Enemy;
 
-public class EnemyController implements ActorController {
+public class EnemyController implements IActorController {
 	
 	private Enemy e;
 	

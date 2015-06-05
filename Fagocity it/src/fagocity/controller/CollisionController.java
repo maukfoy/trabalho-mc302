@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 import fagocity.model.Actor;
 import fagocity.model.GameModel;
+import fagocity.model.HUDModel;
 import fagocity.model.Player;
-import fagocity.view.GameView;
 
 public class CollisionController {
 	
@@ -33,19 +33,19 @@ public class CollisionController {
 				 *propicia a fagocitacao, guarda-se o menor (p/ remove-lo posteriormente) e 
 				 *aumenta-se o maior*/
 				if ( (j != i) && (obj1.getRadius() != obj2.getRadius()) && (intersection(obj1, obj2)))
-				{			
+				{	
+					greatestObject(obj1, obj2).setRadius(newRadius(obj1, obj2));
 					toBeDeleted.add(smallestObject(obj1,obj2));
 					Actor dead = smallestObject (obj1, obj2);
 					/* Se o Actor morto for o player, salvar o highscore */
 					if(dead instanceof Player) {
 						try {
-							GameView.getHUD().saveHighscore();
+							HUDModel.saveHighscore();
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
-					list.remove(dead);
 				}
 			}
 		}
