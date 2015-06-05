@@ -12,7 +12,6 @@ public class GameModel {
 	
 	public void addToActorsList(Actor actor) {
 		ActorsList.add(actor);
-		System.out.println("tamlista: " +ActorsList.size());
 	}
 	
 	public static void removeFromActorsList(Actor actor) {
