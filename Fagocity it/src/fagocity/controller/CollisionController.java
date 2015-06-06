@@ -2,6 +2,7 @@ package fagocity.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import fagocity.model.Actor;
 import fagocity.model.GameModel;
@@ -34,7 +35,10 @@ public class CollisionController {
 				 *aumenta-se o maior*/
 				if ( (j != i) && (obj1.getRadius() != obj2.getRadius()) && (intersection(obj1, obj2)))
 				{	
-					greatestObject(obj1, obj2).setRadius(newRadius(obj1, obj2));
+					/*aumenta o Growing do objeto maior, usando-se o calculo do newRadius*/
+					greatestObject(obj1, obj2).setGrowingRadius(greatestObject(obj1, obj2).getGrowingRadius()
+						+ newRadius(obj1, obj2)/2);
+					
 					toBeDeleted.add(smallestObject(obj1,obj2));
 					
 					Actor dead = smallestObject (obj1, obj2);
@@ -50,7 +54,8 @@ public class CollisionController {
 				}
 			}
 		}
-		/*remove todos os objetos que foram fagocitados*/
+		
+		/*remove os objetos que foram fagocitados*/
 		for (int i = 0; i < toBeDeleted.size(); i++) {
 			Actor dead = toBeDeleted.get(i);
 			
@@ -61,7 +66,7 @@ public class CollisionController {
 				 * sÛ deixa o player morrer se ja tiver se passado 
 				 * o tempo de DeathTimeDaley desde sua ultima morte */
 				if( Player.getLastDeathTime() == 0 || 
-						(currentTime - Player.getLastDeathTime() ) > Player.getDeathTimeDelay() ) {
+					(currentTime - Player.getLastDeathTime() ) > Player.getDeathTimeDelay() ) {
 						Player.lives--;
 						Player.setLastDeathTime( System.currentTimeMillis() );
 				}
@@ -74,6 +79,10 @@ public class CollisionController {
 			}
 			
 		}
+		
+		sortPerRadius (list);	
+		growBalls (list);
+		
 	}
 	
 	/*calcula a dinstancia entre dois pontos das coordenadas cartesianas*/
@@ -120,14 +129,49 @@ public class CollisionController {
 			return false;
 	}
 	
-	/*retorna o novo raio do objeto maior ap√≥s a fagocitacao*/
+	/*retorna o raio a ser acrescido no objeto apos a fagocitacao*/
 	public static int newRadius (Actor obj1, Actor obj2)
 	{
 		double r;
 		
 		r = Math.sqrt(obj1.getRadius() * obj1.getRadius() + obj2.getRadius() * obj2.getRadius());
-	
+		
+		r -= greatestObject (obj1, obj2).getRadius();
+				
 		return (int)r;
+	}
+	
+	/*reorganiza o arraylist em ordem crescente de raio, por fins de renderizacao*/
+	public static void sortPerRadius (ArrayList <Actor> list)
+	{
+		int i, j , posAntiga = 0, maior;
+		
+		for (j = 0; j < list.size(); j++)
+		{
+			maior = 0;
+			for (i = j; i < list.size(); i++)
+			{
+				if (list.get(i).getRadius() >= maior)
+				{
+					maior = list.get(i).getRadius();
+					posAntiga = i;
+				}
+			}
+			Collections.swap(list, j, posAntiga);
+		}
+	}
+	
+	/*aumenta o raio dos que fagocitaram, de update em update (implica animacao)*/
+	public static void growBalls (ArrayList <Actor> list)
+	{
+		for (int i = 0; i < list.size(); i++)
+		{
+			if (list.get(i).getGrowingRadius() != 0)
+			{
+				list.get(i).setRadius(list.get(i).getRadius() + 1);
+				list.get(i).setGrowingRadius(list.get(i).getGrowingRadius() - 1);
+			}
+		}
 	}
 	
 }
