@@ -10,6 +10,7 @@ import fagocity.view.Display;
 
 public class PlayerController implements IActorController {
 	
+	
 	private Player p;
 	
 	public PlayerController (Player player){

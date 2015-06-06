@@ -26,6 +26,7 @@ public class GameController {
 		/* Cria o player */
 		int radius = Player.defaultRadius;
 		player = ActorFactory.createActor((GameView.getScreenWidth() - radius)/2, (GameView.getScreenHeight() - radius)/2, 0, 0, radius, Color.red, "player");
+
 	}
 	
 	/* Atualiza todos fatores do jogo */

@@ -8,14 +8,13 @@ import fagocity.model.GameStatus.STATUS;
 public class HUDController {
 	
 	private static int playerInitialRadius = Player.defaultRadius;
-	private static long initialTime;
+	private static long initialTime = 0;
 	private static long currentTime;
 	private static int score = 0;
 	
 	public static void update() {
 		Player player = PlayerController.getPlayer();
 		if(player != null) {
-			currentTime = System.currentTimeMillis();
 			if(GameStatus.status == STATUS.Fagocity) {
 				currentTime = System.currentTimeMillis();
 				score = 107 * (player.getRadius() - playerInitialRadius) + (int)(currentTime/50 - initialTime/50);

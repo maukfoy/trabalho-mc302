@@ -6,6 +6,9 @@ Vamos só fazer append aqui pra manter um log mesmo do trabalho */
 
 - os inimigos nunca são deletados! - vitao
 
+- BUG - player as vezes aparece em cima e as vezes fica em baixo quando passa por um inimigo - vitao
+(implementar também um jeito de fazer o player piscar quando passar por alguem) 
+
 - a thread está no construtor da GameMain, mas ele deve ser posteriormente
 tirado do construtor. Dizem que dá bugs. Pesquisar. - vitao
 - o bug que dá é que o javax.swing não é thread-safe, então ele usa um

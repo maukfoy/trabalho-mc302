@@ -28,9 +28,9 @@ public class GameView extends JPanel {
 	public GameView(String title) {
 		this.display = new Display(title, WIDTH, HEIGHT);
 		
-		/* Da load no Highscore do disco */
+		/* Manda o HUD se iniciar */
 		try {
-			HUDModel.loadHighscore();
+			HUDModel.loadHUD();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

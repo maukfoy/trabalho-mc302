@@ -1,5 +1,6 @@
 package fagocity.model;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -8,32 +9,58 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
 
+import javax.imageio.ImageIO;
+
 public class HUDModel implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static int score = 0;
 	private static int highscore;
-	private static String path = "src/fagocity/model/assets/data/";
-	private static String fileName = "highscore.txt";
+	private static BufferedImage heartImage;
+	private static String dataPath = "src/fagocity/model/assets/data/";
+	private static String highscoreFile = "highscore.txt";
+	private static String spritesPath = "src/fagocity/model/assets/sprites/";
+	private static String heartFile = "heart64x64.png";
 
 	/* Salva o highscore no disco */
 	public static void saveHighscore() throws IOException {
 		if(score > highscore) {
-			File file = new File(path + fileName);
+			File file = new File(dataPath + highscoreFile);
 			FileWriter writer = new FileWriter(file);
 			PrintWriter printer = new PrintWriter(writer);
 			
-			printer.println(score);		
+			printer.println(score);
 			printer.close();
 		}
 	}
 	
 	/* Carrega o highscore do disco */
-	public static void loadHighscore() throws Exception {
-		File file = new File(path + fileName);
-		FileReader reader = new FileReader(file);
-		BufferedReader bufReader = new BufferedReader(reader);
-		HUDModel.highscore = Integer.parseInt(bufReader.readLine());
-		reader.close();
+	public static void loadHighscore() {
+		try {
+			File file = new File(dataPath + highscoreFile);
+			FileReader reader = new FileReader(file);
+			BufferedReader bufReader = new BufferedReader(reader);
+			HUDModel.highscore = Integer.parseInt(bufReader.readLine());
+			reader.close();
+		}
+		catch(Exception e) {
+			e.getStackTrace();
+		}
+	}
+	
+	/* Carrega o coração que simboliza as vidas */
+	public static void loadHeart() {
+		String path = spritesPath + heartFile;
+		File file = new File(path);
+		try {
+			heartImage = ImageIO.read(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void loadHUD() {
+		loadHighscore();
+		loadHeart();
 	}
 
 	public static int getScore() {
@@ -46,5 +73,9 @@ public class HUDModel implements Serializable {
 	
 	public static int getHighScore() {
 		return highscore;
+	}
+	
+	public static BufferedImage getHeartImage() {
+		return heartImage;
 	}
 }
