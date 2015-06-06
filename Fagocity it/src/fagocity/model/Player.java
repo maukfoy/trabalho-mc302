@@ -5,7 +5,7 @@ import java.awt.Color;
 import fagocity.controller.PlayerController;
 
 public class Player extends Actor {
-	public static final int defaultRadius = 30;
+	public static final int defaultRadius = 50;
 	public static final double defaultSpeed = 8;
 	public static int lives = 3;
 	private static long lastDeathTime = 0;
@@ -27,6 +27,5 @@ public class Player extends Actor {
 	public static void setLastDeathTime(long lastDeathTime) {
 		Player.lastDeathTime = lastDeathTime;
 	}
-	
 	
 }

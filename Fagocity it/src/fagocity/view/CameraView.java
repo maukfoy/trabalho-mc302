@@ -3,7 +3,6 @@ package fagocity.view;
 import java.awt.Graphics2D;
 
 import fagocity.controller.CameraController;
-import fagocity.controller.MouseController;
 
 public class CameraView {
 	
