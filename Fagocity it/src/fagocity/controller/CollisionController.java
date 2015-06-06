@@ -34,7 +34,9 @@ public class CollisionController {
 				 *aumenta-se o maior*/
 				if ( (j != i) && (obj1.getRadius() != obj2.getRadius()) && (intersection(obj1, obj2)))
 				{	
-					greatestObject(obj1, obj2).setRadius(newRadius(obj1, obj2));
+					/* Se for o player, aumenta o seu raio */
+					if ( greatestObject(obj1, obj2) instanceof Player )
+						greatestObject(obj1, obj2).setRadius(newRadius(obj1, obj2));
 					toBeDeleted.add(smallestObject(obj1,obj2));
 					Actor dead = smallestObject (obj1, obj2);
 					/* Se o Actor morto for o player, salvar o highscore */
@@ -50,8 +52,28 @@ public class CollisionController {
 			}
 		}
 		/*remove todos os objetos que foram fagocitados*/
-		for (int i = 0; i < toBeDeleted.size(); i++)
-			list.remove(toBeDeleted.get(i));
+		for (int i = 0; i < toBeDeleted.size(); i++) {
+			Actor dead = toBeDeleted.get(i);
+			/* Se for o player, diminui uma vida */
+			if(dead instanceof Player) {
+				long currentTime = System.currentTimeMillis();
+				/* Faz com que o deathTimeDelay seja respeitado, ou seja
+				 * só deixa o player morrer se ja tiver se passado 
+				 * o tempo de DeathTimeDaley desde sua ultima morte */
+				if( Player.getLastDeathTime() == 0 || 
+						(currentTime - Player.getLastDeathTime() ) > Player.getDeathTimeDelay() ) {
+						Player.lives--;
+						Player.setLastDeathTime( System.currentTimeMillis() );
+				}
+				/* Se o player não tiver mais vidas, ele morre pra sempre */
+				if(Player.lives < 0)
+					list.remove(dead);
+			}
+			else {
+				list.remove(dead);
+			}
+			
+		}
 	}
 	
 	/*calcula a dinstancia entre dois pontos das coordenadas cartesianas*/
