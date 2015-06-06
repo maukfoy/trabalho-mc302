@@ -10,6 +10,7 @@ public abstract class Actor {
 	protected double velY;
 	protected Color color;
 	protected IActorController actorController;
+	protected int growingRadius = 0;
 	
 	public Actor(int x, int y, double velX, double velY, int radius, Color color) {
 		this.x = x;
@@ -40,6 +41,9 @@ public abstract class Actor {
 	public void setRadius(int radius){
 		this.radius = radius;
 	}
+	public void setGrowingRadius(int growingRadius){
+		this.growingRadius = growingRadius;
+	}
 	public int getX() {
 		return this.x;
 	}
@@ -54,6 +58,9 @@ public abstract class Actor {
 	}
 	public int getRadius() {
 		return this.radius;
+	}
+	public int getGrowingRadius(){
+		return this.growingRadius;
 	}
 	public Color getColor() {
 		return this.color;
