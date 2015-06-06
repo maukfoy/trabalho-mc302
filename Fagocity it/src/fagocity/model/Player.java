@@ -5,11 +5,11 @@ import java.awt.Color;
 import fagocity.controller.PlayerController;
 
 public class Player extends Actor {
-	public static final int defaultRadius = 50;
+	public static final int defaultRadius = 60;
 	public static final double defaultSpeed = 8;
 	public static int lives = 3;
 	private static long lastDeathTime = 0;
-	private static long deathTimeDelay = 2000; // em milisegundos
+	private static long deathTimeDelay = 1000; // em milisegundos
 		
 	public Player(int x, int y, double velX, double velY, int radius, Color color) {
 		super(x, y, velX, velY, radius, color);

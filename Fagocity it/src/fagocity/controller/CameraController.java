@@ -10,8 +10,8 @@ public class CameraController {
 	/*calcula os parametros de translacao de camera, deixando o player no centro da tela sempre*/
 	public static void update (Actor player)
 	{
-		tx = -player.getX() + GameView.getScreenWidth()/2;
-		ty = -player.getY() + GameView.getScreenHeight()/2;		
+		tx = -player.getX() - player.getRadius()/2 + GameView.getScreenWidth()/2;
+		ty = -player.getY() - player.getRadius()/2 + GameView.getScreenHeight()/2;		
 	}
 	
 	public static double getTX ()
