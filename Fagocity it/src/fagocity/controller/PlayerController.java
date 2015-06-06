@@ -1,14 +1,15 @@
 package fagocity.controller;
 
+import java.io.File;
 import java.util.ArrayList;
-
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import fagocity.controller.Interfaces.IActorController;
 import fagocity.model.Actor;
 import fagocity.model.GameModel;
 import fagocity.model.Player;
 
 public class PlayerController implements IActorController {
-	
 	
 	private Player p;
 	
@@ -62,10 +63,13 @@ public class PlayerController implements IActorController {
 				(currentTime - Player.getLastDeathTime() ) > Player.getDeathTimeDelay() ) {
 				Player.lives--;
 				Player.setLastDeathTime( System.currentTimeMillis() );
+				PlayerController.playPlayerSound("LostLifeSound");
 		}
 		/* Se o player não tiver mais vidas, ele morre pra sempre */
-		if(Player.lives < 0)
+		if(Player.lives < 0) {
 			toBeDeleted.add(player);
+			PlayerController.playPlayerSound("DeathSound");
+		}
 	}
 	
 	public static Player getPlayer() {
@@ -78,5 +82,17 @@ public class PlayerController implements IActorController {
 				player = (Player) actor;
 		}
 		return player;
+	}
+	
+	public static void playPlayerSound(String name) {
+		String path = "src/fagocity/model/assets/sounds/";
+	    try {
+	        Clip clip = AudioSystem.getClip();
+	        clip.open(AudioSystem.getAudioInputStream(new File(path + name + ".wav")));
+	        clip.start();
+	    }
+	    catch (Exception e) {
+	        e.printStackTrace(System.out);
+	    }
 	}
 }

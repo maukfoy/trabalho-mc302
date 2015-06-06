@@ -2,7 +2,14 @@
 AS IDEIAS A SEREM IMPLEMENTADAS E COISAS DO TIPO */
 Vamos só fazer append aqui pra manter um log mesmo do trabalho */
 
+arrumar a funçao em Player playfagocitysound porque o lugar do .wav ta errado. deveria estar em assets - vitao
+
+- IMPORTANTÍSSIMO - DO JEITO QUE OS ASSETS ESTÃO SENDO ACESSADOS ELE NÃO SAO DETECTADOS PELO ARQUIVO
+JAR QUANDO O PROJETO É EXPORTADO DO ECLIPSE.  É IMPORTANTE TROCAR OS ACESSOS POR GETPATH,, RESOURCEASSTREAM, SEI LA - VITAO
+
 - implementar sons - vitao
+
+- tela de replay quando morre. esc pausa - vitao
 
 - é necessário trocar todas ocorrencias de radius por diameter - vitao
 

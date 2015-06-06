@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-
 import fagocity.model.Actor;
 import fagocity.model.GameModel;
 import fagocity.model.HUDModel;
@@ -25,12 +24,22 @@ public class HUDView {
 		g.drawString(score, width/100, height/50);
 		g.drawString(highscore, width/100 + 150, height/50);
 		
+		/*
 		/* Desenha os corações de vida */
 		BufferedImage image = HUDModel.getHeartImage();
 		for(int i = 0; i < Player.lives; i++) {
 			if(playerAlive())
 				g.drawImage(image, width/100 + (int)(image.getWidth()*0.5*i) + 10*i , height/30, (int)(image.getWidth()*0.5), (int)(image.getHeight()*0.5), null);
 		}
+		
+		/* Desenha o Fagocity Streak */
+		double fagocityStreak = 0.3; // DEBUG - A SER IMPLEMENTADO
+		/* Parte externa */
+		g.setColor(Color.white);
+		g.drawRect((int)(width/2 - width/10 -1), (int)(height/100 -1), (int)(width/5 +1), (int)(height/40 +1));
+		/* Parte interna */
+		g.setColor(Color.green);
+		g.fillRect((int)(width/2 - width/10), (int)(height/100), (int)(width/5 *fagocityStreak), (int)(height/40));
 	}
 	
 	/* Verifica se o player está vivo */

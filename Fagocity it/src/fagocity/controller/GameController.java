@@ -49,12 +49,13 @@ public class GameController {
 		}
 		
 		CollisionController.update();
-				
-		if (GameStatus.status == STATUS.Fagocity)
+		
+		if (GameStatus.status == STATUS.Fagocity){
 			HUDController.update();
+		}
 		else
 			/*se nao estiver no modo jogavel, menu ou help fica ativo*/
-			MenuController.update();			
+			MenuController.update();
 	}
 	
 	/* Adiciona actors à lista de actors que fica em GameModel */

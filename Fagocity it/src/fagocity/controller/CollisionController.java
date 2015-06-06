@@ -20,6 +20,7 @@ public class CollisionController {
 	{
 		ArrayList<Actor> list = GameModel.getActorsList();
 		ArrayList<Actor> toBeDeleted = new ArrayList<Actor>();
+		ArrayList<Actor> toBeColored = new ArrayList<Actor>();
 		Actor obj1, obj2;
 		
 		/*compara todos os Actors do jogo*/
@@ -48,12 +49,17 @@ public class CollisionController {
 						if( equalColors(obj1.getColor(), obj2.getColor()) == false ) {
 							PlayerController.reducePlayerLife(greatest, toBeDeleted);
 						}
+						else {
+							/* O Player consegue fagocitar, então toca o som de fagocitose */
+							PlayerController.playPlayerSound("FagocitySound");
+						}
 						
 						/* Muda a cor do player */
-						greatest.setColor( SpawnController.generateRandomColor() );
+						toBeColored.add(greatest);
+						
  					}
 					
-					/* Se o player não consegue fagocitar, tira ele do jogo */
+					/* Se não consegue fagocitar, tira o Actor menor do jogo */
 					else {
 						toBeDeleted.add(smallest);
 						/* Salva o highscore */
@@ -68,9 +74,16 @@ public class CollisionController {
 			}
 		}
 		
+		/* Colore todos objetos que fagocitaram */
+		for(int i = 0; i < toBeColored.size(); i++) {
+			toBeColored.get(i).setColor( SpawnController.generateRandomColor() );
+		}
+		
 		/*remove todos os objetos que foram fagocitados*/
 		for (int i = 0; i < toBeDeleted.size(); i++) {
 			Actor dead = toBeDeleted.get(i);
+			if(dead instanceof Player)
+				PlayerController.playPlayerSound("DeathSound");
 			list.remove(dead);
 		}
 	}
