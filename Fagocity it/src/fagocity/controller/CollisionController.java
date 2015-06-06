@@ -36,6 +36,7 @@ public class CollisionController {
 				{	
 					greatestObject(obj1, obj2).setRadius(newRadius(obj1, obj2));
 					toBeDeleted.add(smallestObject(obj1,obj2));
+					
 					Actor dead = smallestObject (obj1, obj2);
 					/* Se o Actor morto for o player, salvar o highscore */
 					if(dead instanceof Player) {

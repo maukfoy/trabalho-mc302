@@ -14,6 +14,7 @@ public class GameController {
 	
 	private static GameModel model;
 	private GameView view;
+	private static Actor player;
 	
 	public GameController(GameModel model, GameView view) {
 		GameController.setModel(model);
@@ -24,7 +25,7 @@ public class GameController {
 	public static void initialConditions() {
 		/* Cria o player */
 		int radius = Player.defaultRadius;
-		ActorFactory.createActor((GameView.getScreenWidth() - radius)/2, (GameView.getScreenHeight() - radius)/2, 0, 0, radius, Color.red, "player");
+		player = ActorFactory.createActor((GameView.getScreenWidth() - radius)/2, (GameView.getScreenHeight() - radius)/2, 0, 0, radius, Color.red, "player");
 	}
 	
 	/* Atualiza todos fatores do jogo */
@@ -34,18 +35,25 @@ public class GameController {
 		ArrayList<Actor> lista = GameModel.getActorsList();
 		Actor obj;
 		
+		SpawnController.update();
+		
+		/*deve vir antes dos objetos para que se possa ter os parametros de translacao*/
+		if (GameStatus.status == STATUS.Fagocity)
+			CameraController.update(player);
+			
+		/*atualiza os Actors*/
 		for(int i = 0; i < lista.size(); i++) {
 			obj = lista.get(i);
 			obj.update();
 		}
-		SpawnController.update();
+		
 		CollisionController.update();
-		HUDController.update();
-		
-		/*se nao estiver no modo jogavel, menu ou help fica ativo*/
-		if (GameStatus.status != STATUS.Fagocity)
-			MenuController.update();
-		
+				
+		if (GameStatus.status == STATUS.Fagocity)
+			HUDController.update();
+		else
+			/*se nao estiver no modo jogavel, menu ou help fica ativo*/
+			MenuController.update();			
 	}
 	
 	/* Adiciona actors à lista de actors que fica em GameModel */

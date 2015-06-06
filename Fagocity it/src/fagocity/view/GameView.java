@@ -2,9 +2,11 @@ package fagocity.view;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
+
 import javax.swing.JPanel;
 
 import fagocity.model.Actor;
@@ -19,6 +21,7 @@ public class GameView extends JPanel {
 	private static final int HEIGHT = getScreenHeight();
 	private Display display;
 	private BufferStrategy bs;
+	private Graphics2D g2d;
 	private Graphics g;
 	private static HUDView hud;
 	
@@ -43,6 +46,7 @@ public class GameView extends JPanel {
 			return;
 		}
 		g = bs.getDrawGraphics();
+		g2d = (Graphics2D) g;
 		
 		/* Limpa a tela */
 		g.clearRect(0, 0, WIDTH, HEIGHT);
@@ -51,19 +55,25 @@ public class GameView extends JPanel {
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
-		/* Desenha todos actors */
-		renderActors();
-		
-		/* Desenha o HUD */
-		HUDView.render(g);
-		
 		/*se nao estiver no modo jogavel, da render no menu ou help*/
 		if (GameStatus.status != STATUS.Fagocity)
 			MenuView.render(g);
 		
+		else
+			/* Desenha o HUD */
+			HUDView.render(g);
+		
+		
+		CameraView.CameraBeginning (g2d);
+		
+		/* Desenha todos actors */
+		renderActors();
+		
 		/* Finaliza os desenhos */
 		bs.show();
 		g.dispose();
+		
+		CameraView.CameraEnding (g2d);
 	}
 	
 	private void renderActors() {

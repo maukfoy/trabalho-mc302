@@ -22,7 +22,7 @@ public class Display {
 		this.width = width;
 		this.height = height;
 		createDisplay();
-	}
+	}  
 	
 	private void createDisplay() {
 		/* Cria o JFrame */

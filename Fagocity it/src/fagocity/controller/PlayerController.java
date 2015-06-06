@@ -28,12 +28,14 @@ public class PlayerController implements IActorController {
 	
 	private void atualizaVelocidade() {
 		double velTotal = Player.defaultSpeed;
-		int mouseX = MouseController.getMouseX();
-		int mouseY = MouseController.getMouseY();
+		 
+		/*pega as posicoes de input do mouse e soma-as aos parametros de translacao*/
+		int mouseX = (int) (MouseController.getMouseX() - CameraController.getTX());
+		int mouseY = (int) (MouseController.getMouseY() - CameraController.getTY());
 		
 		/* Distance between mouse and player */
 		double distance = Math.sqrt( (mouseY - p.getY())*(mouseY - p.getY()) +  (mouseX - p.getX())*(mouseX - p.getX()) );
-		
+			
 		/* 5 é a tolerância de erro. Ele é necessário pois evita uma divisão por 0 e evita o flickering do player */
 		if(distance > 5) {
 			p.setVelX ( (velTotal/distance) * (mouseX - p.getX()) );
