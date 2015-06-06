@@ -34,9 +34,7 @@ public class CollisionController {
 				 *aumenta-se o maior*/
 				if ( (j != i) && (obj1.getRadius() != obj2.getRadius()) && (intersection(obj1, obj2)))
 				{	
-					/* Se for o player, aumenta o seu raio */
-					if ( greatestObject(obj1, obj2) instanceof Player )
-						greatestObject(obj1, obj2).setRadius(newRadius(obj1, obj2));
+					greatestObject(obj1, obj2).setRadius(newRadius(obj1, obj2));
 					toBeDeleted.add(smallestObject(obj1,obj2));
 					
 					Actor dead = smallestObject (obj1, obj2);
@@ -55,6 +53,7 @@ public class CollisionController {
 		/*remove todos os objetos que foram fagocitados*/
 		for (int i = 0; i < toBeDeleted.size(); i++) {
 			Actor dead = toBeDeleted.get(i);
+			
 			/* Se for o player, diminui uma vida */
 			if(dead instanceof Player) {
 				long currentTime = System.currentTimeMillis();
