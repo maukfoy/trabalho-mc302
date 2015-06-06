@@ -1,5 +1,6 @@
 package fagocity.controller;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,15 +36,30 @@ public class CollisionController {
 				 *aumenta-se o maior*/
 				if ( (j != i) && (obj1.getRadius() != obj2.getRadius()) && (intersection(obj1, obj2)))
 				{	
+					Actor greatest = greatestObject(obj1, obj2);
+					Actor smallest = smallestObject(obj1, obj2);
+				
 					/*aumenta o Growing do objeto maior, usando-se o calculo do newRadius*/
-					greatestObject(obj1, obj2).setGrowingRadius(greatestObject(obj1, obj2).getGrowingRadius()
-						+ newRadius(obj1, obj2)/2);
+					greatest.setGrowingRadius(greatest.getGrowingRadius() + newRadius(obj1, obj2)/2);
 					
-					toBeDeleted.add(smallestObject(obj1,obj2));
+					/* Se o player consegue fagocitar */
+					if( greatest instanceof Player  ) {
+						/* Tira o menor, no caso o inimigo, do jogo */
+						toBeDeleted.add(smallest);
+												
+						/* Se as cores não forem iguais, perde vida */
+						if( equalColors(obj1.getColor(), obj2.getColor()) == false ) {
+							PlayerController.reducePlayerLife(greatest, toBeDeleted);
+						}
+						
+						/* Muda a cor do player */
+						greatest.setColor( SpawnController.generateRandomColor() );
+ 					}
 					
-					Actor dead = smallestObject (obj1, obj2);
-					/* Se o Actor morto for o player, salvar o highscore */
-					if(dead instanceof Player) {
+					/* Se o player não consegue fagocitar, tira ele do jogo */
+					else {
+						toBeDeleted.add(smallest);
+						/* Salva o highscore */
 						try {
 							HUDModel.saveHighscore();
 						} catch (IOException e) {
@@ -55,29 +71,10 @@ public class CollisionController {
 			}
 		}
 		
-		/*remove os objetos que foram fagocitados*/
+		/*remove todos os objetos que foram fagocitados*/
 		for (int i = 0; i < toBeDeleted.size(); i++) {
 			Actor dead = toBeDeleted.get(i);
-			
-			/* Se for o player, diminui uma vida */
-			if(dead instanceof Player) {
-				long currentTime = System.currentTimeMillis();
-				/* Faz com que o deathTimeDelay seja respeitado, ou seja
-				 * só deixa o player morrer se ja tiver se passado 
-				 * o tempo de DeathTimeDaley desde sua ultima morte */
-				if( Player.getLastDeathTime() == 0 || 
-					(currentTime - Player.getLastDeathTime() ) > Player.getDeathTimeDelay() ) {
-						Player.lives--;
-						Player.setLastDeathTime( System.currentTimeMillis() );
-				}
-				/* Se o player não tiver mais vidas, ele morre pra sempre */
-				if(Player.lives < 0)
-					list.remove(dead);
-			}
-			else {
-				list.remove(dead);
-			}
-			
+			list.remove(dead);
 		}
 		
 		sortPerRadius (list);	
@@ -174,4 +171,11 @@ public class CollisionController {
 		}
 	}
 	
+	private static boolean equalColors(Color color1, Color color2) {
+		if(color1 == color2)
+			return true;
+		else
+			return false;
+	}
+
 }

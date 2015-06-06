@@ -1,8 +1,6 @@
 package fagocity.controller;
 
 import java.awt.Color;
-import java.util.EmptyStackException;
-
 import fagocity.model.Actor;
 import fagocity.model.Enemy;
 import fagocity.model.Player;

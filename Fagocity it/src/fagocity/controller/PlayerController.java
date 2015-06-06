@@ -6,7 +6,6 @@ import fagocity.controller.Interfaces.IActorController;
 import fagocity.model.Actor;
 import fagocity.model.GameModel;
 import fagocity.model.Player;
-import fagocity.view.Display;
 
 public class PlayerController implements IActorController {
 	
@@ -36,18 +35,37 @@ public class PlayerController implements IActorController {
 		
 		/* Distance between mouse and player */
 		double distance = Math.sqrt( (mouseY - p.getY())*(mouseY - p.getY()) +  (mouseX - p.getX())*(mouseX - p.getX()) );
-			
-		/* 5 é a tolerância de erro. Ele é necessário pois evita uma divisão por 0 e evita o flickering do player */
-		if(distance > 5) {
-			p.setVelX ( (velTotal/distance) * (mouseX - p.getX()) );
-			p.setVelY ( (velTotal/distance) * (mouseY - p.getY()) );
-			Display.showCursor();
+		
+		/* Componentes da velocidade */
+		int velX = (int) ((velTotal/distance) * (mouseX - p.getX()));
+		int velY = (int) ((velTotal/distance) * (mouseY - p.getY()));
+		
+		/* Tolerância de erro. Ele é necessário pois evita uma divisão por 0, evita o flickering do player
+		 * e faz permite que a velocidade do player diminui conforme o mouse se aproxima dele */
+		int tolerance = 100;
+		if(distance > tolerance) {
+			p.setVelX ( velX );
+			p.setVelY ( velY );
 		}
 		else {
-			Display.hideCursor();
-			p.setVelX (0);
-			p.setVelY (0);
+			p.setVelX ((int)(velX*distance/tolerance));
+			p.setVelY ((int)(velY*distance/100));
 		}
+	}
+	
+	public static void reducePlayerLife(Actor player, ArrayList<Actor> toBeDeleted) {
+		long currentTime = System.currentTimeMillis();
+		/* Faz com que o deathTimeDelay seja respeitado, ou seja
+		 * só deixa o player morrer se ja tiver se passado 
+		 * o tempo de DeathTimeDaley desde sua ultima morte */
+		if( Player.getLastDeathTime() == 0 || 
+				(currentTime - Player.getLastDeathTime() ) > Player.getDeathTimeDelay() ) {
+				Player.lives--;
+				Player.setLastDeathTime( System.currentTimeMillis() );
+		}
+		/* Se o player não tiver mais vidas, ele morre pra sempre */
+		if(Player.lives < 0)
+			toBeDeleted.add(player);
 	}
 	
 	public static Player getPlayer() {

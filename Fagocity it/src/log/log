@@ -2,6 +2,10 @@
 AS IDEIAS A SEREM IMPLEMENTADAS E COISAS DO TIPO */
 Vamos só fazer append aqui pra manter um log mesmo do trabalho */
 
+- implementar sons - vitao
+
+- é necessário trocar todas ocorrencias de radius por diameter - vitao
+
 - sempre que alguem se come a cor muda. No caso do player ele tem que comer somente os de mesma cor que ele? - vitao
 
 - os inimigos nunca são deletados! - vitao
