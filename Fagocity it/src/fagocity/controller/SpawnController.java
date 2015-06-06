@@ -131,13 +131,13 @@ public class SpawnController {
 		return radius;
 	}
 	
-	private static Color generateRandomColor() {
+	public static Color generateRandomColor() {
 		Random r = new Random();
 		
 		/* Vetor com todas cores de bolinha possíveis no jogo */
 		Color[] colors = {Color.blue, Color.cyan, Color.green, 
 				Color.yellow, Color.magenta, Color.orange, Color.pink, 
-				Color.white, Color.yellow};
+				Color.white, Color.yellow, Color.RED};
 		
 		int randomInt = r.nextInt( colors.length ) ;
 		
