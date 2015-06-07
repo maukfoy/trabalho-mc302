@@ -20,6 +20,7 @@ public class HUDModel implements Serializable {
 	private static String highscoreFile = "highscore.txt";
 	private static String spritesPath = "src/fagocity/model/assets/sprites/";
 	private static String heartFile = "heart64x64.png";
+	private static Double fagocityStreak = 0.0;
 
 	/* Salva o highscore no disco */
 	public static void saveHighscore() throws IOException {
@@ -77,5 +78,13 @@ public class HUDModel implements Serializable {
 	
 	public static BufferedImage getHeartImage() {
 		return heartImage;
+	}
+
+	public static void setFagocityStreak(double fagocityStreak) {
+		HUDModel.fagocityStreak = fagocityStreak;		
+	}
+	
+	public static Double getFagocityStreak() {
+		return HUDModel.fagocityStreak;
 	}
 }

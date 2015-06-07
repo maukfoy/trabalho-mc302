@@ -2,6 +2,10 @@
 AS IDEIAS A SEREM IMPLEMENTADAS E COISAS DO TIPO */
 Vamos só fazer append aqui pra manter um log mesmo do trabalho */
 
+- background - vitao
+
+- o score com base no raio perdeu o sentido agora com o fagocity streak. arrumar. - vitao
+
 arrumar a funçao em Player playfagocitysound porque o lugar do .wav ta errado. deveria estar em assets - vitao
 
 - IMPORTANTÍSSIMO - DO JEITO QUE OS ASSETS ESTÃO SENDO ACESSADOS ELE NÃO SAO DETECTADOS PELO ARQUIVO

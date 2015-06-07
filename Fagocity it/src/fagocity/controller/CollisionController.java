@@ -27,7 +27,7 @@ public class CollisionController {
 		/*compara todos os Actors do jogo*/
 		for(int i = 0; i < list.size(); i++)
 		{
-			for(int j = 0; j < list.size(); j++)
+			for(int j = i; j < list.size(); j++)
 			{
 				obj1 = list.get(i);
 				obj2 = list.get(j);
@@ -51,10 +51,13 @@ public class CollisionController {
 						/* Se as cores não forem iguais, perde vida */
 						if( equalColors(obj1.getColor(), obj2.getColor()) == false ) {
 							PlayerController.reducePlayerLife(greatest, toBeDeleted);
+							HUDController.resetFagocityStreak();
 						}
 						else {
 							/* O Player consegue fagocitar, então toca o som de fagocitose */
 							PlayerController.playPlayerSound("FagocitySound");
+							/* Atualiza o streak do player */
+							HUDController.updateFagocityStreak();
 						}
 						
 						/* Muda a cor do player */
@@ -85,8 +88,9 @@ public class CollisionController {
 		/*remove todos os objetos que foram fagocitados*/
 		for (int i = 0; i < toBeDeleted.size(); i++) {
 			Actor dead = toBeDeleted.get(i);
-			if(dead instanceof Player)
+			if(dead instanceof Player) {
 				PlayerController.playPlayerSound("DeathSound");
+			}
 			list.remove(dead);
 		}
 		
@@ -172,17 +176,22 @@ public class CollisionController {
 	}
 	
 	/*aumenta o raio dos que fagocitaram, de update em update (implica animacao)*/
-	public static void growBalls (ArrayList <Actor> list)
-	{
-		for (int i = 0; i < list.size(); i++)
-		{
-			if (list.get(i).getGrowingRadius() != 0)
-			{
-				list.get(i).setRadius(list.get(i).getRadius() + 1);
-				list.get(i).setGrowingRadius(list.get(i).getGrowingRadius() - 1);
-			}
-		}
-	}
+    public static void growBalls (ArrayList <Actor> list)
+    {
+        for (int i = 0; i < list.size(); i++)
+        {
+            if (list.get(i).getGrowingRadius() > 0)
+            {
+                list.get(i).setRadius(list.get(i).getRadius() + 1);
+                list.get(i).setGrowingRadius(list.get(i).getGrowingRadius() - 1);
+            }
+            else if (list.get(i).getGrowingRadius() < 0)
+            {
+                list.get(i).setRadius(list.get(i).getRadius() - 1);
+                list.get(i).setGrowingRadius(list.get(i).getGrowingRadius() + 1);
+            }
+        }
+    }
 	
 	private static boolean equalColors(Color color1, Color color2) {
 		if(color1 == color2)

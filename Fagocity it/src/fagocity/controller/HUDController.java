@@ -4,6 +4,7 @@ import fagocity.model.GameStatus;
 import fagocity.model.HUDModel;
 import fagocity.model.Player;
 import fagocity.model.GameStatus.STATUS;
+import fagocity.view.HUDView;
 
 public class HUDController {
 	
@@ -11,6 +12,10 @@ public class HUDController {
 	private static long initialTime = 0;
 	private static long currentTime;
 	private static int score = 0;
+	private static double fagocityStreak = 0;
+	private static int currentKillStreak = 0;
+	private static int minimumKillStreak = 5;
+	private static int streaksPassed = 0;
 	
 	public static void update() {
 		Player player = PlayerController.getPlayer();
@@ -32,4 +37,29 @@ public class HUDController {
 	public static void setPlayerInitialRadius(int playerInitialRadius) {
 		HUDController.playerInitialRadius = playerInitialRadius;
 	}
+	
+	public static void updateFagocityStreak() {
+		currentKillStreak++;
+		
+		fagocityStreak = (double)(currentKillStreak / ((double)minimumKillStreak + (double)streaksPassed));
+		System.out.println("streak: " +fagocityStreak);
+		
+		HUDModel.setFagocityStreak(fagocityStreak);
+		
+		/* Se o streak estiver completo */
+		if(fagocityStreak >= 1) {
+			HUDView.fagocityStreakTrigger();
+			streaksPassed++;
+			resetFagocityStreak();
+			Player player = PlayerController.getPlayer();
+			player.setGrowingRadius(Player.defaultRadius - player.getRadius());
+		}
+	}
+	
+	public static void resetFagocityStreak() {
+		currentKillStreak = 0;
+		HUDModel.setFagocityStreak(0);
+	}
+	
+	
 }
