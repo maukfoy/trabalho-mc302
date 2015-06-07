@@ -1,5 +1,6 @@
 package fagocity.view;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -65,13 +66,14 @@ public class GameView extends JPanel {
 		/* Limpa a tela */
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 		
-		/* Desenha o background  */
 		CameraView.CameraBeginning (g2d);
+		
+		/* Desenha o background */
 		int imgWidth = background.getWidth();
 		int imgHeight = background.getHeight();
-		for(int i = 0 ; i < maxXBounds; i += imgWidth ) {
-			for(int j = 0; j < maxYBounds; j += imgHeight) {
-				g.drawImage(background, i, j, null);
+		for(int i = -WIDTH ; i < maxXBounds+WIDTH; i += imgWidth ) {
+			for(int j = -HEIGHT; j < maxYBounds+HEIGHT; j += imgHeight) {
+				g2d.drawImage(background, i, j, null);
 			}
 		}
 		
@@ -91,6 +93,7 @@ public class GameView extends JPanel {
         g.drawRect(0, 0, maxXBounds, maxYBounds);
 		
 		g.setColor(Color.DARK_GRAY);
+		g2d.setStroke(new BasicStroke(3));
 		g.drawRect(0, 0, maxXBounds, maxYBounds);
 
 		CameraView.CameraEnding (g2d);
