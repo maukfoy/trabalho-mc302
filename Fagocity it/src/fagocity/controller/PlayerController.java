@@ -32,8 +32,8 @@ public class PlayerController implements IActorController {
 		p.setY(p.getY() + (int)p.getVelY());
 		
 		/*reestabelece x e y se eles passarem dos limites do mapa*/
-		p.setX(boundsChecker(p.getX(),GameView.getMinXBounds(),GameView.getMaxXBounds() - p.getRadius()));
-		p.setY(boundsChecker(p.getY(),GameView.getMinYBounds(),GameView.getMaxYBounds() - p.getRadius()));
+		p.setX(BoundsController.playerRepositioning (p.getX(),GameView.getMinXBounds(),GameView.getMaxXBounds() - p.getRadius()));
+		p.setY(BoundsController.playerRepositioning (p.getY(),GameView.getMinYBounds(),GameView.getMaxYBounds() - p.getRadius()));
 	}
 	
 	private void atualizaVelocidade() {
@@ -103,16 +103,5 @@ public class PlayerController implements IActorController {
 	    catch (Exception e) {
 	        e.printStackTrace(System.out);
 	    }
-	}
-	
-	/*nega a passagem do player para fora dos limites do mapa*/
-	public static int boundsChecker (int var, int min, int max)
-	{
-		if (var >= max)
-			return max;
-		else if (var <= min)
-			return min;
-		else
-			return var;
 	}
 }

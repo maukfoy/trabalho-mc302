@@ -176,10 +176,15 @@ public class CollisionController {
 	{
 		for (int i = 0; i < list.size(); i++)
 		{
-			if (list.get(i).getGrowingRadius() != 0)
+			if (list.get(i).getGrowingRadius() > 0)
 			{
 				list.get(i).setRadius(list.get(i).getRadius() + 1);
 				list.get(i).setGrowingRadius(list.get(i).getGrowingRadius() - 1);
+			}
+			else if (list.get(i).getGrowingRadius() < 0)
+			{
+				list.get(i).setRadius(list.get(i).getRadius() - 1);
+				list.get(i).setGrowingRadius(list.get(i).getGrowingRadius() + 1);
 			}
 		}
 	}

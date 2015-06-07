@@ -10,8 +10,8 @@ public class SpawnController {
 	
 	static long oldTime = 0;
 	static long spawnTime = 150;
-	static double minDefaultEnemyVelocity = 2;
-	static double maxDefaultEnemyVelocity = 4;
+	static double minDefaultEnemyVelocity = 15;
+	static double maxDefaultEnemyVelocity = 18;
 	static int minDefaultRadius = 10;
 	static int maxDefaultRadius = 120;
 	static SIDE side;
