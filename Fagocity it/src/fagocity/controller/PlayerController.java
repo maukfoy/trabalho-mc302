@@ -8,6 +8,7 @@ import fagocity.controller.Interfaces.IActorController;
 import fagocity.model.Actor;
 import fagocity.model.GameModel;
 import fagocity.model.Player;
+import fagocity.view.GameView;
 
 public class PlayerController implements IActorController {
 	
@@ -25,6 +26,10 @@ public class PlayerController implements IActorController {
 	private void atualizarPosicao() {
 		p.setX(p.getX() + (int)p.getVelX());
 		p.setY(p.getY() + (int)p.getVelY());
+		
+		/*reestabelece x e y se eles passarem dos limites do mapa*/
+		p.setX(BoundsController.playerRepositioning (p.getX(),GameView.getMinXBounds(),GameView.getMaxXBounds() - p.getRadius()));
+		p.setY(BoundsController.playerRepositioning (p.getY(),GameView.getMinYBounds(),GameView.getMaxYBounds() - p.getRadius()));
 	}
 	
 	private void atualizaVelocidade() {

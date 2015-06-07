@@ -176,22 +176,22 @@ public class CollisionController {
 	}
 	
 	/*aumenta o raio dos que fagocitaram, de update em update (implica animacao)*/
-    public static void growBalls (ArrayList <Actor> list)
-    {
-        for (int i = 0; i < list.size(); i++)
-        {
-            if (list.get(i).getGrowingRadius() > 0)
-            {
-                list.get(i).setRadius(list.get(i).getRadius() + 1);
-                list.get(i).setGrowingRadius(list.get(i).getGrowingRadius() - 1);
-            }
-            else if (list.get(i).getGrowingRadius() < 0)
-            {
-                list.get(i).setRadius(list.get(i).getRadius() - 1);
-                list.get(i).setGrowingRadius(list.get(i).getGrowingRadius() + 1);
-            }
-        }
-    }
+	public static void growBalls (ArrayList <Actor> list)
+	{
+		for (int i = 0; i < list.size(); i++)
+		{
+			if (list.get(i).getGrowingRadius() > 0)
+			{
+				list.get(i).setRadius(list.get(i).getRadius() + 1);
+				list.get(i).setGrowingRadius(list.get(i).getGrowingRadius() - 1);
+			}
+			else if (list.get(i).getGrowingRadius() < 0)
+			{
+				list.get(i).setRadius(list.get(i).getRadius() - 1);
+				list.get(i).setGrowingRadius(list.get(i).getGrowingRadius() + 1);
+			}
+		}
+	}
 	
 	private static boolean equalColors(Color color1, Color color2) {
 		if(color1 == color2)

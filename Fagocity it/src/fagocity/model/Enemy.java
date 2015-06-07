@@ -10,4 +10,5 @@ public class Enemy extends Actor {
 		super(x, y, velX, velY, radius, color);
 		actorController = new EnemyController(this);
 	}
+	
 }

@@ -49,6 +49,7 @@ public class GameController {
 		}
 		
 		CollisionController.update();
+		BoundsController.update();
 		
 		if (GameStatus.status == STATUS.Fagocity){
 			HUDController.update();

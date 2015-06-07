@@ -78,8 +78,6 @@ public class HUDView {
 	/* Verifica se o fagocity streak deve ser exibido da tela */
 	private static boolean fagocityStreakTriggered() {
 		long currentTime = System.currentTimeMillis();
-		System.out.println(currentTime);
-		System.out.println(lastFagocityStreakTime);
 		if(currentTime - lastFagocityStreakTime < FagocityStreakTextDuration)
 			return true;
 		else

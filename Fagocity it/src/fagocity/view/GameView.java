@@ -24,6 +24,10 @@ public class GameView extends JPanel {
 	private Graphics2D g2d;
 	private Graphics g;
 	private static HUDView hud;
+	private static int minXBounds = -1*WIDTH;
+	private static int maxXBounds = 2*WIDTH;
+	private static int minYBounds = -1*HEIGHT;
+	private static int maxYBounds = 2*HEIGHT;
 	
 	public GameView(String title) {
 		this.display = new Display(title, WIDTH, HEIGHT);
@@ -54,6 +58,7 @@ public class GameView extends JPanel {
 		/* Desenha o fundo da tela */
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
+		 
 		
 		/*se nao estiver no modo jogavel, da render no menu ou help*/
 		if (GameStatus.status != STATUS.Fagocity)
@@ -63,6 +68,10 @@ public class GameView extends JPanel {
 		
 		/* Desenha todos actors */
 		renderActors();
+		
+		/*desenha os limites do mapa*/
+		g.setColor(Color.WHITE);
+		g.drawRect(-1*WIDTH, -1*HEIGHT, 3*WIDTH, 3*HEIGHT);
 		
 		CameraView.CameraEnding (g2d);
 		
@@ -104,6 +113,18 @@ public class GameView extends JPanel {
 	
 	public static HUDView getHUD() {
 		return hud;
+	}
+	public static int getMinXBounds(){
+		return minXBounds;
+	}
+	public static int getMaxXBounds(){
+		return maxXBounds;
+	}
+	public static int getMinYBounds(){
+		return minYBounds;
+	}
+	public static int getMaxYBounds(){
+		return maxYBounds;
 	}
 }
 
