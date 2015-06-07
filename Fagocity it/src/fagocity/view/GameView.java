@@ -5,10 +5,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
-
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-
 import fagocity.model.Actor;
 import fagocity.model.GameStatus;
 import fagocity.model.GameModel;
@@ -25,9 +26,10 @@ public class GameView extends JPanel {
 	private Graphics g;
 	private static HUDView hud;
 	private static int minXBounds = 0;
-    private static int maxXBounds = 5000;
-    private static int minYBounds = 0;
-    private static int maxYBounds = 4000;
+	private static int maxXBounds = 5000;
+	private static int minYBounds = 0;
+	private static int maxYBounds = 4000;
+	private BufferedImage background;
 	
 	public GameView(String title) {
 		this.display = new Display(title, WIDTH, HEIGHT);
@@ -37,6 +39,14 @@ public class GameView extends JPanel {
 			HUDModel.loadHUD();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		
+		/* Carrega a imagem de fundo */
+		try {
+			background = ImageIO.read(new File("src/fagocity/model/assets/sprites/Background.jpg"));
+		}
+		catch(Exception e) {
+			e.getStackTrace();
 		}
 		
 	}
@@ -55,10 +65,17 @@ public class GameView extends JPanel {
 		/* Limpa a tela */
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 		
-		/* Desenha o fundo da tela */
-		g.setColor(Color.DARK_GRAY);
-		g.fillRect(0, 0, WIDTH, HEIGHT);
-		 
+		/* Desenha o background  */
+		CameraView.CameraBeginning (g2d);
+		int imgWidth = background.getWidth();
+		int imgHeight = background.getHeight();
+		for(int i = 0 ; i < maxXBounds; i += imgWidth ) {
+			for(int j = 0; j < maxYBounds; j += imgHeight) {
+				g.drawImage(background, i, j, null);
+			}
+		}
+		
+		CameraView.CameraEnding (g2d);
 		
 		/*se nao estiver no modo jogavel, da render no menu ou help*/
 		if (GameStatus.status != STATUS.Fagocity)
@@ -73,6 +90,9 @@ public class GameView extends JPanel {
         g.setColor(Color.WHITE);
         g.drawRect(0, 0, maxXBounds, maxYBounds);
 		
+		g.setColor(Color.DARK_GRAY);
+		g.drawRect(0, 0, maxXBounds, maxYBounds);
+
 		CameraView.CameraEnding (g2d);
 		
 		/* Desenha o HUD se estiver no modo jogável*/

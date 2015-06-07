@@ -4,12 +4,10 @@ Vamos só fazer append aqui pra manter um log mesmo do trabalho */
 
 - background - vitao
 
-- o score com base no raio perdeu o sentido agora com o fagocity streak. arrumar. - vitao
-
-arrumar a funçao em Player playfagocitysound porque o lugar do .wav ta errado. deveria estar em assets - vitao
-
 - IMPORTANTÍSSIMO - DO JEITO QUE OS ASSETS ESTÃO SENDO ACESSADOS ELE NÃO SAO DETECTADOS PELO ARQUIVO
 JAR QUANDO O PROJETO É EXPORTADO DO ECLIPSE.  É IMPORTANTE TROCAR OS ACESSOS POR GETPATH,, RESOURCEASSTREAM, SEI LA - VITAO
+
+- buff velocidade o talvez vida no chao - vitao
 
 - implementar sons - vitao
 
@@ -21,8 +19,6 @@ JAR QUANDO O PROJETO É EXPORTADO DO ECLIPSE.  É IMPORTANTE TROCAR OS ACESSOS POR
 
 - os inimigos nunca são deletados! - vitao
 
-- BUG - player as vezes aparece em cima e as vezes fica em baixo quando passa por um inimigo - vitao
-(implementar também um jeito de fazer o player piscar quando passar por alguem) 
 
 - a thread está no construtor da GameMain, mas ele deve ser posteriormente
 tirado do construtor. Dizem que dá bugs. Pesquisar. - vitao

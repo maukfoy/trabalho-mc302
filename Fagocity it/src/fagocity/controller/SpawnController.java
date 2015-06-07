@@ -43,22 +43,29 @@ public class SpawnController {
 	
 	private static int[] generateSpawnCoordinates() {
 		Random r = new Random();
-		int[] coordinates = {r.nextInt(maxXBounds), r.nextInt(maxYBounds)};
-		Actor player = GameController.getPlayer();
+		Actor p = GameController.getPlayer();
+		int[] coordinates = new int[2];
+		
+		/*caso base para o nascimento dos inimigos*/
+		if (p != null)
+		{
+			coordinates[0] = p.getX() + width/2;
+			coordinates[1] = p.getY() + height/2;
+		}	
 		
 		switch(r.nextInt(4)) {
 			/* Nascer do lado esquerdo da tela */
 			case 0:
-				if (player == null)/*no menu*/ /*ninguem pode nascer na tela inicial (0.0)*/
+				if (p == null)/*no menu*/ /*ninguem pode nascer na tela inicial (0.0)*/
 				{
 					coordinates[0] = r.nextInt(maxXBounds/2 - width/2);
 					coordinates[1] = r.nextInt(maxYBounds - height) + height;
 				}
 				else/*no jogo, os inimigos devem nascer longe do personagem*/
 				{
-					if ((player.getX() - width/2) > 0)//evita que o limite de random se inverte e de crush
+					if ((p.getX() - width/2) > 0)//evita que o limite de random se inverte e de crush
 					{
-					coordinates[0] = r.nextInt (player.getX() - width/2);
+					coordinates[0] = r.nextInt (p.getX() - width/2);
 					coordinates[1] = r.nextInt (maxYBounds);
 					}
 				}
@@ -66,16 +73,16 @@ public class SpawnController {
 				break;
 			/* Nascer do lado direito da tela */
 			case 1:
-				if (player == null)//no menu
+				if (p == null)//no menu
 				{
 					coordinates[0] = r.nextInt(maxXBounds - maxXBounds/2 - width/2) + maxXBounds/2 + width/2;
 					coordinates[1] = r.nextInt(maxYBounds);
 				}
 				else//no jogo
 				{
-					if ((maxXBounds - player.getX() - width/2)  > (player.getX() - width/2))
+					if ((maxXBounds - p.getX() - width/2)  > (p.getX() - width/2))
 					{
-					coordinates[0] = r.nextInt(maxXBounds - player.getX() - width/2) + player.getX() + width/2;
+					coordinates[0] = r.nextInt(maxXBounds - p.getX() - width/2) + p.getX() + width/2;
 					coordinates[1] = r.nextInt(maxYBounds);
 					}
 				}
@@ -83,34 +90,34 @@ public class SpawnController {
 				break;
 			/* Nascer em cima da tela */
 			case 2:
-				if (player == null)//no menu
+				if (p == null)//no menu
 				{
 					coordinates[0] = r.nextInt(maxXBounds - width) + width;
 					coordinates[1] = r.nextInt(maxYBounds/2 - height/2);
 				}
 				else//no jogo
 				{
-					if ((player.getY() - height/2) > 0)
+					if ((p.getY() - height/2) > 0)
 					{
 						coordinates[0] = r.nextInt(maxXBounds);
-						coordinates[1] = r.nextInt(player.getY() - height/2);
+						coordinates[1] = r.nextInt(p.getY() - height/2);
 					}
 				}
 				side = SIDE.UP;
 				break;
 			/* Nascer em baixo da tela */
 			case 3:
-				if (player == null)//no menu
+				if (p == null)//no menu
 				{		
 					coordinates[0] =r.nextInt(maxXBounds);
 					coordinates[1] = r.nextInt(maxYBounds - maxYBounds/2 - height/2) + maxYBounds/2 + height/2;
 				}
 				else//no jogo
 				{
-					if ((maxYBounds - player.getY() - height/2)  > (player.getY() - height/2))
+					if ((maxYBounds - p.getY() - height/2)  > (p.getY() - height/2))
 					{
 					coordinates[0] = r.nextInt(maxXBounds);
-					coordinates[1] = r.nextInt( maxYBounds - player.getY() - height/2) + player.getY() + height/2;
+					coordinates[1] = r.nextInt( maxYBounds - p.getY() - height/2) + p.getY() + height/2;
 					}
 				}
 				side = SIDE.DOWN;

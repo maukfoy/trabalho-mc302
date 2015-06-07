@@ -7,8 +7,7 @@ import fagocity.model.GameStatus.STATUS;
 import fagocity.view.HUDView;
 
 public class HUDController {
-	
-	private static int playerInitialRadius = Player.defaultRadius;
+
 	private static long initialTime = 0;
 	private static long currentTime;
 	private static int score = 0;
@@ -16,13 +15,14 @@ public class HUDController {
 	private static int currentKillStreak = 0;
 	private static int minimumKillStreak = 2;
 	private static int streaksPassed = 0;
+	private static int totalFagocitedRadius = 0; // soma do raio dos inimigos fagocitados
 	
 	public static void update() {
 		Player player = PlayerController.getPlayer();
 		if(player != null) {
 			if(GameStatus.status == STATUS.Fagocity) {
 				currentTime = System.currentTimeMillis();
-				score = 107 * (player.getRadius() - playerInitialRadius) + (int)(currentTime/50 - initialTime/50);
+				score = 1*(streaksPassed+1)*totalFagocitedRadius*totalFagocitedRadius + (int)(currentTime/50 - initialTime/50);
 			}
 			else
 				score = 0;
@@ -32,10 +32,6 @@ public class HUDController {
 	
 	public static void setInitialTime(long initialTime) {
 		HUDController.initialTime = initialTime;
-	}
-	
-	public static void setPlayerInitialRadius(int playerInitialRadius) {
-		HUDController.playerInitialRadius = playerInitialRadius;
 	}
 	
 	public static void updateFagocityStreak() {
@@ -59,6 +55,10 @@ public class HUDController {
 	public static void resetFagocityStreak() {
 		currentKillStreak = 0;
 		HUDModel.setFagocityStreak(0);
+	}
+
+	public static void setTotalFagocitedRadius(int radius) {
+		totalFagocitedRadius += radius;		
 	}
 	
 	

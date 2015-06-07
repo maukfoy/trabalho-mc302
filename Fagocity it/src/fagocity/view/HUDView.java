@@ -22,7 +22,7 @@ public class HUDView {
 		/* Desenha o Score */
 		Font fnt = new Font ("arial", 1, 17);
 		g.setFont (fnt);
-		g.setColor(Color.white);
+		g.setColor(Color.DARK_GRAY);
 		String score = "Score: " + String.valueOf(HUDModel.getScore());
 		String highscore = "Highscore: " + String.valueOf(HUDModel.getHighScore());
 		g.drawString(score, width/100, height/50);
@@ -39,7 +39,7 @@ public class HUDView {
 		/* Desenha a barra de Fagocity Streak */
 		double fagocityStreak = HUDModel.getFagocityStreak();
 		/* Parte externa */
-		g.setColor(Color.white);
+		g.setColor(Color.DARK_GRAY);
 		g.drawRect((int)(width/2 - width/10 -1), (int)(height/100 -1), (int)(width/5 +1), (int)(height/40 +1));
 		/* Parte interna */
 		g.setColor(Color.green);

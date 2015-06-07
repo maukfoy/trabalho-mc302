@@ -20,11 +20,9 @@ public class MenuView {
 		Font fnt = new Font ("arial", 1, 50);
 		
 		g.setFont (fnt);
-		g.setColor(SpawnController.generateRandomColor());
+		g.setColor(Color.DARK_GRAY);
 		g.drawString ("Fagocity It!", 820, 120);
-		
-		g.setColor (Color.white);
-		
+				
 		/*botoes do menu*/
 		g.drawRect (82, 270, 190, 65);
 		g.drawString ("Play", 125, 320);
@@ -47,17 +45,19 @@ public class MenuView {
 
 
 			Font font = new Font ("arial", 1, 40);
-			g.setColor(SpawnController.generateRandomColor());
 			g.setFont ( font );
+			g.setColor(Color.DARK_GRAY);
+
 			g.drawString ( text1 ,  40 , 330) ;
 			g.drawString ( text2 , 40, 420 );
 			g.drawString ( text3, 40 , 510 );
 			g.drawString ( text4 , 40, 600 );
 			g.drawString ( text5 , 40 , 690 );
 			
-			Font f = new Font ("arial", 1, 50);
-			g.setFont (f);
-			g.setColor (Color.white);
+			Font font2 = new Font ("arial", 1, 50);
+			g.setFont ( font2 );
+			g.setColor(Color.DARK_GRAY);
+			
 			g.drawString ("Help", 900, 120);
 			
 			/*botao back*/
