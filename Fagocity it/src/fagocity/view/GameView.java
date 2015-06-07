@@ -24,10 +24,10 @@ public class GameView extends JPanel {
 	private Graphics2D g2d;
 	private Graphics g;
 	private static HUDView hud;
-	private static int minXBounds = -1*WIDTH;
-	private static int maxXBounds = 2*WIDTH;
-	private static int minYBounds = -1*HEIGHT;
-	private static int maxYBounds = 2*HEIGHT;
+	private static int minXBounds = 0;
+    private static int maxXBounds = 5000;
+    private static int minYBounds = 0;
+    private static int maxYBounds = 4000;
 	
 	public GameView(String title) {
 		this.display = new Display(title, WIDTH, HEIGHT);
@@ -70,8 +70,8 @@ public class GameView extends JPanel {
 		renderActors();
 		
 		/*desenha os limites do mapa*/
-		g.setColor(Color.WHITE);
-		g.drawRect(-1*WIDTH, -1*HEIGHT, 3*WIDTH, 3*HEIGHT);
+        g.setColor(Color.WHITE);
+        g.drawRect(0, 0, maxXBounds, maxYBounds);
 		
 		CameraView.CameraEnding (g2d);
 		

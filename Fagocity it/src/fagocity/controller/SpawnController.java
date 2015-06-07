@@ -2,19 +2,28 @@ package fagocity.controller;
 
 import java.awt.Color;
 import java.util.Random;
+
+import fagocity.model.Actor;
 import fagocity.view.GameView;
 
 public class SpawnController {
 	
 	enum SIDE {DOWN, UP, LEFT, RIGHT};
 	
-	static long oldTime = 0;
-	static long spawnTime = 150;
-	static double minDefaultEnemyVelocity = 3;
-	static double maxDefaultEnemyVelocity = 6;
-	static int minDefaultRadius = 20;
-	static int maxDefaultRadius = 120;
-	static SIDE side;
+	private static long oldTime = 0;
+	private static long spawnTime = 20;
+	private static double minDefaultEnemyVelocity = 3;
+	private static double maxDefaultEnemyVelocity = 6;
+	private static int minDefaultRadius = 20;
+	private static int maxDefaultRadius = 120;
+	private static SIDE side;
+	
+	private static int width = GameView.getScreenWidth();
+	private static int height = GameView.getScreenHeight();
+	private static int minXBounds = GameView.getMinXBounds();
+	private static int maxXBounds = GameView.getMaxXBounds();
+	private static int minYBounds = GameView.getMinYBounds();
+	private static int maxYBounds = GameView.getMaxYBounds();
 	
 	public static void update (){
 		autoEnemyCreator();
@@ -33,32 +42,77 @@ public class SpawnController {
 	}
 	
 	private static int[] generateSpawnCoordinates() {
-		Random random = new Random();
-		int[] coordinates = new int[2];
+		Random r = new Random();
+		int[] coordinates = {r.nextInt(maxXBounds), r.nextInt(maxYBounds)};
+		Actor player = GameController.getPlayer();
 		
-		switch(random.nextInt(4)) {
+		switch(r.nextInt(4)) {
 			/* Nascer do lado esquerdo da tela */
 			case 0:
-				coordinates[0] = -maxDefaultRadius;
-				coordinates[1] = random.nextInt(GameView.getScreenHeight());
+				if (player == null)/*no menu*/ /*ninguem pode nascer na tela inicial (0.0)*/
+				{
+					coordinates[0] = r.nextInt(maxXBounds/2 - width/2);
+					coordinates[1] = r.nextInt(maxYBounds - height) + height;
+				}
+				else/*no jogo, os inimigos devem nascer longe do personagem*/
+				{
+					if ((player.getX() - width/2) > 0)//evita que o limite de random se inverte e de crush
+					{
+					coordinates[0] = r.nextInt (player.getX() - width/2);
+					coordinates[1] = r.nextInt (maxYBounds);
+					}
+				}
 				side = SIDE.LEFT;
 				break;
 			/* Nascer do lado direito da tela */
 			case 1:
-				coordinates[0] = GameView.getScreenWidth();
-				coordinates[1] = random.nextInt(GameView.getScreenHeight());
+				if (player == null)//no menu
+				{
+					coordinates[0] = r.nextInt(maxXBounds - maxXBounds/2 - width/2) + maxXBounds/2 + width/2;
+					coordinates[1] = r.nextInt(maxYBounds);
+				}
+				else//no jogo
+				{
+					if ((maxXBounds - player.getX() - width/2)  > (player.getX() - width/2))
+					{
+					coordinates[0] = r.nextInt(maxXBounds - player.getX() - width/2) + player.getX() + width/2;
+					coordinates[1] = r.nextInt(maxYBounds);
+					}
+				}
 				side = SIDE.RIGHT;
 				break;
 			/* Nascer em cima da tela */
 			case 2:
-				coordinates[0] = random.nextInt(GameView.getScreenWidth());
-				coordinates[1] = -maxDefaultRadius;
+				if (player == null)//no menu
+				{
+					coordinates[0] = r.nextInt(maxXBounds - width) + width;
+					coordinates[1] = r.nextInt(maxYBounds/2 - height/2);
+				}
+				else//no jogo
+				{
+					if ((player.getY() - height/2) > 0)
+					{
+						coordinates[0] = r.nextInt(maxXBounds);
+						coordinates[1] = r.nextInt(player.getY() - height/2);
+					}
+				}
 				side = SIDE.UP;
 				break;
 			/* Nascer em baixo da tela */
 			case 3:
-				coordinates[0] = random.nextInt(GameView.getScreenWidth());
-				coordinates[1] = GameView.getScreenHeight();
+				if (player == null)//no menu
+				{		
+					coordinates[0] =r.nextInt(maxXBounds);
+					coordinates[1] = r.nextInt(maxYBounds - maxYBounds/2 - height/2) + maxYBounds/2 + height/2;
+				}
+				else//no jogo
+				{
+					if ((maxYBounds - player.getY() - height/2)  > (player.getY() - height/2))
+					{
+					coordinates[0] = r.nextInt(maxXBounds);
+					coordinates[1] = r.nextInt( maxYBounds - player.getY() - height/2) + player.getY() + height/2;
+					}
+				}
 				side = SIDE.DOWN;
 				break;
 		}

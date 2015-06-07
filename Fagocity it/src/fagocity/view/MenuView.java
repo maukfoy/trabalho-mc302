@@ -2,7 +2,10 @@ package fagocity.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
+
+import fagocity.controller.SpawnController;
 import fagocity.model.GameStatus;
 import fagocity.model.GameStatus.STATUS;
 
@@ -17,35 +20,51 @@ public class MenuView {
 		Font fnt = new Font ("arial", 1, 50);
 		
 		g.setFont (fnt);
+		g.setColor(SpawnController.generateRandomColor());
+		g.drawString ("Fagocity It!", 820, 120);
+		
 		g.setColor (Color.white);
-		g.drawString ("Fagocity It!", 20*width/50, height/10);
 		
 		/*botoes do menu*/
-		g.drawRect (width/23, 5*height/20, width/10, height/17);
-		g.drawString ("Play", width/15, 59*height/200);
+		g.drawRect (82, 270, 190, 65);
+		g.drawString ("Play", 125, 320);
 		
-		g.drawRect (width/23, 9*height/20 , width/10, height/17);
-		g.drawString ("Help", width/15, 189*height/380);
+		g.drawRect (82, 489 , 190, 65);
+		g.drawString ("Help", 125, 538);
 	
-		g.drawRect (width/23, 13*height/20, width/10, height/17);
-		g.drawString ("Quit", width/15, 153*height/220);
+		g.drawRect (82, 702, 190, 65);
+		g.drawString ("Quit", 125, 752);
 		}
 		
 		/*janela help*/
 		else if (GameStatus.status == STATUS.Help)
-		{
-			Font fnt = new Font ("arial", 1, 50);
-			Font fnt2 = new Font ("arial", 1, 30);
+		{	
+			String text1 = "- Mouse move o personagem";
+			String text2 = "- Bolinhas maiores que voc\u00EA te fagocitam";
+			String text3 = "- Bolinhas menores que voc\u00EA s\u00E3o fagocitadas";
+			String text4 = "- Fagocitar bolinhas com cor diferente da sua, tira sua vida";
+			String text5 = "- Deve-se completar uma sequ\u00EAncia de fagocita\u00E7\u00F5es para voltar a ser pequeno";
+
+
+			Font font = new Font ("arial", 1, 40);
+			g.setColor(SpawnController.generateRandomColor());
+			g.setFont ( font );
+			g.drawString ( text1 ,  40 , 330) ;
+			g.drawString ( text2 , 40, 420 );
+			g.drawString ( text3, 40 , 510 );
+			g.drawString ( text4 , 40, 600 );
+			g.drawString ( text5 , 40 , 690 );
 			
-			g.setFont (fnt);
+			Font f = new Font ("arial", 1, 50);
+			g.setFont (f);
 			g.setColor (Color.white);
-			g.drawString ("Help", 23*width/50, height/10);
+			g.drawString ("Help", 900, 120);
 			
-			g.drawRect (22*width/50, 40*height/50, width/10, height/17);
-			g.drawString ("Back", 23*width/50, 169*height/200);
+			/*botao back*/
+			g.drawRect (864, 900, 190, 65);
+			g.drawString ("Back", 900, 950);
 			
-			g.setFont (fnt2);
-			g.drawString ("Mouse move o personagem", 25*width/64, 4*height/9);
+			
 		}
 
 	}

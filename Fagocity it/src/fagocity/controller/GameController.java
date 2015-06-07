@@ -14,7 +14,7 @@ public class GameController {
 	
 	private static GameModel model;
 	private GameView view;
-	private static Actor player;
+	private static Actor player = null;
 	
 	public GameController(GameModel model, GameView view) {
 		GameController.setModel(model);
@@ -25,8 +25,7 @@ public class GameController {
 	public static void initialConditions() {
 		/* Cria o player */
 		int radius = Player.defaultRadius;
-		player = ActorFactory.createActor((GameView.getScreenWidth() - radius)/2, (GameView.getScreenHeight() - radius)/2, 0, 0, radius, Color.red, "player");
-
+		player = ActorFactory.createActor((GameView.getMaxXBounds() - radius)/2, (GameView.getMaxYBounds() - radius)/2, 0, 0, radius, Color.red, "player");
 	}
 	
 	/* Atualiza todos fatores do jogo */
@@ -76,5 +75,9 @@ public class GameController {
 	}
 	public void setView(GameView view) {
 		this.view = view;
+	}
+	public static Actor getPlayer ()
+	{
+		return player;
 	}
 }

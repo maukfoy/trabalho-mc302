@@ -14,7 +14,7 @@ public class HUDController {
 	private static int score = 0;
 	private static double fagocityStreak = 0;
 	private static int currentKillStreak = 0;
-	private static int minimumKillStreak = 5;
+	private static int minimumKillStreak = 2;
 	private static int streaksPassed = 0;
 	
 	public static void update() {

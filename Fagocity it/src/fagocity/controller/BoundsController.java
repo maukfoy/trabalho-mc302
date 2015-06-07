@@ -37,11 +37,11 @@ public class BoundsController {
 		int upperY = enemy.getY();
 		int lowerY = enemy.getY() + enemy.getRadius();
 		
-		if (rightX < GameView.getMinXBounds() - GameView.getScreenWidth())
+		if (rightX < GameView.getMinXBounds() - GameView.getScreenWidth()/2)
 			return true;
-		if (leftX > GameView.getMaxXBounds() + GameView.getScreenWidth())
+		if (leftX > GameView.getMaxXBounds() + GameView.getScreenWidth()/2)
 			return true;
-		if (lowerY < GameView.getMinYBounds() - GameView.getScreenHeight())
+		if (lowerY < GameView.getMinYBounds() - GameView.getScreenHeight()/2)
 			return true;
 		if (upperY > GameView.getMaxYBounds() + GameView.getScreenHeight())
 			return true;

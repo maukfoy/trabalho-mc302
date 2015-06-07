@@ -21,26 +21,26 @@ public class MenuController {
 		my = MouseController.getClickY ();
 		
 		/*Botão Play*/
-		if (GameStatus.status == STATUS.Menu && mouseOver (mx, my, width/23, 5*height/20, width/10, height/17 ))
+		if (GameStatus.status == STATUS.Menu && mouseOver (mx, my, 82, 270, 190, 65 ))
 		{	
 			GameController.initialConditions();
 			GameStatus.status = STATUS.Fagocity;
 			HUDController.setInitialTime(System.currentTimeMillis());
 		}
 		/*Botão Quit*/
-		if (GameStatus.status == STATUS.Menu && mouseOver (mx, my, width/23, 13*height/20, width/10, height/17 ))
+		if (GameStatus.status == STATUS.Menu && mouseOver (mx, my, 82, 702, 190, 65 ))
 		{
 			System.exit(1);
 		}
 		
 		/*Botão Help*/
-		if (GameStatus.status == STATUS.Menu && mouseOver (mx, my, width/23, 9*height/20 , width/10, height/17 ))
+		if (GameStatus.status == STATUS.Menu && mouseOver (mx, my, 82, 489 , 190, 65 ))
 		{
 			GameStatus.status = STATUS.Help;
 		}
 		
 		/*Botão Back da tela Help*/
-		if (GameStatus.status == STATUS.Help && mouseOver (mx, my, 22*width/50, 40*height/50, width/10, height/17 ) )
+		if (GameStatus.status == STATUS.Help && mouseOver (mx, my, 864, 900, 190, 65 ) )
 		{
 			GameStatus.status = STATUS.Menu;
 			return;
