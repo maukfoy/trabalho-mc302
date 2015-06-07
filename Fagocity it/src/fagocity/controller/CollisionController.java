@@ -58,6 +58,8 @@ public class CollisionController {
 							PlayerController.playPlayerSound("FagocitySound");
 							/* Atualiza o streak do player */
 							HUDController.updateFagocityStreak();
+							/* Atualiza o raio total fagocitado, importante para o score */
+							HUDController.setTotalFagocitedRadius(smallest.getRadius());
 						}
 						
 						/* Muda a cor do player */

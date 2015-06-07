@@ -17,7 +17,7 @@ public class MenuView {
 		Font fnt = new Font ("arial", 1, 50);
 		
 		g.setFont (fnt);
-		g.setColor (Color.white);
+		g.setColor(Color.DARK_GRAY);
 		g.drawString ("Fagocity It!", 20*width/50, height/10);
 		
 		/*botoes do menu*/
@@ -38,7 +38,7 @@ public class MenuView {
 			Font fnt2 = new Font ("arial", 1, 30);
 			
 			g.setFont (fnt);
-			g.setColor (Color.white);
+			g.setColor(Color.DARK_GRAY);
 			g.drawString ("Help", 23*width/50, height/10);
 			
 			g.drawRect (22*width/50, 40*height/50, width/10, height/17);
