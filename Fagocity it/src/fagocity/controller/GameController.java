@@ -1,8 +1,6 @@
 package fagocity.controller;
 
-import java.awt.Color;
 import java.util.ArrayList;
-
 import fagocity.model.Actor;
 import fagocity.model.GameStatus;
 import fagocity.model.GameStatus.STATUS;
@@ -25,7 +23,7 @@ public class GameController {
 	public static void initialConditions() {
 		/* Cria o player */
 		int radius = Player.defaultRadius;
-		player = ActorFactory.createActor((GameView.getMaxXBounds() - radius)/2, (GameView.getMaxYBounds() - radius)/2, 0, 0, radius, Color.red, "player");
+		player = ActorFactory.createActor((GameView.getMaxXBounds() - radius)/2, (GameView.getMaxYBounds() - radius)/2, 0, 0, radius, SpawnController.generateRandomColor(), "player");
 	}
 	
 	/* Atualiza todos fatores do jogo */

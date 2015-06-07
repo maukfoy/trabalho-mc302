@@ -193,10 +193,19 @@ public class SpawnController {
 	public static Color generateRandomColor() {
 		Random r = new Random();
 		
+		Color blue = new Color(57, 45, 215);
+		Color purple = new Color(153, 7, 198);
+		Color green = new Color(14, 215, 14);
+		Color yellow = new Color(255, 255, 24);
+		Color pink = new Color(255, 0, 127);
+		Color orange = new Color(255, 128, 0);
+		Color brown = new Color(102, 51, 0);
+		Color red = new Color(255, 0, 0);
+		Color gray = new Color(128, 128, 128);
+		Color lightBlue = new Color(0, 204, 204);
+		
 		/* Vetor com todas cores de bolinha possíveis no jogo */
-		Color[] colors = {Color.blue, Color.cyan, Color.green, 
-				Color.yellow, Color.magenta, Color.orange, Color.pink, 
-				Color.white, Color.yellow, Color.RED};
+		Color[] colors = {blue, purple, green, yellow, pink, orange, brown, red, gray, lightBlue};
 		
 		int randomInt = r.nextInt( colors.length ) ;
 		

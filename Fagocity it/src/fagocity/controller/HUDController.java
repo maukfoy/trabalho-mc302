@@ -22,7 +22,7 @@ public class HUDController {
 		if(player != null) {
 			if(GameStatus.status == STATUS.Fagocity) {
 				currentTime = System.currentTimeMillis();
-				score = 1*(streaksPassed+1)*totalFagocitedRadius*totalFagocitedRadius + (int)(currentTime/50 - initialTime/50);
+				score = 1*(streaksPassed+1)*totalFagocitedRadius*totalFagocitedRadius + (int)(currentTime/50 - initialTime/50)*(streaksPassed+1);
 			}
 			else
 				score = 0;

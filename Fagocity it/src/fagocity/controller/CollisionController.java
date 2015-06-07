@@ -196,7 +196,7 @@ public class CollisionController {
 	}
 	
 	private static boolean equalColors(Color color1, Color color2) {
-		if(color1 == color2)
+		if(color1.equals(color2))
 			return true;
 		else
 			return false;
