@@ -1,11 +1,14 @@
 package fagocity.view;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+
 import fagocity.controller.SpawnController;
 import fagocity.model.Actor;
 import fagocity.model.GameModel;
@@ -40,6 +43,8 @@ public class HUDView {
 		double fagocityStreak = HUDModel.getFagocityStreak();
 		/* Parte externa */
 		g.setColor(Color.DARK_GRAY);
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setStroke(new BasicStroke(1));
 		g.drawRect((int)(width/2 - width/10 -1), (int)(height/100 -1), (int)(width/5 +1), (int)(height/40 +1));
 		/* Parte interna */
 		g.setColor(Color.green);
