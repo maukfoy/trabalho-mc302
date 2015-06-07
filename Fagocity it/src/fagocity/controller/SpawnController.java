@@ -49,8 +49,8 @@ public class SpawnController {
 		/*caso base para o nascimento dos inimigos*/
 		if (p != null)
 		{
-			coordinates[0] = p.getX() + width/2;
-			coordinates[1] = p.getY() + height/2;
+			coordinates[0] = p.getX() + width;
+			coordinates[1] = p.getY() + height;
 		}	
 		
 		switch(r.nextInt(4)) {
