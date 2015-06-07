@@ -39,12 +39,16 @@ public class PlayerController implements IActorController {
 		int mouseX = (int) (MouseController.getMouseX() - CameraController.getTX());
 		int mouseY = (int) (MouseController.getMouseY() - CameraController.getTY());
 		
+		/* Coordenadas do centro do player */
+		int xCenter = p.getX() + p.getRadius()/2;
+		int yCenter = p.getY() + p.getRadius()/2;
+		
 		/* Distance between mouse and player */
-		double distance = Math.sqrt( (mouseY - p.getY())*(mouseY - p.getY()) +  (mouseX - p.getX())*(mouseX - p.getX()) );
+		double distance = Math.sqrt( (mouseY - yCenter)*(mouseY - yCenter) +  (mouseX - xCenter)*(mouseX - xCenter) );
 		
 		/* Componentes da velocidade */
-		int velX = (int) ((velTotal/distance) * (mouseX - p.getX()));
-		int velY = (int) ((velTotal/distance) * (mouseY - p.getY()));
+		int velX = (int) ((velTotal/distance) * (mouseX - xCenter));
+		int velY = (int) ((velTotal/distance) * (mouseY - yCenter));
 		
 		/* Tolerância de erro. Ele é necessário pois evita uma divisão por 0, evita o flickering do player
 		 * e faz permite que a velocidade do player diminui conforme o mouse se aproxima dele */

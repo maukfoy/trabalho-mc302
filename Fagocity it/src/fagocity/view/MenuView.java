@@ -2,16 +2,11 @@ package fagocity.view;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
-
-import fagocity.controller.SpawnController;
 import fagocity.model.GameStatus;
 import fagocity.model.GameStatus.STATUS;
 
 public class MenuView {
-	private static int width = GameView.getScreenWidth();
-	private static int height = GameView.getScreenHeight();
 	
 	public static void render (Graphics g)
 	{

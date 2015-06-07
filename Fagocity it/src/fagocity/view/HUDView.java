@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import fagocity.controller.HUDController;
 import fagocity.controller.SpawnController;
 import fagocity.model.Actor;
 import fagocity.model.GameModel;
@@ -49,7 +50,13 @@ public class HUDView {
 		/* Parte interna */
 		g.setColor(Color.green);
 		g.fillRect((int)(width/2 - width/10), (int)(height/100), (int)((width/5) * fagocityStreak), (int)(height/40));
-	
+		
+		/* Mostra o numero de streaks */
+		String streaks = "Fagocity Streaks: " + HUDController.getStreaksPassed();
+		g.setColor(Color.DARK_GRAY);
+		g.drawString(streaks, (int)(width/2 - width/10) + (int)(width/5 +1) +20 , (int)(height/35));
+		
+		
 		/* Mostra o texto de Fagocity Streak */
 		if(fagocityStreakTriggered())
 			showFagocityStreakText(g);

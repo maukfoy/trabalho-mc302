@@ -20,9 +20,7 @@ public class SpawnController {
 	
 	private static int width = GameView.getScreenWidth();
 	private static int height = GameView.getScreenHeight();
-	private static int minXBounds = GameView.getMinXBounds();
 	private static int maxXBounds = GameView.getMaxXBounds();
-	private static int minYBounds = GameView.getMinYBounds();
 	private static int maxYBounds = GameView.getMaxYBounds();
 	
 	public static void update (){

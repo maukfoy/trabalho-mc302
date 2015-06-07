@@ -2,8 +2,6 @@
 AS IDEIAS A SEREM IMPLEMENTADAS E COISAS DO TIPO */
 Vamos só fazer append aqui pra manter um log mesmo do trabalho */
 
-- background - vitao
-
 - IMPORTANTÍSSIMO - DO JEITO QUE OS ASSETS ESTÃO SENDO ACESSADOS ELE NÃO SAO DETECTADOS PELO ARQUIVO
 JAR QUANDO O PROJETO É EXPORTADO DO ECLIPSE.  É IMPORTANTE TROCAR OS ACESSOS POR GETPATH,, RESOURCEASSTREAM, SEI LA - VITAO
 
@@ -14,10 +12,6 @@ JAR QUANDO O PROJETO É EXPORTADO DO ECLIPSE.  É IMPORTANTE TROCAR OS ACESSOS POR
 - tela de replay quando morre. esc pausa - vitao
 
 - é necessário trocar todas ocorrencias de radius por diameter - vitao
-
-- sempre que alguem se come a cor muda. No caso do player ele tem que comer somente os de mesma cor que ele? - vitao
-
-- os inimigos nunca são deletados! - vitao
 
 
 - a thread está no construtor da GameMain, mas ele deve ser posteriormente

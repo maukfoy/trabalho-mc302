@@ -2,12 +2,8 @@ package fagocity.controller;
 
 import fagocity.model.GameStatus;
 import fagocity.model.GameStatus.STATUS;
-import fagocity.view.GameView;
 
 public class MenuController {
-	
-	private static int width = GameView.getScreenWidth();
-	private static int height = GameView.getScreenHeight();
 	private static int mx, my;
 	
 	public static void update(){

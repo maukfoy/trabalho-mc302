@@ -49,6 +49,7 @@ public class HUDController {
 			resetFagocityStreak();
 			Player player = PlayerController.getPlayer();
 			player.setGrowingRadius(Player.defaultRadius - player.getRadius());
+			PlayerController.playPlayerSound("StreakSound");
 		}
 	}
 	
@@ -61,5 +62,8 @@ public class HUDController {
 		totalFagocitedRadius += radius;		
 	}
 	
+	public static int getStreaksPassed() {
+		return streaksPassed;
+	}
 	
 }
