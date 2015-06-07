@@ -49,7 +49,7 @@ public class HUDController {
 			resetFagocityStreak();
 			Player player = PlayerController.getPlayer();
 			player.setGrowingRadius(Player.defaultRadius - player.getRadius());
-			PlayerController.playPlayerSound("StreakSound");
+			AudioPlayer.playAudio("StreakSound");
 		}
 	}
 	

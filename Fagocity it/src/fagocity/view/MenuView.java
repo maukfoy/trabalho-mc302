@@ -16,7 +16,7 @@ public class MenuView {
 		
 		g.setFont (fnt);
 		g.setColor(Color.DARK_GRAY);
-		g.drawString ("Fagocity It!", 820, 120);
+		g.drawString ("Fagocity It!", GameView.getScreenWidth()/2 - 120, 120);
 				
 		/*botoes do menu*/
 		g.drawRect (82, 270, 190, 65);

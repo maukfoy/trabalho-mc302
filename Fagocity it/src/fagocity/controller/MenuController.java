@@ -22,6 +22,7 @@ public class MenuController {
 			GameController.initialConditions();
 			GameStatus.status = STATUS.Fagocity;
 			HUDController.setInitialTime(System.currentTimeMillis());
+			new Thread( new BackgroundMusicLoop()).start();
 		}
 		/*Botão Quit*/
 		if (GameStatus.status == STATUS.Menu && mouseOver (mx, my, 82, 702, 190, 65 ))

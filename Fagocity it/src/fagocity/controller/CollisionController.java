@@ -55,7 +55,7 @@ public class CollisionController {
 						}
 						else {
 							/* O Player consegue fagocitar, então toca o som de fagocitose */
-							PlayerController.playPlayerSound("FagocitySound");
+							AudioPlayer.playAudio("FagocitySound");
 							/* Atualiza o streak do player */
 							HUDController.updateFagocityStreak();
 							/* Atualiza o raio total fagocitado, importante para o score */
@@ -91,7 +91,7 @@ public class CollisionController {
 		for (int i = 0; i < toBeDeleted.size(); i++) {
 			Actor dead = toBeDeleted.get(i);
 			if(dead instanceof Player) {
-				PlayerController.playPlayerSound("DeathSound");
+				AudioPlayer.playAudio("DeathSound");
 			}
 			list.remove(dead);
 		}
