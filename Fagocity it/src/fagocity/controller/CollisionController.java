@@ -6,18 +6,85 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import fagocity.model.Actor;
+import fagocity.model.Enemy;
 import fagocity.model.GameModel;
 import fagocity.model.HUDModel;
 import fagocity.model.Player;
+import fagocity.model.ColorBuff;
+import fagocity.view.ColorBuffView;
 
 public class CollisionController {
 	
 	public static void update()
 	{
-		collision ();
+		actorsCollision ();
+		buffsCollision ();
 	}
 	
-	public static void collision()
+	public static class EnemiesColorChanger implements Runnable {
+		
+		public void run() {
+			
+			/* Marca como ativado o Color Buff */
+			ColorBuff.setCurrentColorBuff( PlayerController.getPlayer().getColor() );
+			
+			/* Percorre a lista de actors e troca suas cores */
+			ArrayList<Actor> list = GameModel.getActorsList();
+			for(int i = list.size() -1; i >= 0; i--) {
+				Actor actor = list.get(i);
+				/* Se for um enemy diminui a velocidade deles */
+				if( actor instanceof Enemy) {
+					actor.setColor( PlayerController.getPlayer().getColor() );
+				}	
+			}
+			
+			long startedTime = System.currentTimeMillis();
+			long timer;
+			/* Deixa o efeito do buff acontecer por um tempo e vai atualizando o timer*/
+			while(System.currentTimeMillis() - startedTime < ColorBuff.getDuration()) {
+				timer  = System.currentTimeMillis() - startedTime;
+				ColorBuffView.setTimer(timer);
+			}
+			
+			/* desativa o buff */
+			ColorBuff.setCurrentColorBuff( null );
+		}		
+	}
+	
+	private static void buffsCollision() {
+		ArrayList<ColorBuff> buffsList = ColorBuffController.getBuffsList();
+		int buffX, buffY, buffRadius;
+		int playerX, playerY, playerRadius;
+		
+		Player player = PlayerController.getPlayer();
+		if( player != null) {
+			playerX = player.getX();
+			playerY = player.getY();
+			playerRadius = player.getRadius();
+			
+			for(int i = 0; i < buffsList.size(); i++) {
+				ColorBuff colorBuff = buffsList.get(i);
+				buffX = colorBuff.getX();
+				buffY = colorBuff.getY();
+				buffRadius = colorBuff.getRadius();
+				
+				/* Se houver colisão */
+				if( distanceBetweenPoints ( ( buffX + buffRadius), (playerX + playerRadius/2),
+						(buffY + buffRadius), (playerY + playerRadius/2) ) < (buffRadius + playerRadius/2) )  {
+					buffsList.remove(colorBuff);
+					/* Toca o som de colisão */
+					AudioPlayer.playAudio("BuffSound");
+					/* Se não tiver nenhum Color Buff ligado, chama o Color Buff */
+					if( ColorBuff.getCurrentColorBuff() == null) {
+						new Thread( new EnemiesColorChanger()).start();
+					}
+				}
+			}
+		}
+		
+	}
+
+	public static void actorsCollision()
 	{
 		ArrayList<Actor> list = GameModel.getActorsList();
 		ArrayList<Actor> toBeDeleted = new ArrayList<Actor>();
@@ -63,7 +130,8 @@ public class CollisionController {
 						}
 						
 						/* Muda a cor do player */
-						toBeColored.add(greatest);
+						if(ColorBuff.getCurrentColorBuff() == null) //se o color buff estiver desligado
+							toBeColored.add(greatest);
 						
  					}
 					

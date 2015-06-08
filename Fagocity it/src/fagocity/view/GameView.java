@@ -11,11 +11,13 @@ import java.io.File;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import fagocity.controller.ColorBuffController;
 import fagocity.model.Actor;
 import fagocity.model.GameStatus;
 import fagocity.model.GameModel;
 import fagocity.model.GameStatus.STATUS;
 import fagocity.model.HUDModel;
+import fagocity.model.ColorBuff;
 
 public class GameView extends JPanel {
 	private static final long serialVersionUID = 3856930242116209479L;
@@ -85,6 +87,9 @@ public class GameView extends JPanel {
 
 		CameraView.CameraBeginning (g2d);
 		
+		/* Desenha todos os buffs */
+		renderBuffs(g);
+		
 		/* Desenha todos actors */
 		renderActors();
 		
@@ -102,6 +107,12 @@ public class GameView extends JPanel {
 		if (GameStatus.status == STATUS.Fagocity)
 			HUDView.render(g);
 		
+		/* Desenha a barra do Color Buff se ele estiver ativado */
+		if ( ColorBuff.getCurrentColorBuff() != null ) {
+			g.setColor(Color.green);
+			g.fillRect(WIDTH/2 -150, (int)(HEIGHT/1.2), (int)(ColorBuffView.getTimerPercentage() *300), 30);
+		}
+		
 		/* Finaliza os desenhos */
 		bs.show();
 		g.dispose();
@@ -114,6 +125,20 @@ public class GameView extends JPanel {
 			Actor actor = ActorsList.get(i);
 			g.setColor(actor.getColor());
 			g.fillOval((int)actor.getX(),(int) actor.getY(),(int) actor.getRadius(),(int) actor.getRadius());
+		}
+	}
+	
+	private void renderBuffs(Graphics g) {
+		ArrayList<ColorBuff> buffsList = ColorBuffController.getBuffsList();
+		int x, y, height, width;
+		BufferedImage sprite;
+		for(int i = 0; i < buffsList.size(); i++) {
+			x = buffsList.get(i).getX();
+			y = buffsList.get(i).getY();
+			width = buffsList.get(i).getWidth();
+			height = buffsList.get(i).getHeight();
+			sprite = buffsList.get(i).getSprite();
+			g.drawImage(sprite, x , y, (int)(width), (int)(height), null);
 		}
 	}
 	

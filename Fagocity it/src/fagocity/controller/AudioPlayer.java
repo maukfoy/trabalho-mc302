@@ -6,10 +6,10 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 public class AudioPlayer {
+	private static String path = "src/fagocity/model/assets/sounds/";
 	
 	/* Toca um audio sem deixar em loop */
 	public static void playAudio(String name) {
-		String path = "src/fagocity/model/assets/sounds/";
 	    try {
 	        Clip clip = AudioSystem.getClip();
 	        clip.open(AudioSystem.getAudioInputStream(new File(path + name + ".wav")));
@@ -22,7 +22,6 @@ public class AudioPlayer {
 	
 	/* Deixa um audio em loop */
 	public static void playAudio(String name, String loop) {
-		String path = "src/fagocity/model/assets/sounds/";
 	    try {
 	        Clip clip = AudioSystem.getClip();
 	        clip.open(AudioSystem.getAudioInputStream(new File(path + name + ".wav")));
