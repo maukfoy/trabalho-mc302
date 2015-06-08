@@ -8,7 +8,7 @@ import fagocity.model.Actor;
 public class BossSpawnController extends SpawnController {
 	
 	protected static double defaultBossVelocity = 3;
-	private static int defaultBossRadius = 3700;
+	private static int defaultBossRadius = 3200;
 	static int[] coordinates = new int[2];
 	
 	public static int[] generateBossSpawnCoordinates() {
