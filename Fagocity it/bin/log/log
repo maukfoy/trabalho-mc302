@@ -21,3 +21,14 @@ sugiro retornar ao que era -mauk
 - No final, antes de entregar o jogo pro Santanche, todos e.printStackTrace(); nos try/catch 
 devem ser trocador for getMessage(); por ser uma boa prática de programação. e.printStackTrace();
 deve ser usado apenas para debugação. - vitao
+
+TODO list:
+
+. implementar Design Patterns
+. separar Components
+
+. adicionar SupressWarnings a todos erros por serialização
+. tratar exceções
+. permitir redimensionamento da tela
+. implementar pause menu in-game (resume, reset, quit)
+. 

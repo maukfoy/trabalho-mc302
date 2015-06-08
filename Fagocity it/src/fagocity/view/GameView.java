@@ -9,8 +9,10 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+
 import fagocity.controller.ColorBuffController;
 import fagocity.model.Actor;
 import fagocity.model.GameStatus;
@@ -19,8 +21,8 @@ import fagocity.model.GameStatus.STATUS;
 import fagocity.model.HUDModel;
 import fagocity.model.ColorBuff;
 
+@SuppressWarnings("serial")
 public class GameView extends JPanel {
-	private static final long serialVersionUID = 3856930242116209479L;
 	private static final int WIDTH = getScreenWidth();
 	private static final int HEIGHT = getScreenHeight();
 	private Display display;
@@ -35,6 +37,7 @@ public class GameView extends JPanel {
 	private BufferedImage background;
 	
 	public GameView(String title) {
+		
 		this.display = new Display(title, WIDTH, HEIGHT);
 		
 		/* Manda o HUD se iniciar */

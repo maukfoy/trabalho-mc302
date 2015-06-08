@@ -30,11 +30,13 @@ public class Display {
 		
 		/* Cria o Canvas */
 		canvas = new Canvas();
-		canvas.setPreferredSize(new Dimension(width, height));
-		canvas.setMinimumSize(new Dimension(width, height));
-		canvas.setMaximumSize(new Dimension(width, height));
+		Dimension canvasDimension = new Dimension(width, height);
+		canvas.setPreferredSize(canvasDimension);
+		canvas.setMinimumSize(canvasDimension);
+		canvas.setMaximumSize(canvasDimension);
 		
 		frame.add(canvas);
+		
 		MouseController mouseController = new MouseController();
 		canvas.addMouseMotionListener(mouseController); /* Permite a detecçao do movimento do mouse*/
 		canvas.addMouseListener(mouseController); /* Permite a detecçao dos cliques */

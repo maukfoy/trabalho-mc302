@@ -2,7 +2,6 @@ package fagocity.controller;
 
 import java.util.Random;
 
-import fagocity.controller.SpawnController.SIDE;
 import fagocity.model.Actor;
 
 public class BossSpawnController extends SpawnController {
