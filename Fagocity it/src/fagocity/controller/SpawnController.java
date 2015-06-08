@@ -12,7 +12,7 @@ public class SpawnController {
 	enum SIDE {DOWN, UP, LEFT, RIGHT};
 	
 	protected static long oldTime = 0;
-	protected static long spawnTime = 15;
+	protected static long spawnTime = 14;
 	protected static double minDefaultEnemyVelocity = 4;
 	protected static double maxDefaultEnemyVelocity = 7;
 	protected static int minDefaultRadius = 20;
@@ -203,7 +203,6 @@ public class SpawnController {
 	public static Color generateRandomColor() {
 		Random r = new Random();
 		
-		Color purple = new Color(153, 7, 198);
 		Color yellow = new Color(255, 255, 24);
 		Color pink = new Color(255, 0, 127);
 		Color orange = new Color(255, 128, 0);
@@ -213,7 +212,7 @@ public class SpawnController {
 		Color lightBlue = new Color(0, 204, 204);
 		
 		/* Vetor com todas cores de bolinha possíveis no jogo */
-		Color[] colors = { purple, yellow, pink, orange, brown, red, gray, lightBlue};
+		Color[] colors = { yellow, pink, orange, brown, red, gray, lightBlue};
 		
 		int randomInt = r.nextInt( colors.length ) ;
 		
