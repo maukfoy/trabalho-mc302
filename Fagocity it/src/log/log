@@ -5,9 +5,7 @@ Vamos só fazer append aqui pra manter um log mesmo do trabalho */
 - IMPORTANTÍSSIMO - DO JEITO QUE OS ASSETS ESTÃO SENDO ACESSADOS ELE NÃO SAO DETECTADOS PELO ARQUIVO
 JAR QUANDO O PROJETO É EXPORTADO DO ECLIPSE.  É IMPORTANTE TROCAR OS ACESSOS POR GETPATH,, RESOURCEASSTREAM, SEI LA - VITAO
 
-- buff velocidade o talvez vida no chao - vitao
-
-- implementar sons - vitao
+- o speedBuff tem um bug que ele pode nascer fora da tela - vitao
 
 - tela de replay quando morre. esc pausa - vitao
 

@@ -24,6 +24,9 @@ public class GameController {
 		/* Cria o player */
 		int radius = Player.defaultRadius;
 		player = ActorFactory.createActor((GameView.getScreenWidth() - radius)/2, (GameView.getScreenHeight() - radius)/2, 0, 0, radius, SpawnController.generateRandomColor(), "player");
+	
+		/* Cria o gerador de buffs autônomo */
+		new Thread( new ColorBuffController() ).start();
 	}
 	
 	/* Atualiza todos fatores do jogo */

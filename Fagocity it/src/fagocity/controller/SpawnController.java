@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.Random;
 
 import fagocity.model.Actor;
+import fagocity.model.ColorBuff;
 import fagocity.view.GameView;
 
 public class SpawnController {
@@ -11,7 +12,7 @@ public class SpawnController {
 	enum SIDE {DOWN, UP, LEFT, RIGHT};
 	
 	protected static long oldTime = 0;
-	protected static long spawnTime = 18;
+	protected static long spawnTime = 15;
 	protected static double minDefaultEnemyVelocity = 6;
 	protected static double maxDefaultEnemyVelocity = 9;
 	protected static int minDefaultRadius = 20;
@@ -32,14 +33,23 @@ public class SpawnController {
 		if(System.currentTimeMillis() > oldTime + spawnTime) {
 			int[] coordinates = generateSpawnCoordinates();
 			double[] velocities = generateSpawnVelocities();
+			/* Se o buff de cor estiver desligado */
+			if( ColorBuff.getCurrentColorBuff() == null) {
 			ActorFactory.createActor(coordinates[0], coordinates[1],
 					velocities[0], velocities[1], generateRandomRadius(), generateRandomColor(), "enemy");
+			}
+			/* Se o buff de cor estiver ligado */
+			else {
+				ActorFactory.createActor(coordinates[0], coordinates[1],
+						velocities[0], velocities[1], generateRandomRadius(), ColorBuff.getCurrentColorBuff(), "enemy");
+			}
+				
 			
 			oldTime = System.currentTimeMillis();
 		}
 	}
 	
-	private static int[] generateSpawnCoordinates() {
+	public static int[] generateSpawnCoordinates() {
 		Random r = new Random();
 		Actor p = GameController.getPlayer();
 		int[] coordinates = new int[2];
@@ -124,7 +134,7 @@ public class SpawnController {
 		return coordinates;
 	}
 	
-	public static double[] generateSpawnVelocities() {
+	private static double[] generateSpawnVelocities() {
 		double velTotal, velX, velY;
 		double[] velocities = new double[2];
 		Random random = new Random();
@@ -209,6 +219,22 @@ public class SpawnController {
 		
 		return colors[randomInt];		
 		
+	}
+	
+	public static double getMinDefaultEnemyVelocity() {
+		return minDefaultEnemyVelocity;
+	}
+	
+	public static void setMinDefaultEnemyVelocity(double newVelocity) {
+		minDefaultEnemyVelocity = newVelocity;
+	}
+	
+	public static double getMaxDefaultEnemyVelocity() {
+		return maxDefaultEnemyVelocity;
+	}
+	
+	public static void setMaxDefaultEnemyVelocity(double newVelocity) {
+		maxDefaultEnemyVelocity = newVelocity;
 	}
 		
 }
