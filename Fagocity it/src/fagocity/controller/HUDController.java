@@ -15,18 +15,22 @@ public class HUDController {
 	private static int currentKillStreak = 0;
 	private static int minimumKillStreak = 2;
 	private static int streaksPassed = 0;
+	private static int bossScore = 1;
 	private static int totalFagocitedRadius = 0; // soma do raio dos inimigos fagocitados
 	
 	public static void update() {
 		Player player = PlayerController.getPlayer();
 		if(player != null) {
-			if(GameStatus.status == STATUS.Fagocity) {
+			if(GameStatus.status == STATUS.Fagocity) 
+			{
 				currentTime = System.currentTimeMillis();
-				score = 1*(streaksPassed+1)*totalFagocitedRadius*totalFagocitedRadius + (int)(currentTime/50 - initialTime/50)*(streaksPassed+1);
+				score = (1200*streaksPassed) +totalFagocitedRadius + (int)(currentTime/50 - initialTime/50)*(streaksPassed+1);
 			}
 			else
 				score = 0;
+			
 			HUDModel.setScore(score);
+			BossController.checkScore();
 		}
 	}
 	
@@ -64,6 +68,16 @@ public class HUDController {
 	
 	public static int getStreaksPassed() {
 		return streaksPassed;
+	}
+	
+	public static int getBossScore()
+	{
+		return bossScore;
+	}
+	
+	public static void incrementBossScore ()
+	{
+		bossScore++;
 	}
 	
 }

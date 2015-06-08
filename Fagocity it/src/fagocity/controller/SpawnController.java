@@ -10,18 +10,18 @@ public class SpawnController {
 	
 	enum SIDE {DOWN, UP, LEFT, RIGHT};
 	
-	private static long oldTime = 0;
-	private static long spawnTime = 20;
-	private static double minDefaultEnemyVelocity = 3;
-	private static double maxDefaultEnemyVelocity = 6;
-	private static int minDefaultRadius = 20;
-	private static int maxDefaultRadius = 120;
-	private static SIDE side;
+	protected static long oldTime = 0;
+	protected static long spawnTime = 18;
+	protected static double minDefaultEnemyVelocity = 6;
+	protected static double maxDefaultEnemyVelocity = 9;
+	protected static int minDefaultRadius = 20;
+	protected static int maxDefaultRadius = 120;
+	protected static SIDE side;
 	
-	private static int width = GameView.getScreenWidth();
-	private static int height = GameView.getScreenHeight();
-	private static int maxXBounds = GameView.getMaxXBounds();
-	private static int maxYBounds = GameView.getMaxYBounds();
+	protected static int width = GameView.getScreenWidth();
+	protected static int height = GameView.getScreenHeight();
+	protected static int maxXBounds = GameView.getMaxXBounds();
+	protected static int maxYBounds = GameView.getMaxYBounds();
 	
 	public static void update (){
 		autoEnemyCreator();
@@ -123,8 +123,8 @@ public class SpawnController {
 		}
 		return coordinates;
 	}
-
-	private static double[] generateSpawnVelocities() {
+	
+	public static double[] generateSpawnVelocities() {
 		double velTotal, velX, velY;
 		double[] velocities = new double[2];
 		Random random = new Random();
@@ -193,9 +193,7 @@ public class SpawnController {
 	public static Color generateRandomColor() {
 		Random r = new Random();
 		
-		Color blue = new Color(57, 45, 215);
 		Color purple = new Color(153, 7, 198);
-		Color green = new Color(14, 215, 14);
 		Color yellow = new Color(255, 255, 24);
 		Color pink = new Color(255, 0, 127);
 		Color orange = new Color(255, 128, 0);
@@ -205,7 +203,7 @@ public class SpawnController {
 		Color lightBlue = new Color(0, 204, 204);
 		
 		/* Vetor com todas cores de bolinha possíveis no jogo */
-		Color[] colors = {blue, purple, green, yellow, pink, orange, brown, red, gray, lightBlue};
+		Color[] colors = { purple, yellow, pink, orange, brown, red, gray, lightBlue};
 		
 		int randomInt = r.nextInt( colors.length ) ;
 		

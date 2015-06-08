@@ -21,6 +21,7 @@ public class HUDModel implements Serializable {
 	private static String spritesPath = "src/fagocity/model/assets/sprites/";
 	private static String heartFile = "heart64x64.png";
 	private static Double fagocityStreak = 0.0;
+	private static int defaultPointsTillBoss = 4000;
 
 	/* Salva o highscore no disco */
 	public static void saveHighscore() throws IOException {
@@ -86,5 +87,9 @@ public class HUDModel implements Serializable {
 	
 	public static Double getFagocityStreak() {
 		return HUDModel.fagocityStreak;
+	}
+	public static int getDefaultPointsTillBoss()
+	{
+		return defaultPointsTillBoss;
 	}
 }

@@ -77,14 +77,6 @@ public class GameView extends JPanel {
 			}
 		}
 		
-		CameraView.CameraEnding (g2d);
-		
-		/*se nao estiver no modo jogavel, da render no menu ou help*/
-		if (GameStatus.status != STATUS.Fagocity)
-			MenuView.render(g);
-
-		CameraView.CameraBeginning (g2d);
-		
 		/* Desenha todos actors */
 		renderActors();
 		
@@ -101,6 +93,9 @@ public class GameView extends JPanel {
 		/* Desenha o HUD se estiver no modo jogável*/
 		if (GameStatus.status == STATUS.Fagocity)
 			HUDView.render(g);
+		else
+			MenuView.render(g);
+
 		
 		/* Finaliza os desenhos */
 		bs.show();
