@@ -25,10 +25,12 @@ public class MenuView {
 		
 			g.drawRect (82, 702, 190, 65);
 			g.drawString ("Quit", 125, 752);
+			
 		}
 		
 		/*janela help*/
 		else if (GameStatus.status == STATUS.Help){	
+			
 			String text1 = "- Mouse move o personagem";
 			String text2 = "- Bolinhas maiores que voce te fagocitam";
 			String text3 = "- Bolinhas menores que voce serao fagocitadas";

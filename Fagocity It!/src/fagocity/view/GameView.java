@@ -115,7 +115,7 @@ public class GameView extends JPanel {
 		/* Desenha o HUD se estiver no modo jogável*/
 		if (GameStatus.status == STATUS.Fagocity)
 			hudView.render(g);
-		else if (GameStatus.status == STATUS.Menu)
+		else if (GameStatus.status == STATUS.Menu || GameStatus.status == STATUS.Help  )
 			menuView.render(g);
 		else if (GameStatus.status == STATUS.End)
 			endView.render(g);

@@ -112,7 +112,7 @@ public class GameController {
 		if (GameStatus.status == STATUS.Fagocity){
 			hud.update();
 		}
-		else if (GameStatus.status == STATUS.Menu){
+		else if (GameStatus.status == STATUS.Menu || GameStatus.status == STATUS.Help){
 			/*se nao estiver no modo jogavel, menu ou help fica ativo*/
 			menu.update();
 		}
