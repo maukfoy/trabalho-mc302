@@ -20,6 +20,7 @@ public class HUDView {
 	private final int height;
 	private long FagocityStreakTextDuration = 3000; //em milisegundos
 	private long lastFagocityStreakTime = 0;
+	private Font fnt;
 	
 	private GameModel model;
 	private HUDModel hudModel;
@@ -44,13 +45,6 @@ public class HUDView {
 	}
 	
 	public void render(Graphics g) {
-		
-		/* Botao de pausa */
-		Font fnt = new Font ("arial", 1, 75);
-		g.setFont (fnt);
-		g.setColor(Color.DARK_GRAY);
-		g.drawString ("II", GameView.getScreenWidth() - 120, 125);
-		g.drawRect(GameView.getScreenWidth() - 150, 50, 100, 100);
 		
 		/* Desenha o Score */
 		fnt = new Font ("arial", 1, 17);

@@ -2,8 +2,6 @@ package fagocity.model;
 
 import java.awt.Color;
 
-import fagocity.controller.BoundsController;
-import fagocity.controller.CameraController;
 import fagocity.controller.EnemyController;
 import fagocity.controller.GameController;
 import fagocity.view.GameView;

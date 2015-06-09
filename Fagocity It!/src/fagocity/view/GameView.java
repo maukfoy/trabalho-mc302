@@ -38,7 +38,6 @@ public class GameView extends JPanel {
 	private GameModel model;
 	private MenuView menuView;
 	private HUDView hudView;
-	private EndView endView;
 	private CameraView cameraView;
 	private String title;
 	
@@ -117,8 +116,6 @@ public class GameView extends JPanel {
 			hudView.render(g);
 		else if (GameStatus.status == STATUS.Menu || GameStatus.status == STATUS.Help  )
 			menuView.render(g);
-		else if (GameStatus.status == STATUS.End)
-			endView.render(g);
 
 		
 		/* Desenha a barra do Color Buff se ele estiver ativado */

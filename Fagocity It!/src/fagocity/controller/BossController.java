@@ -17,9 +17,6 @@ public class BossController {
 	private GameView view;
 	private GameModel model;
 	private BossSpawnController bossSpawner;
-	private Player player;
-	private BoundsController bounds;
-	private CameraController camera;
 	private HUDModel hudModel;
 	private GameController controller;
 	
@@ -32,9 +29,6 @@ public class BossController {
 		this.actorFactory = actorFactory;
 		this.view = view;
 		this.model = model;
-		this.player = player;
-		this.bounds = bounds;
-		this.camera = camera;
 		
 		this.hudModel = model.getHudModel();
 		

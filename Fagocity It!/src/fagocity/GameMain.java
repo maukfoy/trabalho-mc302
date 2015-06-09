@@ -3,7 +3,6 @@ package fagocity;
 import java.awt.Canvas;
 
 import fagocity.controller.GameController;
-import fagocity.model.GameModel;
 import fagocity.model.GameStatus;
 import fagocity.model.GameStatus.STATUS;
 import fagocity.view.GameView;
@@ -11,7 +10,6 @@ import fagocity.view.GameView;
 @SuppressWarnings("serial")
 public class GameMain extends Canvas implements Runnable {
 	private static final int MilisToSecs = 1000;
-	private GameModel model;
 	private GameView view;
 	private GameController controller;
 	private boolean running;
@@ -23,7 +21,6 @@ public class GameMain extends Canvas implements Runnable {
 	
 	public GameMain() {
 		/* Cria o Model, View e o Controller */
-		this.model = GameModel.getInstance();
 		this.view = GameView.getInstance("Fagocity It!");
 		this.controller = GameController.getInstance();
 		

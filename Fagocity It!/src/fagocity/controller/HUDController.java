@@ -1,6 +1,5 @@
 package fagocity.controller;
 
-import fagocity.GameMain;
 import fagocity.model.GameModel;
 import fagocity.model.GameStatus;
 import fagocity.model.GameStatus.STATUS;
@@ -22,28 +21,14 @@ public class HUDController {
 	private int totalFagocitedRadius = 0; // soma do raio dos inimigos fagocitados
 	private Player player;
 	private BossController boss;
-	private HUDController hudController;
-	private ActorFactory actorFactory;
-	private GameView view;
-	private GameModel model;
-	private CameraController camera;
-	private BoundsController bounds;
 	private HUDModel hudModel;
 	private HUDView hudView;
 	private GameController controller;
-	private int my, mx;
-	private MouseController mouse;
-
 	
 	public HUDController (Player player, ActorFactory actorFactory, GameView view, GameModel model,
 			BoundsController bounds, CameraController camera, GameController controller){
-		this.mouse = MouseController.getInstance();
 		this.player = player;
 		this.controller = controller;
-		this.actorFactory = actorFactory;
-		this.view = view;
-		this.model = model;
-		
 		this.hudModel = model.getHudModel();
 		this.hudView = view.getHUD();
 		
@@ -51,19 +36,18 @@ public class HUDController {
 	}
 	
 	public void update() {
-		if(player != null) {
-			if(GameStatus.status == STATUS.Fagocity) 
+		if(controller.getPlayer() != null) {
+			if(GameStatus.status == STATUS.Fagocity)
 			{
 				currentTime = System.currentTimeMillis();
 				score = (1200*streaksPassed) +totalFagocitedRadius + (int)(currentTime/50 - initialTime/50)*(streaksPassed+1);
 			}
-			else
-				score = 0;
 			
 			hudModel.setScore(score);
 			boss.checkScore(); //chama o boss se o score for o suficiente
 		}
-		click();
+		else
+			score = 0;
 	}
 	
 	public void setInitialTime(long initialTime) {
@@ -110,26 +94,6 @@ public class HUDController {
 	public void incrementBossScore ()
 	{
 		bossScore++;
-	}
-	
-	public void click () {	
-		mx = mouse.getClickX ();
-		my = mouse.getClickY ();
-		
-		if (GameStatus.status == STATUS.Fagocity) {
-			if (mouseOver(mx, my, GameView.getScreenWidth() - 150, 50, 100, 100)) {
-				GameStatus.status = STATUS.Pause;
-				boolean pause = true;
-				while (pause) {
-					mx = mouse.getClickX ();
-					my = mouse.getClickY ();
-					if (!mouseOver(mx, my, GameView.getScreenWidth() - 150, 50, 100, 100)) {	
-						GameStatus.status = STATUS.Fagocity;
-						pause = false;
-					}
-				}
-			}
-		}
 	}
 	
 	/*verifica se as coordenadas dadas do mouse estao dentro dos limites da caixa do botao*/

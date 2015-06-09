@@ -2,8 +2,6 @@ package fagocity.controller;
 
 import java.util.Random;
 
-import fagocity.controller.SpawnController.SIDE;
-import fagocity.model.Actor;
 import fagocity.model.Player;
 import fagocity.view.GameView;
 
@@ -16,16 +14,12 @@ public class BossSpawnController {
 	private  double defaultBossVelocity = 3;
 	private  int defaultBossRadius = 3200;
 	int[] coordinates = new int[2];
-	private GameView view;
 	private Player p;
 	
 	
 	public BossSpawnController(Player player, GameView view){
 		this.p = player;
-		this.view = view;
 		
-		width = view.getScreenWidth();
-		height = view.getScreenHeight();
 		}
 	
 	public int[] generateBossSpawnCoordinates() {

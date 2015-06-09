@@ -6,14 +6,8 @@ public class GameStatus {
 		Fagocity(),
 		Menu(),
 		Help(),
-		Pause(),
-		End();
 	}
 	
 	public static STATUS status = STATUS.Menu;
-	
-	public static void update(){
-		
-	}
 	
 }

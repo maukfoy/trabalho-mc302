@@ -25,7 +25,6 @@ public class GameController {
 	private ColorBuffController buff;
 	private MouseController mouseController;
 	private AudioPlayer audioPlayer;
-	//private EndController end;
 	
 	private static GameController gameController = null;
 	
@@ -78,7 +77,7 @@ public class GameController {
 		/* Cria o player */
 		int radius = 110;
 		
-		player = actorFactory.createActor((GameView.getScreenWidth() - radius)/2, (GameView.getScreenHeight() - radius)/2, 0, 0, radius,
+		player = actorFactory.createActor((view.getWidth() - radius)/2, (view.getHeight() - radius)/2, 0, 0, radius,
 				 Color.RED, "player", view, model, this);
 	}
 	
@@ -102,10 +101,6 @@ public class GameController {
 			obj.update();
 		}
 		
-		//GameStatus.update();
-		//if (((Player) player).getLifes() <= 0)
-		//	GameStatus.status = STATUS.End;
-		
 		collision.update();
 		bounds.update();
 		
@@ -116,15 +111,17 @@ public class GameController {
 			/*se nao estiver no modo jogavel, menu ou help fica ativo*/
 			menu.update();
 		}
-		//else if (GameStatus.status == STATUS.End){
-		//	end.update();
-		//}
 		
 	}
 	
 	public Actor getPlayer ()
 	{
-		return player;
+		ArrayList<Actor> list = model.getActorsList();
+		for(int i = 0; i < list.size(); i++) {
+			if(list.get(i) instanceof Player)
+				return list.get(i);
+		}
+		return null;
 	}
 	
 	public GameView getView ()
