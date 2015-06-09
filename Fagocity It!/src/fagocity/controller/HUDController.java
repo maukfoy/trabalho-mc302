@@ -1,10 +1,11 @@
 package fagocity.controller;
 
+import fagocity.GameMain;
 import fagocity.model.GameModel;
 import fagocity.model.GameStatus;
+import fagocity.model.GameStatus.STATUS;
 import fagocity.model.HUDModel;
 import fagocity.model.Player;
-import fagocity.model.GameStatus.STATUS;
 import fagocity.view.GameView;
 import fagocity.view.HUDView;
 
@@ -30,11 +31,13 @@ public class HUDController {
 	private HUDModel hudModel;
 	private HUDView hudView;
 	private GameController controller;
+	private int my, mx;
+	private MouseController mouse;
 
 	
-	public HUDController (Player player, ActorFactory actorFactory,
-			GameView view, GameModel model, BoundsController bounds, CameraController camera,
-			GameController controller){
+	public HUDController (Player player, ActorFactory actorFactory, GameView view, GameModel model,
+			BoundsController bounds, CameraController camera, GameController controller){
+		this.mouse = MouseController.getInstance();
 		this.player = player;
 		this.controller = controller;
 		this.actorFactory = actorFactory;
@@ -60,6 +63,7 @@ public class HUDController {
 			hudModel.setScore(score);
 			boss.checkScore(); //chama o boss se o score for o suficiente
 		}
+		click();
 	}
 	
 	public void setInitialTime(long initialTime) {
@@ -106,6 +110,34 @@ public class HUDController {
 	public void incrementBossScore ()
 	{
 		bossScore++;
+	}
+	
+	public void click () {	
+		mx = mouse.getClickX ();
+		my = mouse.getClickY ();
+		
+		if (GameStatus.status == STATUS.Fagocity) {
+			if (mouseOver(mx, my, GameView.getScreenWidth() - 150, 50, 100, 100)) {
+				GameStatus.status = STATUS.Pause;
+				boolean pause = true;
+				while (pause) {
+					mx = mouse.getClickX ();
+					my = mouse.getClickY ();
+					if (!mouseOver(mx, my, GameView.getScreenWidth() - 150, 50, 100, 100)) {	
+						GameStatus.status = STATUS.Fagocity;
+						pause = false;
+					}
+				}
+			}
+		}
+	}
+	
+	/*verifica se as coordenadas dadas do mouse estao dentro dos limites da caixa do botao*/
+	public boolean mouseOver (int mx, int my, int x, int y, int largura, int altura) {
+		if ((mx > x) && (mx < x + largura) && (my > y) && (my < y + altura))
+			return true;
+		else
+			return false;
 	}
 	
 }
