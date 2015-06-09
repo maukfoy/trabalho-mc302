@@ -2,17 +2,20 @@ package fagocity.model;
 
 import java.util.ArrayList;
 
-import fagocity.controller.ActorFactory;
-import fagocity.controller.CameraController;
-import fagocity.controller.HUDController;
-import fagocity.controller.SpawnController;
-
 public class GameModel {
 	/* Lista de Actors */
 	private ArrayList<Actor> ActorsList;
 	HUDModel hudModel;
 	
-	public GameModel() {
+	private static GameModel gameModel = null;
+	
+	public static GameModel getInstance() {
+		if (gameModel == null)
+			gameModel = new GameModel();
+		return gameModel;
+	}
+	
+	private GameModel() {
 
 		ActorsList = new ArrayList<Actor>();
 		hudModel = new HUDModel();

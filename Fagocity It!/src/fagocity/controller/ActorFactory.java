@@ -12,8 +12,16 @@ public class ActorFactory {
 	
 	private GameModel model;
 	
-	public ActorFactory (GameModel model) {
-		this.model = model;
+	private static ActorFactory actorFactory = null;
+	
+	public static ActorFactory getInstance() {
+		if (actorFactory == null)
+			actorFactory = new ActorFactory();
+		return actorFactory;
+	}
+	
+	private ActorFactory () {
+		this.model = GameModel.getInstance();
 	}
 	
 	/* Cria um Actor */
@@ -22,7 +30,7 @@ public class ActorFactory {
 		
 		/* Cria um Player */
 		if( type.equals("player")) {
-			Player player = new Player(x, y, velX, velY, radius, color, view, gameModel, controller);
+			Player player = new Player(x, y, velX, velY, radius, color, "player", view, gameModel, controller);
 			/* Adiciona o player à lista de actors */
 			model.addToActorsList(player);
 			return player;
@@ -30,7 +38,7 @@ public class ActorFactory {
 		
 		/* Cria um Enemy */
 		else if( type.equals("enemy")) {
-			Enemy enemy = new Enemy(x, y, velX, velY, radius, color, view, gameModel, controller);
+			Enemy enemy = new Enemy(x, y, velX, velY, radius, color, "enemy", view, gameModel, controller);
 			/* Adiciona o enemy à lista de actors */
 			model.addToActorsList(enemy);
 			return enemy;

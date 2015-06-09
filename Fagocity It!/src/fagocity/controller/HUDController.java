@@ -45,7 +45,7 @@ public class HUDController {
 		this.hudView = view.getHUD();
 		
 		boss = new BossController ( this, actorFactory, view, model,(Player) player, bounds, camera, controller);
-		}
+	}
 	
 	public void update() {
 		if(player != null) {

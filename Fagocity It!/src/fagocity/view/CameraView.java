@@ -7,8 +7,8 @@ import fagocity.controller.CameraController;
 public class CameraView {
 	private CameraController cameraController;
 	
-	public CameraView (CameraController cameraController){
-		this.cameraController = cameraController;
+	public CameraView (){
+		cameraController = CameraController.getInstance();
 	}
 	
 	/*determina o inicio da camera na tela apos translada-la*/

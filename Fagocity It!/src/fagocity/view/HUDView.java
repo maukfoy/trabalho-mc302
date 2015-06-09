@@ -8,10 +8,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Random;
 
-import fagocity.controller.GameController;
-import fagocity.controller.HUDController;
-import fagocity.controller.SpawnController;
 import fagocity.model.Actor;
 import fagocity.model.GameModel;
 import fagocity.model.HUDModel;
@@ -22,35 +20,40 @@ public class HUDView {
 	private final int height;
 	private long FagocityStreakTextDuration = 3000; //em milisegundos
 	private long lastFagocityStreakTime = 0;
-	private GameView view;
+	
 	private GameModel model;
-	private SpawnController spawnController;
 	private HUDModel hudModel;
-	private GameController controller;
-	private HUDController hudController;
-	private Player player;
+	
 	private int streaksPassed = 0;
 	
-	public HUDView (GameView view, GameModel model, GameController controller)
+	private Player player;
+	
+	public HUDView (GameModel model)
 	{
-		this.view = view;
 		this.model = model;
-		this.controller = controller;
 		
+		ArrayList<Actor> list = model.getActorsList();
+		for (int i = 0; i < list.size(); i++)
+			if (list.get(i).getType().equalsIgnoreCase("player"))
+				this.player = (Player) list.get(i);
+			
 		hudModel = model.getHudModel();
-		spawnController = controller.getSpawnController();
-		hudController = controller.getHudController();
-		player = (Player) controller.getPlayer();
-
 		
-		
-		width = view.getScreenWidth();
-		height = view.getScreenHeight();
+		width = GameView.getScreenWidth();
+		height = GameView.getScreenHeight();
 	}
 	
 	public void render(Graphics g) {
+		
+		/* Botao de pausa */
+		Font fnt = new Font ("arial", 1, 75);
+		g.setFont (fnt);
+		g.setColor(Color.DARK_GRAY);
+		g.drawString ("II", GameView.getScreenWidth() - 120, 125);
+		g.drawRect(GameView.getScreenWidth() - 150, 50, 100, 100);
+		
 		/* Desenha o Score */
-		Font fnt = new Font ("arial", 1, 17);
+		fnt = new Font ("arial", 1, 17);
 		g.setFont (fnt);
 		g.setColor(Color.DARK_GRAY);
 		String score = "Score: " + String.valueOf(hudModel.getScore());
@@ -58,7 +61,6 @@ public class HUDView {
 		g.drawString(score, width/100, height/50);
 		g.drawString(highscore, width/100 + 150, height/50);
 		
-		/*
 		/* Desenha os corações de vida */
 		BufferedImage image = hudModel.getHeartImage();
 		for(int i = 0; i < player.getLifes(); i++) {
@@ -102,12 +104,16 @@ public class HUDView {
 	private void showFagocityStreakText(Graphics g) {		
 		String text = "FAGOCITY STREAK!";
 		Font font = new Font ("arial", 1, 50);
-		FontMetrics fm = g.getFontMetrics ( font );
-		int sw = fm.stringWidth ( text );
-		g.setFont ( font );
-		g.setColor(spawnController.generateRandomColor());
-		g.drawString ( text , ( width + sw ) / 2 - sw , (height/100 -1) + 120 );
+		FontMetrics fm = g.getFontMetrics (font);
+		
+		int sw = fm.stringWidth (text);
+		Random r = new Random();
+		
+		g.setFont (font);
+		g.setColor(new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256), r.nextInt(256)));
+		g.drawString (text, ( width + sw ) / 2 - sw, (height/100 -1) + 120);
 	}
+	
 	/* Marca que o Fagocity Streak deve ser iniciado */
 	public void fagocityStreakTrigger() {
 		lastFagocityStreakTime = System.currentTimeMillis();

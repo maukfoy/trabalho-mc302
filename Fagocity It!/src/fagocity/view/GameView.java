@@ -14,18 +14,18 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import fagocity.controller.ColorBuffController;
-import fagocity.controller.GameController;
-import fagocity.controller.HUDController;
 import fagocity.model.Actor;
-import fagocity.model.GameStatus;
-import fagocity.model.GameModel;
-import fagocity.model.GameStatus.STATUS;
 import fagocity.model.ColorBuff;
+import fagocity.model.GameModel;
+import fagocity.model.GameStatus;
+import fagocity.model.GameStatus.STATUS;
 
+@SuppressWarnings("serial")
 public class GameView extends JPanel {
-	private static final long serialVersionUID = 3856930242116209479L;
-	private final int WIDTH = getScreenWidth();
-	private final int HEIGHT = getScreenHeight();
+	
+	private static final int WIDTH = getScreenWidth();
+	private static final int HEIGHT = getScreenHeight();
+	
 	private Display display;
 	private BufferStrategy bs;
 	private Graphics2D g2d;
@@ -36,15 +36,26 @@ public class GameView extends JPanel {
 	private int maxYBounds = 4000;
 	private BufferedImage background;
 	private GameModel model;
-	private MenuView menu;
-	private CameraView cameraView;
-	private GameController controller;
+	private MenuView menuView;
 	private HUDView hudView;
+	private EndView endView;
+	private CameraView cameraView;
 	private String title;
 	
+	private static GameView gameView = null;
 	
-	public GameView(String title, GameModel model) {
-		this.model = model;
+	public static GameView getInstance(String title) {
+		if (gameView == null)
+			gameView = new GameView(title);
+		return gameView;
+	}
+	
+	public static GameView getInstance() {
+		return gameView;
+	}
+	
+	private GameView(String title) {
+		this.model = GameModel.getInstance();
 		this.title = title;
 		
 		/* Carrega a imagem de fundo */
@@ -55,11 +66,14 @@ public class GameView extends JPanel {
 			e.getStackTrace();
 		}
 		
+		setDisplay();
+		setCameraView();
+		setHUDView();
 	}
 	
 	/* Metodo que renderiza */
 	public void render() {
-		/* Cria o Buffer Strategy, caso n√£o exista - Triple Buffering */
+		/* Cria o Buffer Strategy, caso nao exista - Triple Buffering */
 		bs = display.getCanvas().getBufferStrategy();
 		if(bs == null) {
 			display.getCanvas().createBufferStrategy(3);
@@ -101,12 +115,14 @@ public class GameView extends JPanel {
 		/* Desenha o HUD se estiver no modo jog·vel*/
 		if (GameStatus.status == STATUS.Fagocity)
 			hudView.render(g);
-		else
-			menu.render(g);
+		else if (GameStatus.status == STATUS.Menu)
+			menuView.render(g);
+		else if (GameStatus.status == STATUS.End)
+			endView.render(g);
 
 		
 		/* Desenha a barra do Color Buff se ele estiver ativado */
-		if ( ColorBuff.getCurrentColorBuff() != null ) {
+		if (ColorBuff.getCurrentColorBuff() != null) {
 			g.setColor(Color.green);
 			g.fillRect(WIDTH/2 -150, (int)(HEIGHT/1.2), (int)(ColorBuffView.getTimerPercentage() *300), 30);
 		}
@@ -140,21 +156,20 @@ public class GameView extends JPanel {
 		}
 	}
 	
-	public void setController (GameController controller)
-	{
-		this.controller = controller;
-	}
 	public void setHUDView(){
-		hudView = new HUDView (this, model, controller);
+		hudView = new HUDView(model);
 	}
-	public void setDisplay(){
-		this.display = new Display(title, WIDTH, HEIGHT, controller.getMouseController());
-	}
+	
 	public void setMenuView(){
-		menu = new MenuView (this);
+		menuView = new MenuView();
 	}
+	
 	public void setCameraView(){
-		cameraView = new CameraView(controller.getCameraController());
+		cameraView = new CameraView();
+	}
+	
+	public void setDisplay(){
+		this.display = new Display(title, WIDTH, HEIGHT);
 	}
 	
 	/* Getters e setters */
@@ -166,11 +181,11 @@ public class GameView extends JPanel {
 		return HEIGHT;
 	}
 	
-	public int getScreenWidth() {
+	public static int getScreenWidth() {
 	    return Toolkit.getDefaultToolkit().getScreenSize().width;
 	}
 
-	public int getScreenHeight() {
+	public static int getScreenHeight() {
 	    return Toolkit.getDefaultToolkit().getScreenSize().height;
 	}
 	

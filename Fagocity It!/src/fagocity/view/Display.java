@@ -11,13 +11,11 @@ public class Display {
 	private Canvas canvas;
 	private String title;
 	private int width, height;
-	private MouseController mouseController;
 	
-	public Display(String title, int width, int height, MouseController mouseController) {
+	public Display(String title, int width, int height) {
 		this.title = title;
 		this.width = width;
 		this.height = height;
-		this.mouseController = mouseController;
 		createDisplay();
 	}  
 	
@@ -37,8 +35,8 @@ public class Display {
 		canvas.setMaximumSize(new Dimension(width, height));
 		
 		frame.add(canvas);
-		canvas.addMouseMotionListener(mouseController); /* Permite a detecçao do movimento do mouse*/
-		canvas.addMouseListener(mouseController); /* Permite a detecçao dos cliques */
+		canvas.addMouseMotionListener(MouseController.getInstance()); /* Permite a detecçao do movimento do mouse*/
+		canvas.addMouseListener(MouseController.getInstance()); /* Permite a detecçao dos cliques */
 			
 		frame.pack();
 	}

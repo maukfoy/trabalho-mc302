@@ -2,15 +2,15 @@ package fagocity.model;
 
 import java.awt.Color;
 
-import fagocity.controller.BoundsController;
-import fagocity.controller.CameraController;
-import fagocity.controller.EnemyController;
 import fagocity.controller.GameController;
 import fagocity.controller.PlayerController;
 import fagocity.controller.Interfaces.IActorController;
 import fagocity.view.GameView;
 
 public class Player extends Actor {
+	
+	//private static Player player = null;
+	
 	private final int defaultRadius = 110;
 	private final double defaultSpeed = 8;
 	private int lifes = 3;
@@ -18,10 +18,22 @@ public class Player extends Actor {
 	private long deathTimeDelay = 1000; // em milisegundos
 		
 	public Player(int x, int y, double velX, double velY, int radius, Color color,
-			GameView view, GameModel model, GameController controller) {
-		super(x, y, velX, velY, radius, color, view, model, controller);
+			String type, GameView view, GameModel model, GameController controller) {
+		super(x, y, velX, velY, radius, color, type, view, model, controller);
 		actorController = new PlayerController(this, view, model, controller);
 	}
+	
+	/*
+	public static Player getInstance(int x, int y, double velX, double velY, int radius, Color color,
+			GameView view, GameModel model, GameController controller) {
+		if (player == null)
+			player = new Player(x, y, velX, velY, radius, color, view, model, controller);
+		return player;
+	}
+	
+	public static Player getInstance() {
+		return player;
+	}*/
 	
 	public long getLastDeathTime() {
 		return lastDeathTime;
@@ -32,7 +44,7 @@ public class Player extends Actor {
 	}
 	
 	public void setLastDeathTime(long lastDeathTime) {
-		lastDeathTime = lastDeathTime;
+		this.lastDeathTime = lastDeathTime;
 	}
 	
 	public int getLifes (){

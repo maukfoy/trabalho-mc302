@@ -25,50 +25,60 @@ public class GameController {
 	private ColorBuffController buff;
 	private MouseController mouseController;
 	private AudioPlayer audioPlayer;
+	//private EndController end;
 	
+	private static GameController gameController = null;
 	
-	public GameController(GameModel model, GameView view) {
-		this.model = model;
-		this.view = view;
-		view.setController(this);
-
+	public static GameController getInstance() {
+		if (gameController == null)
+			gameController = new GameController();
+		return gameController;
+	}
+	
+	private GameController() {
+		this.model = GameModel.getInstance();
+		this.view = GameView.getInstance();
 		
+		mouseController = MouseController.getInstance();
+		camera = CameraController.getInstance();
+		actorFactory = ActorFactory.getInstance();
+		bounds = BoundsController.getInstance();
 		audioPlayer = new AudioPlayer();
-		mouseController = new MouseController();
-		camera = new CameraController (view);
-		view.setDisplay();
-		view.setCameraView();
-
 		
-		actorFactory = new ActorFactory(model);
 		
-		bounds = new BoundsController (view, model);
-		
+		//
 		initialConditions();
-
-		spawn = new SpawnController ((Player)player, actorFactory, view, model,bounds,camera, this);
-
+		//
+		
+		spawn = SpawnController.getInstance((Player) player);
+		
+		//
 		view.setHUDView();
+		//
 		
 		hud = new HUDController ((Player) player, actorFactory, view, model, bounds, camera, this);
-	
-		collision = new CollisionController ((Player) player, this, model);
-			
-		view.setMenuView();
-	
-		menu = new MenuController (this, hud, mouseController);
 		
-		buff = new ColorBuffController (spawn);
-		/* Cria o gerador de buffs aut�nomo */
-		new Thread( buff ).start();
+		collision = new CollisionController ((Player) player, this, model);
+		
+		//
+		view.setMenuView();
+		//
+		
+		menu = new MenuController(this, hud, mouseController);
+		
+		buff = new ColorBuffController(spawn);
+		
+		/* Cria o gerador de buffs autonomo */
+		new Thread(buff).start();
 
 	}
 	
-	/* Cria as condições iniciais do jogo */
+	/* Cria as condicoes iniciais do jogo */
 	public void initialConditions() {
 		/* Cria o player */
 		int radius = 110;
-		player = actorFactory.createActor((view.getScreenWidth() - radius)/2, (view.getScreenHeight() - radius)/2, 0, 0, radius,
+		
+		player = actorFactory.createActor((GameView.getScreenWidth() - radius)/2, (GameView.getScreenHeight() - radius)/2, 0, 0, radius,
 				 Color.RED, "player", view, model, this);
 	}
 	
@@ -79,7 +89,8 @@ public class GameController {
 		ArrayList<Actor> lista = model.getActorsList();
 		Actor obj;
 		
-		spawn.update();
+		if (GameStatus.status == STATUS.Fagocity)
+			spawn.update();
 		
 		/*deve vir antes dos objetos para que se possa ter os parametros de translacao*/
 		if (GameStatus.status == STATUS.Fagocity)
@@ -91,15 +102,24 @@ public class GameController {
 			obj.update();
 		}
 		
+		//GameStatus.update();
+		//if (((Player) player).getLifes() <= 0)
+		//	GameStatus.status = STATUS.End;
+		
 		collision.update();
 		bounds.update();
 		
 		if (GameStatus.status == STATUS.Fagocity){
 			hud.update();
 		}
-		else
+		else if (GameStatus.status == STATUS.Menu){
 			/*se nao estiver no modo jogavel, menu ou help fica ativo*/
 			menu.update();
+		}
+		//else if (GameStatus.status == STATUS.End){
+		//	end.update();
+		//}
+		
 	}
 	
 	public Actor getPlayer ()
@@ -116,14 +136,7 @@ public class GameController {
 	{
 		return model;
 	}
-
-	public CameraController getCameraController (){
-		return camera;
-	}
-
-	public MouseController getMouseController() {
-		return mouseController;
-	}
+	
 	public SpawnController getSpawnController() {
 		return spawn;
 	}

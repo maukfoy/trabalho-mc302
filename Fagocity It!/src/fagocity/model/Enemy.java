@@ -11,8 +11,8 @@ import fagocity.view.GameView;
 public class Enemy extends Actor {
 		
 	public Enemy(int x, int y, double velX, double velY, int radius, Color color,
-			GameView view, GameModel model,	GameController controller) {
-		super(x, y, velX, velY, radius, color, view, model, controller);
+			String type, GameView view, GameModel model,	GameController controller) {
+		super(x, y, velX, velY, radius, color, type, view, model, controller);
 		actorController = new EnemyController(this);
 	}
 	

@@ -3,7 +3,6 @@ package fagocity.controller;
 import java.awt.Color;
 import java.util.Random;
 
-import fagocity.model.Actor;
 import fagocity.model.ColorBuff;
 import fagocity.model.GameModel;
 import fagocity.model.Player;
@@ -30,22 +29,29 @@ public class SpawnController {
 	private Player p;
 	private GameView view;
 	private GameModel model;
-	private BoundsController bounds;
-	private CameraController camera;
 	private GameController controller;
 	
-	public SpawnController (Player player, ActorFactory actorFactory,
-			GameView view, GameModel model, BoundsController bounds, CameraController camera, GameController controller)
+	private static SpawnController spawnController = null;
+	
+	public static SpawnController getInstance(Player player) {
+		if (spawnController == null)
+			spawnController = new SpawnController(player);
+		return spawnController;
+	}
+	
+	public static SpawnController getInstance() {
+		return spawnController;
+	}
+	
+	private SpawnController (Player player)
 	{
-		this.actorFactory = actorFactory;
 		this.p = player;
-		this.view = view;
-		this.model = model;
-		this.bounds = bounds;
-		this. camera = camera;
+		this.actorFactory = ActorFactory.getInstance();
+		this.view = GameView.getInstance();
+		this.model = GameModel.getInstance();
 		
-		width = view.getScreenWidth();
-		height = view.getScreenHeight();
+		width = GameView.getScreenWidth();
+		height = GameView.getScreenHeight();
 		maxXBounds = view.getMaxXBounds();
 		maxYBounds = view.getMaxYBounds();
 		
@@ -72,7 +78,6 @@ public class SpawnController {
 						velocities[0], velocities[1], generateRandomRadius(),
 						ColorBuff.getCurrentColorBuff(), "enemy", view, model, controller);
 			}
-				
 			
 			oldTime = System.currentTimeMillis();
 		}

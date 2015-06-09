@@ -47,7 +47,4 @@ public class ColorBuffController implements Runnable {
 			}
 		}
 	}
-	
-	
-
 }

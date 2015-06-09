@@ -22,17 +22,17 @@ public class PlayerController implements IActorController {
 		this.view = view;
 		this.model = model;
 		this.bounds = controller.getBounds();
-		this.camera = controller.getCameraController();
+		this.camera = CameraController.getInstance();
 		
-		this.mouse = controller.getMouseController();
+		this.mouse = MouseController.getInstance();
 	}
 	
 	public void update() {
-		atualizaVelocidade();
-		atualizarPosicao();
+		updateSpeed();
+		updatePosition();
 	}
 	
-	private void atualizarPosicao() {
+	private void updatePosition() {
 		p.setX(p.getX() + (int)p.getVelX());
 		p.setY(p.getY() + (int)p.getVelY());
 		
@@ -41,7 +41,7 @@ public class PlayerController implements IActorController {
 		p.setY(bounds.playerRepositioning (p.getY(),view.getMinYBounds(),view.getMaxYBounds() - p.getRadius()));
 	}
 	
-	private void atualizaVelocidade() {
+	private void updateSpeed() {
 		double velTotal = p.getDefaultSpeed();
 		 
 		/*pega as posicoes de input do mouse e soma-as aos parametros de translacao*/
@@ -60,15 +60,15 @@ public class PlayerController implements IActorController {
 		int velY = (int) ((velTotal/distance) * (mouseY - yCenter));
 		
 		/* Tolerância de erro. Ele é necessário pois evita uma divisão por 0, evita o flickering do player
-		 * e faz permite que a velocidade do player diminui conforme o mouse se aproxima dele */
+		 * e permite que a velocidade do player diminua conforme o mouse ele aproxima do ponteiro do mouse */
 		int tolerance = 100;
 		if(distance > tolerance) {
 			p.setVelX ( velX );
 			p.setVelY ( velY );
 		}
 		else {
-			p.setVelX ((int)(velX*distance/tolerance));
-			p.setVelY ((int)(velY*distance/100));
+			p.setVelX ((int)(velX * distance/tolerance));
+			p.setVelY ((int)(velY * distance/100));
 		}
 	}
 	
@@ -79,7 +79,7 @@ public class PlayerController implements IActorController {
 		
 		for(int i = 0; i < list.size(); i++) {
 			Actor actor = list.get(i);
-			if( actor instanceof Player )
+			if(actor.getType().equalsIgnoreCase("player"))
 				player = (Player) actor;
 		}
 		return player;

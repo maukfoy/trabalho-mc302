@@ -12,15 +12,23 @@ public class BoundsController {
 	private GameModel model;
 	private ArrayList<Actor> actors;
 	
-	public BoundsController (GameView view, GameModel model)
+	private static BoundsController boundsController = null;
+	
+	public static BoundsController getInstance() {
+		if (boundsController == null)
+			boundsController = new BoundsController();
+		return boundsController;
+	}
+	
+	private BoundsController()
 	{
-		this. model = model;
-		this. view = view;
+		this. model = GameModel.getInstance();
+		this. view = GameView.getInstance();
 		actors = model.getActorsList();
 	}
 
 	
-	public  void update()
+	public void update()
 	{
 		seekBounders();		
 	}
@@ -45,13 +53,13 @@ public class BoundsController {
 		int upperY = enemy.getY();
 		int lowerY = enemy.getY() + enemy.getRadius();
 		
-		if (rightX < view.getMinXBounds() - view.getScreenWidth()/2)
+		if (rightX < view.getMinXBounds() - GameView.getScreenWidth()/2)
 			return true;
-		if (leftX > view.getMaxXBounds() + view.getScreenWidth()/2)
+		if (leftX > view.getMaxXBounds() + GameView.getScreenWidth()/2)
 			return true;
-		if (lowerY < view.getMinYBounds() - view.getScreenHeight()/2)
+		if (lowerY < view.getMinYBounds() - GameView.getScreenHeight()/2)
 			return true;
-		if (upperY > view.getMaxYBounds() + view.getScreenHeight())
+		if (upperY > view.getMaxYBounds() + GameView.getScreenHeight())
 			return true;
 		else
 			return false;

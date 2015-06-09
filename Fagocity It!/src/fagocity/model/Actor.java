@@ -2,8 +2,6 @@ package fagocity.model;
 
 import java.awt.Color;
 
-import fagocity.controller.BoundsController;
-import fagocity.controller.CameraController;
 import fagocity.controller.GameController;
 import fagocity.controller.Interfaces.IActorController;
 import fagocity.view.GameView;
@@ -17,15 +15,17 @@ public abstract class Actor {
 	protected int growingRadius = 0;
 	protected GameModel model;
 	protected GameView view;
+	protected String type;
 	
 	public Actor(int x, int y, double velX, double velY, int radius, Color color,
-			GameView view, GameModel model, GameController controller) {
+			String type, GameView view, GameModel model, GameController controller) {
 		this.x = x;
 		this.y = y;
 		this.velX = velX;
 		this.velY = velY;
 		this.radius = radius;
 		this.color = color;
+		this.type = type;
 	}
 	
 	public void update (){
@@ -74,6 +74,9 @@ public abstract class Actor {
 	}
 	public void setColor(Color color) {
 		this.color = color;
+	}
+	public String getType() {
+		return type;
 	}
 	
 }

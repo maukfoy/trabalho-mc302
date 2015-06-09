@@ -4,13 +4,15 @@ import java.awt.Canvas;
 
 import fagocity.controller.GameController;
 import fagocity.model.GameModel;
+import fagocity.model.GameStatus;
+import fagocity.model.GameStatus.STATUS;
 import fagocity.view.GameView;
 
+@SuppressWarnings("serial")
 public class GameMain extends Canvas implements Runnable {
-	private static final long serialVersionUID = -7704331975933693523L;
 	private static final int MilisToSecs = 1000;
-	private GameView view;
 	private GameModel model;
+	private GameView view;
 	private GameController controller;
 	private boolean running;
 	private Thread thread;
@@ -21,10 +23,12 @@ public class GameMain extends Canvas implements Runnable {
 	
 	public GameMain() {
 		/* Cria o Model, View e o Controller */
-		this.model = new GameModel();
-		this.view = new GameView("Fagocity It!", model);
-		this.controller = new GameController(model, view);
-
+		this.model = GameModel.getInstance();
+		this.view = GameView.getInstance("Fagocity It!");
+		this.controller = GameController.getInstance();
+		
+		/* Inicializa o jogo no menu principal */
+		GameStatus.status = STATUS.Menu;
 		
 		/* Cria a Thread */
 		this.thread = new Thread(this);
