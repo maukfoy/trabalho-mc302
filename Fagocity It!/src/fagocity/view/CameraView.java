@@ -3,8 +3,9 @@ package fagocity.view;
 import java.awt.Graphics2D;
 
 import fagocity.controller.CameraController;
+import fagocity.view.Interfaces.ViewSingleton;
 
-public class CameraView {
+public class CameraView implements ViewSingleton {
 	private CameraController cameraController;
 	
 	private static CameraView camera = null;

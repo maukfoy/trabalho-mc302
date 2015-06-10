@@ -1,8 +1,9 @@
 package fagocity.view;
 
 import fagocity.model.ColorBuff;
+import fagocity.view.Interfaces.ViewSingleton;
 
-public class ColorBuffView {
+public class ColorBuffView implements ViewSingleton{
 	static long timer;
 	
 	private static ColorBuffView colorBuff = null;

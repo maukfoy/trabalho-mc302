@@ -6,8 +6,9 @@ import java.awt.Graphics;
 
 import fagocity.model.GameStatus;
 import fagocity.model.GameStatus.STATUS;
+import fagocity.view.Interfaces.ViewSingleton;
 
-public class MenuView {
+public class MenuView implements ViewSingleton {
 	
 	private static MenuView menuView = null;
 	

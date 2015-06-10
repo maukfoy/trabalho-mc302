@@ -6,8 +6,9 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 import fagocity.controller.MouseController;
+import fagocity.view.Interfaces.ViewSingleton;
 
-public class Display {
+public class Display implements ViewSingleton{
 	private static JFrame frame;
 	private Canvas canvas;
 	private String title;

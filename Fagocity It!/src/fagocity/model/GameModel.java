@@ -2,7 +2,9 @@ package fagocity.model;
 
 import java.util.ArrayList;
 
-public class GameModel {
+import fagocity.model.Interfaces.ModelSingleton;
+
+public class GameModel implements ModelSingleton {
 	/* Lista de Actors */
 	private ArrayList<Actor> ActorsList;
 	HUDModel hudModel;

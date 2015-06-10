@@ -11,7 +11,9 @@ import java.io.PrintWriter;
 
 import javax.imageio.ImageIO;
 
-public class HUDModel {
+import fagocity.model.Interfaces.ModelSingleton;
+
+public class HUDModel implements ModelSingleton {
 	private  int score = 0;
 	private  int highscore;
 	private  BufferedImage heartImage;

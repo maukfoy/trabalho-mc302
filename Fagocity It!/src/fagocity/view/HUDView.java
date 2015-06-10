@@ -15,8 +15,9 @@ import fagocity.model.Actor;
 import fagocity.model.GameModel;
 import fagocity.model.HUDModel;
 import fagocity.model.Player;
+import fagocity.view.Interfaces.ViewSingleton;
 
-public class HUDView {
+public class HUDView implements ViewSingleton {
 	private final int width;
 	private final int height;
 	private long FagocityStreakTextDuration = 3000; //em milisegundos

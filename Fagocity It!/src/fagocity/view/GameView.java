@@ -19,9 +19,10 @@ import fagocity.model.ColorBuff;
 import fagocity.model.GameModel;
 import fagocity.model.GameStatus;
 import fagocity.model.GameStatus.STATUS;
+import fagocity.view.Interfaces.ViewSingleton;
 
 @SuppressWarnings("serial")
-public class GameView extends JPanel {
+public class GameView extends JPanel implements ViewSingleton {
 	
 	private static final int WIDTH = getScreenWidth();
 	private static final int HEIGHT = getScreenHeight();

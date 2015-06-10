@@ -5,7 +5,6 @@ import java.util.Random;
 
 import fagocity.controller.Interfaces.ControllerSingleton;
 import fagocity.model.ColorBuff;
-import fagocity.model.GameModel;
 import fagocity.model.Player;
 import fagocity.view.GameView;
 
@@ -29,8 +28,6 @@ public class SpawnController implements ControllerSingleton {
 	private ActorFactory actorFactory;
 	private Player p;
 	private GameView view;
-	private GameModel model;
-	private GameController controller;
 	
 	private static SpawnController spawnController = null;
 	
@@ -44,7 +41,6 @@ public class SpawnController implements ControllerSingleton {
 	{
 		this.actorFactory = ActorFactory.getInstance();
 		this.view = GameView.getInstance();
-		this.model = GameModel.getInstance();
 		
 		width = GameView.getScreenWidth();
 		height = GameView.getScreenHeight();

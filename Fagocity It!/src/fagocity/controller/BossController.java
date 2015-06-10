@@ -25,11 +25,8 @@ public class BossController implements ControllerSingleton{
 	private BossController ( )
 	{
 		this.actorFactory = ActorFactory.getInstance();
-		
 		this.hudModel = HUDModel.getInstance();
-		
 		bossSpawner = BossSpawnController.getInstance ();
-		
 		defaultBossRadius = bossSpawner.getDefaultBossRadius();
 	}
 
