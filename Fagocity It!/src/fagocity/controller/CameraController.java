@@ -1,9 +1,10 @@
 package fagocity.controller;
 
+import fagocity.controller.Interfaces.ControllerSingleton;
 import fagocity.model.Actor;
 import fagocity.view.GameView;
 
-public class CameraController {
+public class CameraController implements ControllerSingleton {
 	
 	private static CameraController cameraController = null;
 	

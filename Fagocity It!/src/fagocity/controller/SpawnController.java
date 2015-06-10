@@ -3,12 +3,13 @@ package fagocity.controller;
 import java.awt.Color;
 import java.util.Random;
 
+import fagocity.controller.Interfaces.ControllerSingleton;
 import fagocity.model.ColorBuff;
 import fagocity.model.GameModel;
 import fagocity.model.Player;
 import fagocity.view.GameView;
 
-public class SpawnController {
+public class SpawnController implements ControllerSingleton {
 	
 	enum SIDE {DOWN, UP, LEFT, RIGHT};
 	

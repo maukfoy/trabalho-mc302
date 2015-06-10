@@ -5,9 +5,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
+import fagocity.controller.Interfaces.ControllerSingleton;
 import fagocity.model.Actor;
 
- public class MouseController extends MouseAdapter implements MouseMotionListener {
+ public class MouseController extends MouseAdapter implements MouseMotionListener, ControllerSingleton {
 	ArrayList<Actor> ActorsList;
 	
 	private static MouseController mouseController = null;

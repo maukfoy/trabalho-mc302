@@ -3,6 +3,7 @@ package fagocity.controller;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import fagocity.controller.Interfaces.ControllerSingleton;
 import fagocity.model.Actor;
 import fagocity.model.GameStatus;
 import fagocity.model.GameStatus.STATUS;
@@ -10,7 +11,7 @@ import fagocity.model.GameModel;
 import fagocity.model.Player;
 import fagocity.view.GameView;
 
-public class GameController {
+public class GameController implements ControllerSingleton {
 	
 	private GameModel model;
 	private GameView view;

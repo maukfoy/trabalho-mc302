@@ -2,9 +2,10 @@ package fagocity.controller;
 
 import java.util.ArrayList;
 
+import fagocity.controller.Interfaces.ControllerSingleton;
 import fagocity.model.ColorBuff;
 
-public class ColorBuffController implements Runnable {
+public class ColorBuffController implements Runnable, ControllerSingleton{
 	private static long timeToNextBuff = 30000; // em milissegundos
 	private static int maximumBuffs = 2;
 	

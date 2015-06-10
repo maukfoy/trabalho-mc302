@@ -2,12 +2,13 @@ package fagocity.controller;
 
 import java.util.ArrayList;
 
+import fagocity.controller.Interfaces.ControllerSingleton;
 import fagocity.model.Actor;
 import fagocity.model.Enemy;
 import fagocity.model.GameModel;
 import fagocity.view.GameView;
 
-public class BoundsController {
+public class BoundsController implements ControllerSingleton {
 	private GameView view;
 	private GameModel model;
 	private ArrayList<Actor> actors;

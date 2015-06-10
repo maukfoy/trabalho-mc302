@@ -2,9 +2,10 @@ package fagocity.controller;
 
 import java.awt.Color;
 
+import fagocity.controller.Interfaces.ControllerSingleton;
 import fagocity.model.HUDModel;
 
-public class BossController {
+public class BossController implements ControllerSingleton{
 	
 	private  int[] coordinates = new int[2];
 	private  double[] velocities = new double[2];

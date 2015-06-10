@@ -1,9 +1,10 @@
 package fagocity.controller;
 
+import fagocity.controller.Interfaces.ControllerSingleton;
 import fagocity.model.GameStatus;
 import fagocity.model.GameStatus.STATUS;
 
-public class MenuController {
+public class MenuController implements ControllerSingleton {
 	private int mx, my;
 	private HUDController hud;
 	private MouseController mouse;

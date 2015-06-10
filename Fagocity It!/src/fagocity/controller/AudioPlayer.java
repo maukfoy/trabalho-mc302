@@ -7,8 +7,10 @@ import java.io.File;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
+import fagocity.controller.Interfaces.ControllerSingleton;
 
-public class AudioPlayer {
+
+public class AudioPlayer implements ControllerSingleton {
 	
 private static AudioPlayer audioPlayer = null;
 	

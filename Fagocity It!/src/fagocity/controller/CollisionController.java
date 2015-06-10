@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import fagocity.controller.Interfaces.ControllerSingleton;
 import fagocity.model.Actor;
 import fagocity.model.Enemy;
 import fagocity.model.GameModel;
@@ -13,7 +14,7 @@ import fagocity.model.Player;
 import fagocity.model.ColorBuff;
 import fagocity.view.ColorBuffView;
 
-public class CollisionController {
+public class CollisionController implements ControllerSingleton {
 	
 	private SpawnController spawn;
 	private GameModel model;

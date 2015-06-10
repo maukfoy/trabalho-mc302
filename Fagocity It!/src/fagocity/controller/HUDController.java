@@ -1,12 +1,13 @@
 package fagocity.controller;
 
+import fagocity.controller.Interfaces.ControllerSingleton;
 import fagocity.model.GameStatus;
 import fagocity.model.GameStatus.STATUS;
 import fagocity.model.HUDModel;
 import fagocity.model.Player;
 import fagocity.view.HUDView;
 
-public class HUDController {
+public class HUDController implements ControllerSingleton {
 
 	private long initialTime = 0;
 	private long currentTime;

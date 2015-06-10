@@ -2,12 +2,13 @@ package fagocity.controller;
 
 import java.awt.Color;
 
+import fagocity.controller.Interfaces.ControllerSingleton;
 import fagocity.model.Actor;
 import fagocity.model.Enemy;
 import fagocity.model.GameModel;
 import fagocity.model.Player;
 
-public class ActorFactory {
+public class ActorFactory implements ControllerSingleton{
 	
 	private GameModel model;
 	
