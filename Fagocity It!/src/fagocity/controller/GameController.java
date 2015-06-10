@@ -64,6 +64,9 @@ public class GameController implements ControllerSingleton {
 		/* Reseta o player */
 		player.setX( (view.getMaxXBounds() - player.getRadius()) / 2 );
 		player.setY( (view.getMaxYBounds() - player.getRadius()) / 2 );
+		player.setRadius(110);
+		player.setLifes(3);
+		
 		ArrayList<Actor> list = model.getActorsList();
 		/* Deleta todos inimigos do jogo */
 		for(int i = list.size() -1; i >= 0; i--) {
@@ -76,9 +79,6 @@ public class GameController implements ControllerSingleton {
 		
 		/* Limpa o fagocity streak */
 		hud.cleanFagocityStreak();
-		
-		/* Reseta as vidas */
-		player.setLifes(3);
 		
 	}
 	
