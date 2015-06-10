@@ -23,7 +23,6 @@ public class GameController {
 	private CameraController camera;
 	private HUDController hud;
 	private ColorBuffController buff;
-	private MouseController mouseController;
 	private AudioPlayer audioPlayer;
 	
 	private static GameController gameController = null;
@@ -38,34 +37,19 @@ public class GameController {
 		this.model = GameModel.getInstance();
 		this.view = GameView.getInstance();
 		
-		mouseController = MouseController.getInstance();
 		camera = CameraController.getInstance();
 		actorFactory = ActorFactory.getInstance();
 		bounds = BoundsController.getInstance();
 		audioPlayer = AudioPlayer.getInstance();
 		
 		
-		//
 		initialConditions();
-		//
-		
+	
 		spawn = SpawnController.getInstance();
-		
-		//
-		view.setHUDView();
-		//
-		
 		hud = HUDController.getInstance();
-		
-		collision = new CollisionController ((Player) player, this, model);
-		
-		//
-		view.setMenuView();
-		//
-		
-		menu = new MenuController(this, hud, mouseController);
-		
-		buff = new ColorBuffController(spawn);
+		collision = CollisionController.getInstance();	
+		menu = MenuController.getInstance();	
+		buff = ColorBuffController.getInstance();
 		
 		/* Cria o gerador de buffs autonomo */
 		new Thread(buff).start();

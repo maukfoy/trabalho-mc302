@@ -35,7 +35,7 @@ public class HUDController {
 		this.hudView = HUDView.getInstance();
 		this.audioPlayer = AudioPlayer.getInstance();
 		
-		boss = new BossController ();
+		boss = BossController.getInstance ();
 	}
 	
 	public void update() {

@@ -2,6 +2,7 @@ package fagocity.view;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
+
 import javax.swing.JFrame;
 
 import fagocity.controller.MouseController;
@@ -12,10 +13,18 @@ public class Display {
 	private String title;
 	private int width, height;
 	
-	public Display(String title, int width, int height) {
+	private static Display display = null;
+	
+	public static Display getInstance(String title) {
+		if (display == null)
+			display = new Display(title);
+		return display;
+	}
+	
+	private Display(String title) {
 		this.title = title;
-		this.width = width;
-		this.height = height;
+		this.width = GameView.getScreenWidth();
+		this.height = GameView.getScreenHeight();;
 		createDisplay();
 	}  
 	

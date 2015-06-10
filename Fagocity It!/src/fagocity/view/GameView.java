@@ -49,6 +49,7 @@ public class GameView extends JPanel {
 		return gameView;
 	}
 	
+	/*sobrecarga do método do singleton*/
 	public static GameView getInstance() {
 		return gameView;
 	}
@@ -57,6 +58,11 @@ public class GameView extends JPanel {
 		this.model = GameModel.getInstance();
 		this.title = title;
 		
+		setMenuView();
+		setDisplay();
+		setCameraView();
+		setHUDView();
+		
 		/* Carrega a imagem de fundo */
 		try {
 			background = ImageIO.read(new File("src/fagocity/model/assets/sprites/Background.jpg"));
@@ -64,10 +70,6 @@ public class GameView extends JPanel {
 		catch(Exception e) {
 			e.getStackTrace();
 		}
-		
-		setDisplay();
-		setCameraView();
-		setHUDView();
 	}
 	
 	/* Metodo que renderiza */
@@ -121,7 +123,7 @@ public class GameView extends JPanel {
 		/* Desenha a barra do Color Buff se ele estiver ativado */
 		if (ColorBuff.getCurrentColorBuff() != null) {
 			g.setColor(Color.green);
-			g.fillRect(WIDTH/2 -150, (int)(HEIGHT/1.2), (int)(ColorBuffView.getTimerPercentage() *300), 30);
+			g.fillRect(WIDTH/2 -150, (int)(HEIGHT/1.2), (int)(ColorBuffView.getInstance().getTimerPercentage() *300), 30);
 		}
 		
 		/* Finaliza os desenhos */
@@ -158,15 +160,15 @@ public class GameView extends JPanel {
 	}
 	
 	public void setMenuView(){
-		menuView = new MenuView();
+		menuView = MenuView.getInstance();
 	}
 	
 	public void setCameraView(){
-		cameraView = new CameraView();
+		cameraView = CameraView.getInstance();
 	}
 	
 	public void setDisplay(){
-		this.display = new Display(title, WIDTH, HEIGHT);
+		this.display = Display.getInstance(title);
 	}
 	
 	/* Getters e setters */
@@ -200,6 +202,9 @@ public class GameView extends JPanel {
 	}
 	public int getMaxYBounds(){
 		return maxYBounds;
+	}
+	public String getTitle(){
+		return title;
 	}
 }
 

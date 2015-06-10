@@ -7,7 +7,15 @@ import fagocity.controller.CameraController;
 public class CameraView {
 	private CameraController cameraController;
 	
-	public CameraView (){
+	private static CameraView camera = null;
+	
+	public static CameraView getInstance() {
+		if (camera == null)
+			camera = new CameraView();
+		return camera;
+	}
+	
+	private CameraView (){
 		cameraController = CameraController.getInstance();
 	}
 	

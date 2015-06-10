@@ -3,27 +3,31 @@ package fagocity.controller;
 import java.awt.Color;
 
 import fagocity.model.HUDModel;
-import fagocity.model.Player;
 
 public class BossController {
 	
 	private  int[] coordinates = new int[2];
 	private  double[] velocities = new double[2];
 	private  int defaultBossRadius;
-	private HUDController hudController;
 	private ActorFactory actorFactory;
 	private BossSpawnController bossSpawner;
 	private HUDModel hudModel;
 	
-	public BossController ( )
+	private static BossController bossController = null;
+	
+	public static BossController getInstance() {
+		if (bossController == null)
+			bossController = new BossController();
+		return bossController;
+	}
+	
+	private BossController ( )
 	{
-
-		
 		this.actorFactory = ActorFactory.getInstance();
 		
 		this.hudModel = HUDModel.getInstance();
 		
-		bossSpawner = new BossSpawnController ();
+		bossSpawner = BossSpawnController.getInstance ();
 		
 		defaultBossRadius = bossSpawner.getDefaultBossRadius();
 	}

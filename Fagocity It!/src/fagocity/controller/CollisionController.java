@@ -20,16 +20,25 @@ public class CollisionController {
 	private Player player;
 	private HUDController hudController;
 	private HUDModel hudModel;
+	private AudioPlayer audioPlayer;
 	GameController controller;
 	
-	public CollisionController (Player player,GameController controller,GameModel model)
+	private static CollisionController collisionController = null;
+	
+	public static CollisionController getInstance() {
+		if (collisionController == null)
+			collisionController = new CollisionController();
+		return collisionController;
+	}
+	
+	private CollisionController ()
 	{
-		this.model = model;
-		this.player = player;
-		this.controller = controller;
-		this.hudController = controller.getHudController();
-		this.hudModel = model.getHudModel();
-		this.spawn = controller.getSpawnController();
+		
+		this.hudController = HUDController.getInstance();
+		this.hudModel = HUDModel.getInstance();
+		this.spawn = SpawnController.getInstance();
+		this.model = GameModel.getInstance();
+		this.audioPlayer = AudioPlayer.getInstance();
 		
 		
 	}
@@ -43,6 +52,9 @@ public class CollisionController {
 	public class EnemiesColorChanger implements Runnable {
 		
 		public void run() {
+			
+			player = (Player) GameController.getInstance().getPlayer();
+
 			
 			/* Marca como ativado o Color Buff */
 			ColorBuff.setCurrentColorBuff( player.getColor() );
@@ -62,7 +74,7 @@ public class CollisionController {
 			/* Deixa o efeito do buff acontecer por um tempo e vai atualizando o timer*/
 			while(System.currentTimeMillis() - startedTime < ColorBuff.getDuration()) {
 				timer  = System.currentTimeMillis() - startedTime;
-				ColorBuffView.setTimer(timer);
+				ColorBuffView.getInstance().setTimer(timer);
 			}
 			
 			/* desativa o buff */
@@ -71,6 +83,7 @@ public class CollisionController {
 	}
 	
 	private void buffsCollision() {
+		player = (Player) GameController.getInstance().getPlayer();
 		ArrayList<ColorBuff> buffsList = ColorBuffController.getBuffsList();
 		int buffX, buffY, buffRadius;
 		int playerX, playerY, playerRadius;
@@ -91,7 +104,7 @@ public class CollisionController {
 						(buffY + buffRadius), (playerY + playerRadius/2) ) < (buffRadius + playerRadius/2) )  {
 					buffsList.remove(colorBuff);
 					/* Toca o som de colisão */
-					controller.getAudioPlayer().playAudio("BuffSound");
+					audioPlayer.playAudio("BuffSound");
 					/* Se não tiver nenhum Color Buff ligado, chama o Color Buff */
 					if( ColorBuff.getCurrentColorBuff() == null) {
 						new Thread( new EnemiesColorChanger()).start();
@@ -104,6 +117,7 @@ public class CollisionController {
 
 	public void actorsCollision()
 	{
+		player = (Player) GameController.getInstance().getPlayer();
 		ArrayList<Actor> list = model.getActorsList();
 		ArrayList<Actor> toBeDeleted = new ArrayList<Actor>();
 		ArrayList<Actor> toBeColored = new ArrayList<Actor>();
@@ -140,7 +154,7 @@ public class CollisionController {
 						}
 						else {
 							/* O Player consegue fagocitar, então toca o som de fagocitose */
-							controller.getAudioPlayer().playAudio("FagocitySound");
+							audioPlayer.playAudio("FagocitySound");
 							/* Atualiza o streak do player */
 							hudController.updateFagocityStreak();
 							/* Atualiza o raio total fagocitado, importante para o score */
@@ -177,7 +191,7 @@ public class CollisionController {
 		for (int i = 0; i < toBeDeleted.size(); i++) {
 			Actor dead = toBeDeleted.get(i);
 			if(dead instanceof Player) {
-				controller.getAudioPlayer().playAudio("DeathSound");
+				audioPlayer.playAudio("DeathSound");
 			}
 			list.remove(dead);
 		}
@@ -289,6 +303,7 @@ public class CollisionController {
 	}
 	
 	public void reducePlayerLife(Player player, ArrayList<Actor> toBeDeleted) {
+		
 		long currentTime = System.currentTimeMillis();
 		/* Faz com que o deathTimeDelay seja respeitado, ou seja
 		 * só deixa o player morrer se ja tiver se passado 
@@ -297,12 +312,12 @@ public class CollisionController {
 			(currentTime - player.getLastDeathTime() ) > player.getDeathTimeDelay() ) {
 			player.setLifes(player.getLifes() - 1);
 			player.setLastDeathTime( System.currentTimeMillis() );
-			controller.getAudioPlayer().playAudio("LostLifeSound");
+			audioPlayer.playAudio("LostLifeSound");
 		}
 		/* Se o player não tiver mais vidas, ele morre pra sempre */
 		if(player.getLifes() < 0) {
 			toBeDeleted.add(player);
-			controller.getAudioPlayer().playAudio("DeathSound");
+			audioPlayer.playAudio("DeathSound");
 		}
 	}
 

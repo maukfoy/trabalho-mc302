@@ -3,10 +3,23 @@ package fagocity.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+
 import fagocity.model.GameStatus;
 import fagocity.model.GameStatus.STATUS;
 
 public class MenuView {
+	
+	private static MenuView menuView = null;
+	
+	public static MenuView getInstance() {
+		if (menuView == null)
+			menuView = new MenuView();
+		return menuView;
+	}
+	
+	private MenuView (){
+		
+	}
 	
 	public void render (Graphics g){
 		if (GameStatus.status == STATUS.Menu){

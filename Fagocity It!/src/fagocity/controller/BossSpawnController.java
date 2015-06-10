@@ -18,7 +18,15 @@ public class BossSpawnController {
 	private Player p;
 	
 	
-	public BossSpawnController( ){
+	private static BossSpawnController bossController = null;
+	
+	public static BossSpawnController getInstance() {
+		if (bossController == null)
+			bossController = new BossSpawnController();
+		return bossController;
+	}
+	
+	private BossSpawnController( ){
 		}
 	
 	public int[] generateBossSpawnCoordinates() {

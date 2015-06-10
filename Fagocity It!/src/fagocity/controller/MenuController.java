@@ -5,15 +5,22 @@ import fagocity.model.GameStatus.STATUS;
 
 public class MenuController {
 	private int mx, my;
-	private GameController controller;
 	private HUDController hud;
 	private MouseController mouse;
 	
-	public MenuController (GameController controller, HUDController hud, MouseController mouse)
+	private static MenuController menuController = null;
+	
+	public static MenuController getInstance() {
+		if (menuController == null)
+			menuController = new MenuController();
+		return menuController;
+	}
+	
+	private MenuController ()
 	{
-		this.controller = controller;
-		this.hud = hud;
-		this.mouse = mouse;
+		this.mouse = MouseController.getInstance();
+		this.hud = HUDController.getInstance();
+
 	}
 	
 	public void update(){
@@ -22,6 +29,7 @@ public class MenuController {
 	
 	public void click ()
 	{	
+
 		mx = mouse.getClickX ();
 		my = mouse.getClickY ();
 		
@@ -30,7 +38,7 @@ public class MenuController {
 		{	
 			GameStatus.status = STATUS.Fagocity;
 			hud.setInitialTime(System.currentTimeMillis());
-			new Thread( new BackgroundMusicLoop(controller)).start();
+			new Thread( new BackgroundMusicLoop(GameController.getInstance())).start();
 		}
 		/*Botão Quit*/
 		if (GameStatus.status == STATUS.Menu && mouseOver (mx, my, 82, 702, 190, 65 ))

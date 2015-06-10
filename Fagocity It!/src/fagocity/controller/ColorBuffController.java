@@ -12,8 +12,16 @@ public class ColorBuffController implements Runnable {
 	
 	private SpawnController spawn;
 	
-	public ColorBuffController (SpawnController spawn){
-		this.spawn = spawn;
+	private static ColorBuffController colorBuff = null;
+	
+	public static ColorBuffController getInstance() {
+		if (colorBuff == null)
+			colorBuff = new ColorBuffController();
+		return colorBuff;
+	}
+	
+	private ColorBuffController ( ){
+		this.spawn = SpawnController.getInstance();
 	}
 	
 	/* Gera um buff */
