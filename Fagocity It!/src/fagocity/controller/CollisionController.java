@@ -193,8 +193,10 @@ public class CollisionController implements ControllerSingleton {
 			Actor dead = toBeDeleted.get(i);
 			if(dead instanceof Player) {
 				audioPlayer.playAudio("DeathSound");
+				GameController.getInstance().resetGame();
 			}
-			list.remove(dead);
+			else
+				list.remove(dead);
 		}
 		
 		sortPerRadius (list);	
