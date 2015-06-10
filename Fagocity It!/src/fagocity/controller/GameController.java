@@ -38,14 +38,10 @@ public class GameController implements ControllerSingleton {
 		this.model = GameModel.getInstance();
 		this.view = GameView.getInstance();
 		actorFactory = ActorFactory.getInstance();
-		initialConditions();
 		
 		camera = CameraController.getInstance();
 		bounds = BoundsController.getInstance();
 		audioPlayer = AudioPlayer.getInstance();
-		
-		
-	
 		spawn = SpawnController.getInstance();
 		hud = HUDController.getInstance();
 		collision = CollisionController.getInstance();	
