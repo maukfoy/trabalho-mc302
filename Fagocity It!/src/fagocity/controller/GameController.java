@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import fagocity.controller.Interfaces.ControllerSingleton;
 import fagocity.model.Actor;
+import fagocity.model.Enemy;
 import fagocity.model.GameStatus;
 import fagocity.model.GameStatus.STATUS;
 import fagocity.model.GameModel;
@@ -15,7 +16,7 @@ public class GameController implements ControllerSingleton {
 	
 	private GameModel model;
 	private GameView view;
-	private Actor player = null;
+	private Player player = null;
 	private ActorFactory actorFactory;
 	private SpawnController spawn;
 	private MenuController menu;
@@ -53,12 +54,36 @@ public class GameController implements ControllerSingleton {
 
 	}
 	
+	/* Reseta o jogo para o início */
+	public void resetGame() {
+		
+		/* Reseta o player */
+		player.setX( (view.getMaxXBounds() - player.getRadius()) / 2 );
+		player.setY( (view.getMaxYBounds() - player.getRadius()) / 2 );
+		player.setRadius(110);
+		player.setLifes(3);
+		
+		ArrayList<Actor> list = model.getActorsList();
+		/* Deleta todos inimigos do jogo */
+		for(int i = list.size() -1; i >= 0; i--) {
+			if(list.get(i) instanceof Enemy)
+				list.remove( i );
+		}
+		
+		/* Reseta o score */
+		hud.setScore(0);
+		
+		/* Limpa o fagocity streak */
+		hud.cleanFagocityStreak();
+		
+	}
+	
 	/* Cria as condicoes iniciais do jogo */
 	public void initialConditions() {
 		/* Cria o player */
 		int radius = 110;
 		
-		player = actorFactory.createActor((view.getWidth() - radius)/2, (view.getHeight() - radius)/2, 0, 0, radius,
+		player = (Player) actorFactory.createActor((view.getMaxXBounds() - radius)/2, (view.getMaxYBounds() - radius)/2, 0, 0, radius,
 				 Color.RED, "player");
 	}
 	

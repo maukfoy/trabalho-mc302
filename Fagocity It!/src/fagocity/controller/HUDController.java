@@ -111,5 +111,18 @@ public class HUDController implements ControllerSingleton {
 		else
 			return false;
 	}
+
+	public void setScore(int i) {
+		totalFagocitedRadius = 0;
+		score = i;
+		initialTime = System.currentTimeMillis();
+	}
+
+	/* Limpa totalmente o Fagocity Streak */
+	public void cleanFagocityStreak() {
+		resetFagocityStreak();
+		streaksPassed = 0;
+		hudView.setStreaksPassed(0);
+	}
 	
 }
