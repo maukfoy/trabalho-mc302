@@ -60,8 +60,8 @@ public class GameController implements ControllerSingleton {
 	public void resetGame() {
 		
 		/* Reseta o player */
-		player.setX( (view.getMaxXBounds() - player.getRadius()) / 2 );
-		player.setY( (view.getMaxYBounds() - player.getRadius()) / 2 );
+		player.setX( (view.getWidth() - player.getRadius()) / 2 );
+		player.setY( (view.getHeight() - player.getRadius()) / 2 );
 		player.setRadius(110);
 		player.setLifes(3);
 		
@@ -85,7 +85,7 @@ public class GameController implements ControllerSingleton {
 		/* Cria o player */
 		int radius = 110;
 		
-		player = (Player) actorFactory.createActor((view.getMaxXBounds() - radius)/2, (view.getMaxYBounds() - radius)/2, 0, 0, radius,
+		player = (Player) actorFactory.createActor((view.getWidth() - radius)/2, (view.getHeight() - radius)/2, 0, 0, radius,
 				 Color.RED, "player");
 	}
 	
