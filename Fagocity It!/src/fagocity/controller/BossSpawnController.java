@@ -4,19 +4,14 @@ import java.util.Random;
 
 import fagocity.controller.Interfaces.ControllerSingleton;
 import fagocity.model.Player;
-import fagocity.view.GameView;
 
-public class BossSpawnController implements ControllerSingleton {
+public class BossSpawnController extends SpawnController implements ControllerSingleton {
 	
-	enum SIDE {DOWN, UP, LEFT, RIGHT};
 	
-	private SIDE side;
-	private int width = GameView.getScreenWidth();
-	private int height = GameView.getScreenHeight();
 	private  double defaultBossVelocity = 2.6;
 	private  int defaultBossRadius = 3200;
+	private  int defaultPointsTillBoss = 4200;
 	int[] coordinates = new int[2];
-	private Player p;
 	
 	
 	private static BossSpawnController bossController = null;
@@ -28,6 +23,7 @@ public class BossSpawnController implements ControllerSingleton {
 	}
 	
 	private BossSpawnController( ){
+		super();
 		}
 	
 	public int[] generateBossSpawnCoordinates() {
@@ -110,5 +106,9 @@ public class BossSpawnController implements ControllerSingleton {
 
 	public int getDefaultBossRadius(){
 		return defaultBossRadius;
+	}
+	public int getDefaultPointsTillBoss()
+	{
+		return defaultPointsTillBoss;
 	}
 }

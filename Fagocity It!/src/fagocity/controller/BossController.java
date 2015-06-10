@@ -29,9 +29,7 @@ public class BossController implements ControllerSingleton{
 		bossSpawner = BossSpawnController.getInstance ();
 		defaultBossRadius = bossSpawner.getDefaultBossRadius();
 	}
-
-
-		
+	
 	public void createBoss ()
 	{
 		generateBossCoordinates ();
@@ -54,7 +52,7 @@ public class BossController implements ControllerSingleton{
 	public void checkScore ()
 	{
 		
-		if (hudModel.getScore() - (hudModel.getDefaultPointsTillBoss() * 
+		if (hudModel.getScore() - (bossSpawner.getDefaultPointsTillBoss() * 
 			HUDController.getInstance().getBossScore()) >= 0)
 		{
 			HUDController.getInstance().incrementBossScore();

@@ -12,22 +12,24 @@ public class SpawnController implements ControllerSingleton {
 	
 	enum SIDE {DOWN, UP, LEFT, RIGHT};
 	
-	protected long oldTime = 0;
-	protected long spawnTime = 14;
-	protected double minDefaultEnemyVelocity = 4;
-	protected double maxDefaultEnemyVelocity = 7;
-	protected int minDefaultRadius = 20;
-	protected int maxDefaultRadius = 120;
-	protected SIDE side;
+	private long oldTime = 0;
+	private long spawnTime = 14;
+	private double minDefaultEnemyVelocity = 4;
+	private double maxDefaultEnemyVelocity = 7;
+	private int minDefaultRadius = 20;
+	private int maxDefaultRadius = 120;
+	private ActorFactory actorFactory;
+	private GameView view;
+
+
 	
+	protected SIDE side;	
 	protected int width;
 	protected int height; 
 	protected int maxXBounds;
 	protected int maxYBounds; 
 	
-	private ActorFactory actorFactory;
-	private Player p;
-	private GameView view;
+	protected Player p;
 	
 	private static SpawnController spawnController = null;
 	
@@ -37,7 +39,7 @@ public class SpawnController implements ControllerSingleton {
 		return spawnController;
 	}
 	
-	private SpawnController ()
+	protected SpawnController ()
 	{
 		this.actorFactory = ActorFactory.getInstance();
 		this.view = GameView.getInstance();
@@ -52,6 +54,7 @@ public class SpawnController implements ControllerSingleton {
 	public void update (){
 		autoEnemyCreator();
 	}
+	
 	
 	public void autoEnemyCreator() {
 		

@@ -22,7 +22,6 @@ public class HUDModel implements ModelSingleton {
 	private  final String spritesPath = "src/fagocity/model/assets/sprites/";
 	private  final String heartFile = "heart64x64.png";
 	private  double fagocityStreak = 0.0;
-	private  int defaultPointsTillBoss = 4200;
 
 	private static HUDModel hudModel = null;
 	
@@ -104,8 +103,5 @@ public class HUDModel implements ModelSingleton {
 	public double getFagocityStreak() {
 		return this.fagocityStreak;
 	}
-	public int getDefaultPointsTillBoss()
-	{
-		return defaultPointsTillBoss;
-	}
+	
 }
