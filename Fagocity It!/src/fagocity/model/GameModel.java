@@ -18,7 +18,7 @@ public class GameModel {
 	private GameModel() {
 
 		ActorsList = new ArrayList<Actor>();
-		hudModel = new HUDModel();
+		hudModel = HUDModel.getInstance();
 		
 		/* Manda o HUD se iniciar */
 		try {

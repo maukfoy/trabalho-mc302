@@ -42,20 +42,20 @@ public class GameController {
 		camera = CameraController.getInstance();
 		actorFactory = ActorFactory.getInstance();
 		bounds = BoundsController.getInstance();
-		audioPlayer = new AudioPlayer();
+		audioPlayer = AudioPlayer.getInstance();
 		
 		
 		//
 		initialConditions();
 		//
 		
-		spawn = SpawnController.getInstance((Player) player);
+		spawn = SpawnController.getInstance();
 		
 		//
 		view.setHUDView();
 		//
 		
-		hud = new HUDController ((Player) player, actorFactory, view, model, bounds, camera, this);
+		hud = HUDController.getInstance();
 		
 		collision = new CollisionController ((Player) player, this, model);
 		
@@ -78,7 +78,7 @@ public class GameController {
 		int radius = 110;
 		
 		player = actorFactory.createActor((view.getWidth() - radius)/2, (view.getHeight() - radius)/2, 0, 0, radius,
-				 Color.RED, "player", view, model, this);
+				 Color.RED, "player");
 	}
 	
 	/* Atualiza todos fatores do jogo */

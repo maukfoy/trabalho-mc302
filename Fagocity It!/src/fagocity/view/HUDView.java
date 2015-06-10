@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
+import fagocity.controller.GameController;
 import fagocity.model.Actor;
 import fagocity.model.GameModel;
 import fagocity.model.HUDModel;
@@ -29,9 +30,17 @@ public class HUDView {
 	
 	private Player player;
 	
-	public HUDView (GameModel model)
+	private static HUDView hudView = null;
+	
+	public static HUDView getInstance() {
+		if (hudView == null)
+			hudView = new HUDView();
+		return hudView;
+	}
+	
+	private HUDView ()
 	{
-		this.model = model;
+		this.model = GameModel.getInstance();
 		
 		ArrayList<Actor> list = model.getActorsList();
 		for (int i = 0; i < list.size(); i++)
@@ -46,6 +55,8 @@ public class HUDView {
 	
 	public void render(Graphics g) {
 		
+		player = (Player) GameController.getInstance().getPlayer();
+		
 		/* Desenha o Score */
 		fnt = new Font ("arial", 1, 17);
 		g.setFont (fnt);
@@ -57,9 +68,14 @@ public class HUDView {
 		
 		/* Desenha os corações de vida */
 		BufferedImage image = hudModel.getHeartImage();
-		for(int i = 0; i < player.getLifes(); i++) {
-			if(playerAlive())
+		
+		/*reenderiza se o player existir*/
+		if (player != null)
+		{
+			for(int i = 0; i < player.getLifes(); i++) {
+				if(playerAlive())
 				g.drawImage(image, width/100 + (int)(image.getWidth()*0.5*i) + 10*i , height/30, (int)(image.getWidth()*0.5), (int)(image.getHeight()*0.5), null);
+			}
 		}
 		
 		/* Desenha a barra de Fagocity Streak */

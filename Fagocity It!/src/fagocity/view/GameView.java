@@ -154,7 +154,7 @@ public class GameView extends JPanel {
 	}
 	
 	public void setHUDView(){
-		hudView = new HUDView(model);
+		hudView = HUDView.getInstance();
 	}
 	
 	public void setMenuView(){

@@ -1,3 +1,5 @@
+
+
 package fagocity.controller;
 
 import java.io.File;
@@ -5,7 +7,21 @@ import java.io.File;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
+
 public class AudioPlayer {
+	
+private static AudioPlayer audioPlayer = null;
+	
+	public static AudioPlayer getInstance() {
+		if (audioPlayer == null)
+			audioPlayer = new AudioPlayer();
+		return audioPlayer;
+	}
+	
+	private AudioPlayer(){
+		
+	}
+	
 	private String path = "src/fagocity/model/assets/sounds/";
 	
 	/* Toca um audio sem deixar em loop */

@@ -22,6 +22,18 @@ public class HUDModel {
 	private  double fagocityStreak = 0.0;
 	private  int defaultPointsTillBoss = 4200;
 
+	private static HUDModel hudModel = null;
+	
+	public static HUDModel getInstance() {
+		if (hudModel == null)
+			hudModel = new HUDModel();
+		return hudModel;
+	}
+	
+	private HUDModel(){
+		
+	}
+	
 	/* Salva o highscore no disco */
 	public void saveHighscore() throws IOException {
 		if (score > highscore) {

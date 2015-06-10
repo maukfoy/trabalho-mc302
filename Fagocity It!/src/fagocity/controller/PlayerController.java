@@ -16,12 +16,11 @@ public class PlayerController implements IActorController {
 	private BoundsController bounds;
 	private MouseController mouse;
 	
-	public PlayerController (Player player, GameView view, GameModel model,
-			GameController controller){
+	public PlayerController (Player player){
 		this.p = player;
-		this.view = view;
-		this.model = model;
-		this.bounds = controller.getBounds();
+		this.view = GameView.getInstance();
+		this.model = GameModel.getInstance();
+		this.bounds = BoundsController.getInstance();
 		this.camera = CameraController.getInstance();
 		
 		this.mouse = MouseController.getInstance();

@@ -10,21 +10,21 @@ public class BossSpawnController {
 	enum SIDE {DOWN, UP, LEFT, RIGHT};
 	
 	private SIDE side;
-	private int width, height;
+	private int width = GameView.getScreenWidth();
+	private int height = GameView.getScreenHeight();
 	private  double defaultBossVelocity = 3;
 	private  int defaultBossRadius = 3200;
 	int[] coordinates = new int[2];
 	private Player p;
 	
 	
-	public BossSpawnController(Player player, GameView view){
-		this.p = player;
-		
+	public BossSpawnController( ){
 		}
 	
 	public int[] generateBossSpawnCoordinates() {
 		Random r = new Random();
-		
+		this.p = (Player) GameController.getInstance().getPlayer();
+
 		
 		switch(r.nextInt (4)) {
 			/* Nascer do lado esquerdo da tela */
@@ -32,7 +32,7 @@ public class BossSpawnController {
 				System.out.println("left");
 				coordinates[0] = p.getX() - width/2 - defaultBossRadius;
 				coordinates[1] = p.getY() - defaultBossRadius/2;
-						
+				System.out.println("esqeurda");		
 				side = SIDE.LEFT;
 				break;
 			/* Nascer do lado direito da tela */
@@ -40,15 +40,15 @@ public class BossSpawnController {
 				System.out.println("right");
 				coordinates[0] =  p.getX() + width/2;
 				coordinates[1] = p.getY() - defaultBossRadius/2;
-					
+				System.out.println("direito");
 				side = SIDE.RIGHT;
 				break;
 			/* Nascer em cima da tela */
 			case 2:
 				System.out.println("up");
 					coordinates[0] = p.getX() - defaultBossRadius/2;
-					coordinates[1] = p.getY() - height/2  - defaultBossRadius;			
-			
+					coordinates[1] = p.getY() - height/2 - defaultBossRadius;			
+					System.out.println("cima");
 				side = SIDE.UP;
 				break;
 			/* Nascer em baixo da tela */
@@ -56,7 +56,7 @@ public class BossSpawnController {
 				System.out.println("down");
 				coordinates[0] = p.getX() - defaultBossRadius/2;
 				coordinates[1] = p.getY() + height/2;	
-				
+				System.out.println("baixo");
 				side = SIDE.DOWN;
 				break;
 		}

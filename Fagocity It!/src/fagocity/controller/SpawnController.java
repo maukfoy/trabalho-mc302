@@ -33,19 +33,14 @@ public class SpawnController {
 	
 	private static SpawnController spawnController = null;
 	
-	public static SpawnController getInstance(Player player) {
-		if (spawnController == null)
-			spawnController = new SpawnController(player);
-		return spawnController;
-	}
-	
 	public static SpawnController getInstance() {
+		if (spawnController == null)
+			spawnController = new SpawnController();
 		return spawnController;
 	}
 	
-	private SpawnController (Player player)
+	private SpawnController ()
 	{
-		this.p = player;
 		this.actorFactory = ActorFactory.getInstance();
 		this.view = GameView.getInstance();
 		this.model = GameModel.getInstance();
@@ -70,13 +65,13 @@ public class SpawnController {
 			if( ColorBuff.getCurrentColorBuff() == null) {
 			actorFactory.createActor(coordinates[0], coordinates[1],
 					velocities[0], velocities[1], generateRandomRadius(),
-					generateRandomColor(), "enemy", view, model, controller);
+					generateRandomColor(), "enemy");
 			}
 			/* Se o buff de cor estiver ligado */
 			else {
 				actorFactory.createActor(coordinates[0], coordinates[1],
 						velocities[0], velocities[1], generateRandomRadius(),
-						ColorBuff.getCurrentColorBuff(), "enemy", view, model, controller);
+						ColorBuff.getCurrentColorBuff(), "enemy");
 			}
 			
 			oldTime = System.currentTimeMillis();
@@ -86,6 +81,8 @@ public class SpawnController {
 	public int[] generateSpawnCoordinates() {
 		Random r = new Random();
 		int[] coordinates = new int[2];
+		this.p = (Player) GameController.getInstance().getPlayer();
+
 		
 		/*caso base para o nascimento dos inimigos*/
 		if (p != null)
@@ -114,12 +111,12 @@ public class SpawnController {
 				break;
 			/* Nascer do lado direito da tela */
 			case 1:
-				if (p == null)//no menu
+				if (p == null)//no menu , nasce à direita do menu
 				{
 					coordinates[0] = r.nextInt(maxXBounds - maxXBounds/2 - width/2) + maxXBounds/2 + width/2;
 					coordinates[1] = r.nextInt(maxYBounds);
 				}
-				else//no jogo
+				else//no jogo, nasce à direita do jogador e dento do mapa
 				{
 					if ((maxXBounds - p.getX() - width/2)  > (p.getX() - width/2))
 					{
@@ -131,12 +128,12 @@ public class SpawnController {
 				break;
 			/* Nascer em cima da tela */
 			case 2:
-				if (p == null)//no menu
+				if (p == null)//no menu, nasce em cima dele
 				{
 					coordinates[0] = r.nextInt(maxXBounds - width) + width;
 					coordinates[1] = r.nextInt(maxYBounds/2 - height/2);
 				}
-				else//no jogo
+				else//no jogo, nasce à cima do jogador e dento do mapa
 				{
 					if ((p.getY() - height/2) > 0)
 					{
@@ -148,12 +145,12 @@ public class SpawnController {
 				break;
 			/* Nascer em baixo da tela */
 			case 3:
-				if (p == null)//no menu
+				if (p == null)//no menu, nasce à baixo dele
 				{		
 					coordinates[0] =r.nextInt(maxXBounds);
 					coordinates[1] = r.nextInt(maxYBounds - maxYBounds/2 - height/2) + maxYBounds/2 + height/2;
 				}
-				else//no jogo
+				else//no jogo, nasce à baixo do jogado e dentro do mapa
 				{
 					if ((maxYBounds - p.getY() - height/2)  > (p.getY() - height/2))
 					{

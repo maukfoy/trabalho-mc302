@@ -2,10 +2,8 @@ package fagocity.model;
 
 import java.awt.Color;
 
-import fagocity.controller.GameController;
 import fagocity.controller.PlayerController;
 import fagocity.controller.Interfaces.IActorController;
-import fagocity.view.GameView;
 
 public class Player extends Actor {
 	
@@ -18,9 +16,9 @@ public class Player extends Actor {
 	private long deathTimeDelay = 1000; // em milisegundos
 		
 	public Player(int x, int y, double velX, double velY, int radius, Color color,
-			String type, GameView view, GameModel model, GameController controller) {
-		super(x, y, velX, velY, radius, color, type, view, model, controller);
-		actorController = new PlayerController(this, view, model, controller);
+			String type) {
+		super(x, y, velX, velY, radius, color, type);
+		actorController = new PlayerController(this);
 	}
 	
 	/*

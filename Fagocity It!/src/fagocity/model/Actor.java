@@ -2,7 +2,6 @@ package fagocity.model;
 
 import java.awt.Color;
 
-import fagocity.controller.GameController;
 import fagocity.controller.Interfaces.IActorController;
 import fagocity.view.GameView;
 
@@ -18,7 +17,7 @@ public abstract class Actor {
 	protected String type;
 	
 	public Actor(int x, int y, double velX, double velY, int radius, Color color,
-			String type, GameView view, GameModel model, GameController controller) {
+			String type) {
 		this.x = x;
 		this.y = y;
 		this.velX = velX;

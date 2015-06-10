@@ -1,11 +1,9 @@
 package fagocity.controller;
 
-import fagocity.model.GameModel;
 import fagocity.model.GameStatus;
 import fagocity.model.GameStatus.STATUS;
 import fagocity.model.HUDModel;
 import fagocity.model.Player;
-import fagocity.view.GameView;
 import fagocity.view.HUDView;
 
 public class HUDController {
@@ -23,20 +21,27 @@ public class HUDController {
 	private BossController boss;
 	private HUDModel hudModel;
 	private HUDView hudView;
-	private GameController controller;
+	private AudioPlayer audioPlayer;
+	private static HUDController hudController = null;
 	
-	public HUDController (Player player, ActorFactory actorFactory, GameView view, GameModel model,
-			BoundsController bounds, CameraController camera, GameController controller){
-		this.player = player;
-		this.controller = controller;
-		this.hudModel = model.getHudModel();
-		this.hudView = view.getHUD();
+	public static HUDController getInstance() {
+		if (hudController == null)
+			hudController = new HUDController();
+		return hudController;
+	}
+	
+	private HUDController ( ){
+		this.hudModel = HUDModel.getInstance();
+		this.hudView = HUDView.getInstance();
+		this.audioPlayer = AudioPlayer.getInstance();
 		
-		boss = new BossController ( this, actorFactory, view, model,(Player) player, bounds, camera, controller);
+		boss = new BossController ();
 	}
 	
 	public void update() {
-		if(controller.getPlayer() != null) {
+		this.player = (Player) GameController.getInstance().getPlayer();
+
+		if(player != null) {
 			if(GameStatus.status == STATUS.Fagocity)
 			{
 				currentTime = System.currentTimeMillis();
@@ -55,6 +60,8 @@ public class HUDController {
 	}
 	
 	public void updateFagocityStreak() {
+		this.player = (Player) GameController.getInstance().getPlayer();
+
 		currentKillStreak++;
 		
 		fagocityStreak = (double)(currentKillStreak / ((double)minimumKillStreak + (double)streaksPassed));
@@ -69,7 +76,7 @@ public class HUDController {
 			hudView.setStreaksPassed(streaksPassed);
 			resetFagocityStreak();
 			player.setGrowingRadius(player.getDefaultRadius() - player.getRadius());
-			controller.getAudioPlayer().playAudio("StreakSound");
+			audioPlayer.playAudio("StreakSound");
 		}
 	}
 	

@@ -2,10 +2,8 @@ package fagocity.controller;
 
 import java.awt.Color;
 
-import fagocity.model.GameModel;
 import fagocity.model.HUDModel;
 import fagocity.model.Player;
-import fagocity.view.GameView;
 
 public class BossController {
 	
@@ -14,25 +12,18 @@ public class BossController {
 	private  int defaultBossRadius;
 	private HUDController hudController;
 	private ActorFactory actorFactory;
-	private GameView view;
-	private GameModel model;
 	private BossSpawnController bossSpawner;
 	private HUDModel hudModel;
-	private GameController controller;
 	
-	public BossController (HUDController hud, ActorFactory actorFactory, 
-		   GameView view, GameModel model, Player player, BoundsController bounds, CameraController camera,
-		   GameController controller)
+	public BossController ( )
 	{
-		this.hudController = hud;
-		this.controller = controller;
-		this.actorFactory = actorFactory;
-		this.view = view;
-		this.model = model;
+
 		
-		this.hudModel = model.getHudModel();
+		this.actorFactory = ActorFactory.getInstance();
 		
-		bossSpawner = new BossSpawnController (player, view);
+		this.hudModel = HUDModel.getInstance();
+		
+		bossSpawner = new BossSpawnController ();
 		
 		defaultBossRadius = bossSpawner.getDefaultBossRadius();
 	}
@@ -44,7 +35,7 @@ public class BossController {
 		generateBossCoordinates ();
 		generateBossVelocities();
 		actorFactory.createActor(coordinates[0], coordinates[1], velocities[0],
-				velocities[1], defaultBossRadius, Color.WHITE, "enemy", view, model, controller);
+				velocities[1], defaultBossRadius, Color.WHITE, "enemy");
 	}
 	
 	private void generateBossCoordinates ()
@@ -62,9 +53,9 @@ public class BossController {
 	{
 		
 		if (hudModel.getScore() - (hudModel.getDefaultPointsTillBoss() * 
-			hudController.getBossScore()) >= 0)
+			HUDController.getInstance().getBossScore()) >= 0)
 		{
-			hudController.incrementBossScore();
+			HUDController.getInstance().incrementBossScore();
 			createBoss();
 		}
 	}
