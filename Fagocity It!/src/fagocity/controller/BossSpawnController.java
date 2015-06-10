@@ -12,8 +12,8 @@ public class BossSpawnController {
 	private SIDE side;
 	private int width = GameView.getScreenWidth();
 	private int height = GameView.getScreenHeight();
-	private  double defaultBossVelocity = 3;
-	private  int defaultBossRadius = 3200;
+	private  double defaultBossVelocity = 2.6;
+	private  int defaultBossRadius = 2800;
 	int[] coordinates = new int[2];
 	private Player p;
 	
