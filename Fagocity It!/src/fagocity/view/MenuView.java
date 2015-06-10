@@ -31,14 +31,14 @@ public class MenuView implements ViewSingleton {
 			g.drawString ("Fagocity It!", GameView.getScreenWidth()/2 - 120, 120);
 					
 			/*botoes do menu*/
-			g.drawRect (82, 270, 190, 65);
-			g.drawString ("Play", 125, 320);
+			g.drawRect (82, 200, 190, 65);
+			g.drawString ("Play", 125, 252);
 			
-			g.drawRect (82, 489 , 190, 65);
-			g.drawString ("Help", 125, 538);
+			g.drawRect (82, 429 , 190, 65);
+			g.drawString ("Help", 125, 477);
 		
-			g.drawRect (82, 702, 190, 65);
-			g.drawString ("Quit", 125, 752);
+			g.drawRect (82, 632, 190, 65);
+			g.drawString ("Quit", 125, 683);
 			
 		}
 		
@@ -51,15 +51,15 @@ public class MenuView implements ViewSingleton {
 			String text4 = "- Fagocitar bolinhas com cor diferente da sua tira sua vida";
 			String text5 = "- Cada sequencia de fagocitacoes faz o personagem voltar a ser pequeno";
 
-			Font font = new Font ("arial", 1, 40);
+			Font font = new Font ("arial", 1, 30);
 			g.setFont (font);
 			g.setColor(Color.DARK_GRAY);
 
-			g.drawString (text1, 40, 330);
-			g.drawString (text2, 40, 420);
-			g.drawString (text3, 40, 510);
-			g.drawString (text4, 40, 600);
-			g.drawString (text5, 40, 690);
+			g.drawString (text1, 40, 250);
+			g.drawString (text2, 40, 340);
+			g.drawString (text3, 40, 430);
+			g.drawString (text4, 40, 520);
+			g.drawString (text5, 40, 610);
 			
 			Font font2 = new Font ("arial", 1, 50);
 			g.setFont ( font2 );
@@ -68,8 +68,8 @@ public class MenuView implements ViewSingleton {
 			g.drawString ("Help", 900, 120);
 			
 			/*botao back*/
-			g.drawRect (864, 900, 190, 65);
-			g.drawString ("Back", 900, 950);
+			g.drawRect (864, 650, 190, 65);
+			g.drawString ("Back", 900, 700);
 		}
 	}
 }

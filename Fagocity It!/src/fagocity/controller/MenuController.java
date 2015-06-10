@@ -35,26 +35,26 @@ public class MenuController implements ControllerSingleton {
 		my = mouse.getClickY ();
 		
 		/*Botão Play*/
-		if (GameStatus.status == STATUS.Menu && mouseOver (mx, my, 82, 270, 190, 65 ))
+		if (GameStatus.status == STATUS.Menu && mouseOver (mx, my, 82, 200, 190, 65 ))
 		{	
 			GameStatus.status = STATUS.Fagocity;
 			hud.setInitialTime(System.currentTimeMillis());
 			new Thread( new BackgroundMusicLoop(GameController.getInstance())).start();
 		}
 		/*Botão Quit*/
-		if (GameStatus.status == STATUS.Menu && mouseOver (mx, my, 82, 702, 190, 65 ))
+		if (GameStatus.status == STATUS.Menu && mouseOver (mx, my, 82, 632, 190, 65 ))
 		{
 			System.exit(1);
 		}
 		
 		/*Botão Help*/
-		if (GameStatus.status == STATUS.Menu && mouseOver (mx, my, 82, 489 , 190, 65 ))
+		if (GameStatus.status == STATUS.Menu && mouseOver (mx, my, 82, 429 , 190, 65 ))
 		{
 			GameStatus.status = STATUS.Help;
 		}
 		
 		/*Botão Back da tela Help*/
-		if (GameStatus.status == STATUS.Help && mouseOver (mx, my, 864, 900, 190, 65 ) )
+		if (GameStatus.status == STATUS.Help && mouseOver (mx, my, 864, 650, 190, 65 ) )
 		{
 			GameStatus.status = STATUS.Menu;
 			return;
